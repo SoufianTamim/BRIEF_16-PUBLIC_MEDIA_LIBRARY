@@ -1,0 +1,12 @@
+DirectoryIndex index.php
+
+RewriteEngine On
+
+# If it's a file/directory/symlink, serve it.
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d [OR]
+RewriteCond %{REQUEST_FILENAME} -l
+RewriteRule ^.*$ - [NC,L]
+
+# Otherwise let's go MVC
+RewriteRule ^.*$ index.php [NC,L]
