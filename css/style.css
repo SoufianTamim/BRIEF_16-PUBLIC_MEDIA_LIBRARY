@@ -8,7 +8,6 @@ header {
   background-image: url("/images/wall3.jpg");
   background-size: cover;
   height: 100vh;
-  width: 100vw;
   padding: 0;
   margin-top: 0;
 }
@@ -34,6 +33,15 @@ section {
   position: absolute;
   left: 48%;
   bottom: 20px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.search{
+  height: 80px;
+  width: 50px;
+  position: absolute;
+  left: 2%;
+  top: 300px;
   border-radius: 20px;
   cursor: pointer;
 }
