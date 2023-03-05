@@ -45,7 +45,7 @@
           </div>
           <div class="col-lg-3">
             <div class="">
-              <select name=""  class="form-control">
+              <select name=""  class="form-select">
                 <option value="" disabled selected>Category</option>
                 <option value="">1</option>
               </select>
@@ -100,14 +100,17 @@
 										<div class="error text-danger"></div>
 									</div>
 								</div>
-                 <div class="mb-2 d-flex flex-row justify-content-between flex-wrap">
-                    <label class="mb-2 text-muted" id="select">State :</label>
-                    <select  class="form-control w-75">
-                      <option disabled selected >choose a Category</option>
+                 <div class="mb-2 d-flex flex-row justify-content-between flex-wrap  ">
+                    <label class="mb-2 text-muted" >State :</label>
+                    <div class="w-75 d-flex flex-column">
+                      <select  class="form-select w-100" id="select" required>
+                      <option disabled selected value="">choose a Category</option>
                       <option value="">1</option>
                       <option value="">1</option>
                     </select>
-              </div>
+										<div class="error text-danger"></div>
+                    </div>
+                  </div>
               <div class="align-items-center d-flex">
 									<button type="submit"  class="btn btn-primary ms-auto">
 										Add Item	

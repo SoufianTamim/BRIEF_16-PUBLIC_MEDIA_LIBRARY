@@ -101,7 +101,7 @@ const validateInputs = () => {
     setError(select, "you have to selecty a category , can't be empty ");
     arr.push(false);
   } else {
-    setSuccess(select);
+    // setSuccess(select);
   }
 
 
