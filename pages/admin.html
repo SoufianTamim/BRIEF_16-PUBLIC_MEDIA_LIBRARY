@@ -16,7 +16,8 @@
             </div>
             <div class="d-flex flex-row" >
               <a class="nav-link text-white" aria-current="page" href="/index.html">HOME</a>
-              <a class="nav-link text-white" aria-current="page" data-bs-toggle="modal" data-bs-target="#exampleModal" href="#">ADD-ITEM</a>
+              <a class="nav-link text-white" aria-current="page" data-bs-toggle="modal"   data-bs-target="#Add-item" href="#">ADD-ITEM</a>
+              
             </div>
             <div class="btn-group">
               <a type="button" class=" me-5 my-1" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
@@ -55,13 +56,14 @@
           </div>
         </div>
 
-    <div class="modal fade modal-lg " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade modal-lg " id="Add-item" tabindex="-1" aria-labelledby="Add-itemLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <h5 class="modal-title" class="text-dark" >Add an Item</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
+          <form action="" id="moda-Add-item">
           <div class="modal-body">
             <div class="mb-2 d-flex flex-row justify-content-between flex-wrap">
 								<label class="mb-2 text-muted" >Title :</label>
@@ -99,19 +101,22 @@
 									</div>
 								</div>
                  <div class="mb-2 d-flex flex-row justify-content-between flex-wrap">
-                    <label class="mb-2 text-muted" >State :</label>
+                    <label class="mb-2 text-muted" id="select">State :</label>
                     <select  class="form-control w-75">
-                      <option disabled selected>Category</option>
+                      <option disabled selected >choose a Category</option>
+                      <option value="">1</option>
                       <option value="">1</option>
                     </select>
               </div>
               <div class="align-items-center d-flex">
-									<button type="submit" class="btn btn-primary ms-auto">
+									<button type="submit"  class="btn btn-primary ms-auto">
 										Add Item	
 									</button>
 							</div>
+
             </div>
           </div>
+          </form>
         </div>
       </div>
       </section>
@@ -145,11 +150,11 @@
 
       <section>
         <!-- Modal -->
-        <div class="modal fade " id="reservation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade " id="reservation" tabindex="-1" aria-labelledby="Add-itemLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
               <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <h1 class="modal-title fs-5" id="Add-itemLabel">Modal title</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
@@ -165,11 +170,11 @@
 
 
         <!-- Modal -->
-        <div class="modal fade" id="return" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="return" tabindex="-1" aria-labelledby="Add-itemLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
               <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <h1 class="modal-title fs-5" id="Add-itemLabel">Modal title</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
@@ -188,7 +193,10 @@
 
 
 
+
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-    
+    <script src="/js/Add-Item.js"></script>
 </body>
 </html>
