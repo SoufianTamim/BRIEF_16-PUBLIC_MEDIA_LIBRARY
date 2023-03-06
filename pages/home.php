@@ -1,50 +1,35 @@
-<?php
-// require("../php/database.php");
-// require("../php/Crud.php");
+  <?php
+  // require("../php/database.php");
+  require("../php/Crud.php");
 
-// $db = new Database();
-// $conn = $db->getConnection();
-
-// $crud = new Crud();
-// $crud->getConnection();
+  $crud = new Crud();
+  $crud->getConnection();
 
 
-// // $table_name = "item";
-// // $where = "";
-// // $data = $crud->read($table_name);
+  $table_name = "Category";
+  $where = "";
+  $category = $crud->read($table_name);
 
 
-// $table1_name="Item";
-// $table2_name="Category";
-// $table1_id="Item_Code";
-// $table2_id="Category_Code";
+  $table1_name="Item";
+  $table2_name="Category";
+  $table1_id = "Category_Code";
+  $table2_id = "Category_Code";
 
-// $All_Data = $crud-> join($table1_name, $table2_name, $table1_id, $table2_id);
-// // print_r($data);
-//  print_r($All_Data);
+  $All_Data = $crud-> join($table1_name, $table2_name, $table1_id, $table2_id);
 
 
-require("../php/Crud.php");
+  print_r($allData);
 
-$crud = new Crud();
-
-$table1_name = "Item";
-$table2_name = "Category";
-$table1_id = "Item_Code";
-$table2_id = "Category_Code";
-
-$all_data = $crud->join($table1_name, $table2_name, $table1_id, $table2_id);
-
-print_r($all_data);
-?>
-
+  ?>
 
 
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
+  <meta charset="UTF-8">
   <title>Header</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -106,9 +91,11 @@ print_r($all_data);
         </div>
         <div class="col-lg-3">
           <div>
-            <select class="form-control">
-              <option  disabled selected value="">//==Choose a Category==//</option>
-              <option value="">book</option>
+            <select class="form-select">
+              <option  disabled selected value=""><-- Choose a Category --> </option>
+              <?php foreach ($category as $key => $val) { ?>
+                  <option value="<?php echo $val['Category_Name']; ?>"><?php echo $val['Category_Name']; ?></option>
+              <?php } ?>
             </select>
           </div>
         </div>
@@ -120,26 +107,27 @@ print_r($all_data);
           
           
           <div class = "d-flex flex-row flex-wrap justify-content-center mt-5">
-          <?php foreach ($data as $key => $val) { ?>
+          <?php foreach ($All_Data as $key => $val) { ?>
             <div class=" w-25 bg-dark p-2 rounded-2 m-1">
               <div class = "product-img cont image " >
                   <img src = "../<?php echo $val['Cover_Image'] ?>" id="image" class = "image img-fluid d-block mx-auto" height="400px !important">
                   <div class="overlay w-100">
                      <div class="middle">
                       <div class="text w-100">
-                        <p><?php echo $val[''] ?></p>
                         <p><?php echo $val['Author_Name'] ?></p>
                         <p><?php echo $val['State'] ?></p>
                         <p><?php echo $val['Edition_Date'] ?></p>
-                        <p>Category</p>
-                        <p>Duration</p>
+                        <p><?php echo $val['Category_Name'] ?></p>
+                        <p><?php echo $val['Category_Type'] ?></p>
                       </div>
                     </div>
                   </div>
               </div>
               <div class = "product-content text-center d-flex flex-column d-block m-auto mb-3">
                   <span class = " m-1 text-uppercase"><?php echo $val['Title'] ?></span>
-                  <button class="btn btn-outline-primary text-white" data-bs-toggle="modal" data-bs-target="#exampleModal">reserve</button>
+                  <span class = " m-1 text-success"><?php echo $val['Status'] ?></span>
+                  <button type="button" <?php if(!isset($val['Status']) || $val['Status'] !== "Available") { echo "hidden"; } ?> class="btn btn-outline-primary text-white" data-bs-toggle="modal" data-bs-target="#exampleModal">reserve</button>
+
               </div>
             </div>
 
