@@ -1,21 +1,43 @@
 <?php
 // require("../php/database.php");
-require("../php/Crud.php");
+// require("../php/Crud.php");
 
 // $db = new Database();
 // $conn = $db->getConnection();
 
+// $crud = new Crud();
+// $crud->getConnection();
+
+
+// // $table_name = "item";
+// // $where = "";
+// // $data = $crud->read($table_name);
+
+
+// $table1_name="Item";
+// $table2_name="Category";
+// $table1_id="Item_Code";
+// $table2_id="Category_Code";
+
+// $All_Data = $crud-> join($table1_name, $table2_name, $table1_id, $table2_id);
+// // print_r($data);
+//  print_r($All_Data);
+
+
+require("../php/Crud.php");
+
 $crud = new Crud();
-$crud->getConnection();
 
+$table1_name = "Item";
+$table2_name = "Category";
+$table1_id = "Item_Code";
+$table2_id = "Category_Code";
 
-$table_name = "item";
-$where = "";
-$data = $crud->read($table_name);
+$all_data = $crud->join($table1_name, $table2_name, $table1_id, $table2_id);
 
-print_r($data);
-
+print_r($all_data);
 ?>
+
 
 
 
@@ -94,26 +116,38 @@ print_r($data);
               <button class="btn btn-primary btn-block w-100">Find </button>
             </div>
           </div>
-        <div class = "product-item m-2 bg-dark w-25 p-2">
-          <div class = "product-img cont image">
-              <img src = "/images/product_img_8.jpg" class = "image img-fluid d-block mx-auto">
-              <div class="overlay">
-                 <div class="middle">
-                  <div class="text">
-                    <h5>Category</h5>
-                    <p>Author Name</p>
-                    <p>State</p>
-                    <p>Edition Date</p>
-                    <p>Category</p>
-                    <p>Duration</p>
+
+          
+          
+          <div class = "d-flex flex-row flex-wrap justify-content-center mt-5">
+          <?php foreach ($data as $key => $val) { ?>
+            <div class=" w-25 bg-dark p-2 rounded-2 m-1">
+              <div class = "product-img cont image " >
+                  <img src = "../<?php echo $val['Cover_Image'] ?>" id="image" class = "image img-fluid d-block mx-auto" height="400px !important">
+                  <div class="overlay w-100">
+                     <div class="middle">
+                      <div class="text w-100">
+                        <p><?php echo $val[''] ?></p>
+                        <p><?php echo $val['Author_Name'] ?></p>
+                        <p><?php echo $val['State'] ?></p>
+                        <p><?php echo $val['Edition_Date'] ?></p>
+                        <p>Category</p>
+                        <p>Duration</p>
+                      </div>
+                    </div>
                   </div>
-                </div>
               </div>
-          </div>
-          <div class = "product-content text-center d-flex flex-column  py-3">
-              <span class = "d-block text-uppercase  m-1 fw-bold">Title</span>
-              <button class="btn btn-outline-primary text-white" data-bs-toggle="modal" data-bs-target="#exampleModal">reserve</button>
-          </div>
+              <div class = "product-content text-center d-flex flex-column d-block m-auto mb-3">
+                  <span class = " m-1 text-uppercase"><?php echo $val['Title'] ?></span>
+                  <button class="btn btn-outline-primary text-white" data-bs-toggle="modal" data-bs-target="#exampleModal">reserve</button>
+              </div>
+            </div>
+
+           <?php } ?>
+
+
+
+
         </div>
 
   </section>

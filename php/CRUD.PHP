@@ -63,6 +63,13 @@ class Crud {
         }
         return false;
     }
+    
+    public function join($table1_name, $table2_name, $table1_id, $table2_id) {
+        $query = "SELECT * FROM $table1_name INNER JOIN $table2_name ON $table1_name.$table1_id=$table2_name.$table2_id";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     public function delete($table_name, $id) {
         $query = "DELETE FROM $table_name WHERE id=:id";

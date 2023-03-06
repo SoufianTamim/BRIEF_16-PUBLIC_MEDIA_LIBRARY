@@ -7,9 +7,12 @@
   opacity: 1;
   display: block;
   width: 100%;
-  height: auto;
+  height: 400px !important;
   transition: .5s ease;
   backface-visibility: hidden;
+}
+#image{
+  height: 400px !important;
 }
 
 .middle {
