@@ -1,6 +1,8 @@
 <?php
 
 class Crud {
+
+    
     private $host = "localhost";
     private $db_name = "Library";
     private $username = "root";
@@ -18,8 +20,8 @@ class Crud {
 
     }
 
-    public function read($table_name, $where="1 = 1") {
-        $query = "SELECT * FROM $table_name WHERE $where";
+    public function read($table_name, $row ="*", $where="1 = 1") {
+        $query = "SELECT $row FROM $table_name WHERE $where";
         $stmt = $this->conn->query($query);
         $xx = $stmt->fetchAll();
         return $xx;
