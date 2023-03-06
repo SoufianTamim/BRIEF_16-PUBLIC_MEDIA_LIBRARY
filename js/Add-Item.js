@@ -4,7 +4,7 @@ const Author = document.getElementById("Author");
 const Image = document.getElementById("Image");
 const Edition_Date = document.getElementById("Edition_Date");
 const Puchase_Date = document.getElementById("Puchase_Date");
-const select = document.getElementById("select").selectedOptions;
+const select = document.getElementById("select").selectedIndex;
 
 
 
@@ -97,15 +97,9 @@ const validateInputs = () => {
     setSuccess(Puchase_Date);
   }
 
-  if (select.length === 0) {
-    setError(select, "you have to selecty a category , can't be empty ");
-    arr.push(false);
-  } else {
-    // setSuccess(select);
-  }
-
 
   if (arr.length === 0) {
     form.submit();
   }
+
 };

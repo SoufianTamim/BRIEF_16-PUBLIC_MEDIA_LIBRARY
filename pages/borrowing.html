@@ -16,6 +16,8 @@
             </div>
             <div class="d-flex flex-row" >
               <a class="nav-link text-white" aria-current="page" href="/index.html">HOME</a>
+              <a class="nav-link text-white" aria-current="page" href="/pages/Reservation.html">RESERVATION</a>
+              <a class="nav-link text-white" aria-current="page" href="/pages/borrowing.html">BORROWING</a>
               <a class="nav-link text-white" aria-current="page" data-bs-toggle="modal"   data-bs-target="#Add-item" href="#">ADD-ITEM</a>
               
             </div>
@@ -125,53 +127,38 @@
       </section>
 <!-- items reserved  -->
       <section>
-              <div class = "product-item m-2 bg-dark w-25 p-2">
-                <div class = "product-img cont image">
-                    <img src = "/images/product_img_8.jpg" class = "image img-fluid d-block mx-auto">
+              <div class = "product-item m-2 bg-dark p-2 d-flex flex-row w-25 card">
+                <div class = "product-img cont image w-50 ">
+                    <img src = "/images/product_img_8.jpg" class="image card-img img-fluid " >
                     <div class="overlay">
                        <div class="middle">
                         <div class="text">
-                          <h5>Category</h5>
-                          <p>Author Name</p>
+                          <p>Author</p>
                           <p>State</p>
-                          <p>Edition Date</p>
                           <p>Category</p>
+                          <p>Edition Date</p>
                           <p>Duration</p>
                         </div>
                       </div>
                     </div>
                 </div>
-                <div class = "product-content text-center d-flex flex-column  py-3">
-                    <span class = "d-block text-uppercase  m-1 fw-bold">Title</span>
-                    <button class="btn btn-outline-primary m-1  text-white" data-bs-toggle="modal" data-bs-target="#reservation">Confirm reservation </button>
-                    <button class="btn btn-outline-primary m-1  text-white" data-bs-toggle="modal" data-bs-target="#return">Confirm return</button>
+                <div class = "product-content text-center d-flex flex-column  text-uppercase ">
+                    <span class = "fw-bold">Title</span>
+                    <p>Nick Name : Name</p>
+                    <p>Full Name : Name</p>
+                    <p>Reserved : Hour</p>
+
+                    <button class="btn btn-outline-primary m-2 text-white" data-bs-toggle="modal" data-bs-target="#return">Confirm Item return</button>
                 </div>
             </div>
+
+
+            
       </section>
 
 
 
       <section>
-        <!-- Modal -->
-        <div class="modal fade " id="reservation" tabindex="-1" aria-labelledby="Add-itemLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="Add-itemLabel">Modal title</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                ...
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
         <!-- Modal -->
         <div class="modal fade" id="return" tabindex="-1" aria-labelledby="Add-itemLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered">
