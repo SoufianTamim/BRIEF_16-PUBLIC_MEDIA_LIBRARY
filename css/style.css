@@ -5,7 +5,7 @@
   box-sizing: border-box;
 }
 header {
-  background-image: url("/images/wall3.jpg");
+  background-image: url("../images/wall3.jpg");
   background-size: cover;
   height: 100vh;
   padding: 0;

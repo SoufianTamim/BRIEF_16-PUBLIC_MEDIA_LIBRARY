@@ -1,26 +1,48 @@
+<?php
+// require("../php/database.php");
+require("../php/Crud.php");
+
+// $db = new Database();
+// $conn = $db->getConnection();
+
+$crud = new Crud();
+$crud->getConnection();
+
+
+$table_name = "item";
+$where = "";
+$data = $crud->read($table_name);
+
+print_r($data);
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <title>Header</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/css/stylecards.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/stylecards.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 </head>
 <body class="h-100 text-center text-white">
   <header>
     <nav class="nav nav-masthead d-flex justify-content-around p-3 mb-auto">
-      <a class="float-md-start mb-0" href="/index.html">
-        <img src="/images/logo.png" alt="logo" width="150">
+      <a class="float-md-start mb-0" href="./home.php">
+        <img src="../images/logo.png" alt="logo" width="150">
       </a>
-      <a class="nav-link text-white" href="/index.html" aria-current="page">HOME</a>
+      <a class="nav-link text-white" href="./home.php" aria-current="page">HOME</a>
       <div class="btn-group">
         <a class="me-5 my-1" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" type="button">
-          <img src="/images/user.png" alt="profile logo" width="35">
+          <img src="../images/user.png" alt="profile logo" width="35">
         </a>
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
-          <li><a class="dropdown-item" href="/pages/profile.html">Profile</a></li>
+          <li><a class="dropdown-item" href="./pages/profile.php">Profile</a></li>
           <li><a class="dropdown-item text-danger" href="#">Log out</a></li>
         </ul>
       </div>
@@ -96,24 +118,7 @@
 
   </section>
 
-  <nav class="d-flex justify-content-center">
-    <ul class="pagination pagination-sm">
-      <li class="page-item">
-        <a class="page-link" href="#" aria-label="Previous">
-          <span aria-hidden="true">&laquo;</span>
-        </a>
-      </li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
 
-      <li class="page-item">
-        <a class="page-link" href="#" aria-label="Next">
-          <span aria-hidden="true">&raquo;</span>
-        </a>
-      </li>
-    </ul>
-  </nav>
   <footer class="mt-auto text-center bg-dark">
     <p class="mb-0">© 2023 by Soufian Tamim. </p>
   </footer>
