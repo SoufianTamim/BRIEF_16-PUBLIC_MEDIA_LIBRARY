@@ -11,14 +11,14 @@
       <header class="mb-auto bg-dark">
           <nav class="nav nav-masthead d-flex justify-content-around p-3" >
             <div>
-              <a class="float-md-start mb-0 "  href="/index.html" ><img src="/images/logo.png"  alt="logo" width="150"></a>
+              <a class="float-md-start mb-0 "  href="/home.php" ><img src="../images/logo.png"  alt="logo" width="150"></a>
             </div>
             <div>
-              <a class="nav-link text-white" aria-current="page" href="/index.html">HOME</a>
+              <a class="nav-link text-white" aria-current="page" href="/home.php">HOME</a>
             </div>
             <div class="btn-group">
               <a type="button" class=" me-5 my-1" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-                <img src="/images/user.png" alt="profile logo" width="35">  
+                <img src="../images/user.png" alt="profile logo" width="35">  
               </a>
               <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
                 <li><a class="dropdown-item" href="/pages/profile.html">Profile</a></li>
@@ -33,7 +33,7 @@
               <div class="col-lg-4">
                 <div class="card mb-4">
                   <div class="card-body text-center">
-                    <img src="/images/product_img_8.jpg" alt="avatar"
+                    <img src="../images/product_img_8.jpg" alt="avatar"
                       class="rounded-circle img-fluid" style="width: 150px;">
                     <h5 class="my-3 text-black">John Smith</h5>
                     <p class="text-muted mb-1">Occupation </p>

@@ -17,8 +17,8 @@
               <h3 class="float-md-start mb-0 " ><img src="/images/logo.png"  alt="logo" width="150"></h3>
             </div>
             <div class="d-flex flex-row ">
-              <a class="nav-link text-white btn btn-outline-success me-3" aria-current="page" href="/pages/register.html">SIGN UP</a>
-              <a class="nav-link text-white btn " id="gren" href="/pages/log.html">SIGN IN</a>
+              <a class="nav-link text-white btn btn-outline-success me-3" aria-current="page" href="pages/register.php">SIGN UP</a>
+              <a class="nav-link text-white btn " id="gren" href="pages/log.php">SIGN IN</a>
             </div>
           </nav>
 
@@ -26,7 +26,7 @@
           <h1>THE LIBRARY  READAMP </h1>
           <p class="lead">READAMP is a modern library that offers a diverse collection of books, audiobooks, magazines, and other resources for individuals of all ages. This online platform makes it easy to sign up and access their vast array of materials from anywhere in the world.</p>
           <p class="lead">
-            <a href="/pages/log.html" class="btn btn-lg mt-5" id="sign">CONNEXION</a>
+            <a href="pages/log.php" class="btn btn-lg mt-5" id="sign">CONNEXION</a>
           </p>
         </div>
         

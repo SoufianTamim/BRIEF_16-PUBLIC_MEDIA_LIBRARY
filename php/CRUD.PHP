@@ -77,30 +77,12 @@ class Crud {
         return false;
     }
 
-    public function register($data) {
-        $query = "INSERT INTO members SET username=:username, password=:password, email=:email, full_name=:full_name";
+    public function join($table1_name, $table2_name, $table1_id, $table2_id) {
+        $query = "SELECT * FROM $table1_name INNER JOIN $table2_name ON $table1_name.$table1_id = $table2_name.$table2_id;";
         $stmt = $this->conn->prepare($query);
-        $data['username'] = htmlspecialchars(strip_tags($data['username']));
-        $data['password'] = htmlspecialchars(strip_tags($data['password']));
-        $data['email'] = htmlspecialchars(strip_tags($data['email']));
-        $data['full_name'] = htmlspecialchars(strip_tags($data['full_name']));
-        $hashed_password = password_hash($data['password'], PASSWORD_BCRYPT);
-        $stmt->bindParam(":username", $data['username']);
-        $stmt->bindParam(":password", $hashed_password);
-        $stmt->bindParam(":email", $data['email']);
-        $stmt->bindParam(":full_name", $data['full_name']);
-        if($stmt->execute()) {
-            return true;
-        }
-        return false;
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
-public function join($table1_name, $table2_name, $table1_id, $table2_id) {
-    $query = "SELECT * FROM $table1_name INNER JOIN $table2_name ON $table1_name.$table1_id = $table2_name.$table2_id;";
-    $stmt = $this->conn->prepare($query);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
 
 }
 

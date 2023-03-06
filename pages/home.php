@@ -1,6 +1,6 @@
   <?php
   // require("../php/database.php");
-  require("../php/Crud.php");
+  require("../php/CRUD.php");
 
   $crud = new Crud();
   $crud->getConnection();

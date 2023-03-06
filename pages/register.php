@@ -41,20 +41,13 @@
 									</div>
 									</div>
 								</div>
-								<!-- <div class="mb-2 d-flex flex-row justify-content-between flex-wrap">
-									<label class="mb-2 text-muted" >Name :</label>
-									<div class="w-75">
-										<input id="name" type="text" class="form-control" name="name" placeholder="Enter your Full Name ..."  autofocus>
-										<div class="error text-danger"></div>
-									</div>
-								</div> -->
 								<div class="mb-2 d-flex flex-row justify-content-between flex-wrap">
 									<label class="mb-2 text-muted" >Email :</label>
 								<div  class="w-75">
 									<input id="email" type="email" class="form-control" name="email" placeholder="Enter your email ..."  autofocus>
 									<div class="error text-danger"></div>
 								</div>
-							</div>
+								</div>
 								<div class="mb-2 d-flex flex-row justify-content-between flex-wrap">
 									<label class="mb-2 text-muted" >Phone :</label>
 									<div class="w-75">
@@ -69,13 +62,6 @@
 										<div class="error text-danger"></div>
 									</div>
 								</div>
-								<!-- <div class="mb-2 d-flex flex-row justify-content-between flex-wrap">
-									<label class="mb-2 text-muted">Occupation :</label>
-									<div class="w-75">
-										<input id="Occupation" type="text"  class="form-control" name="Occupation" placeholder="Enter your Occupation ..." >
-										<div class="error text-danger"></div>
-									</div>
-								</div> -->
 								<div class="mb-2 d-flex flex-row justify-content-between flex-wrap">
 									<label class="mb-2 text-muted" for="password">BirthDate :</label>
 								<div class="w-75">
@@ -97,16 +83,29 @@
 										<div class="error text-danger"></div>
 									</div>
 								</div>
-								<div class="align-items-center d-flex">
+								<div class="col-12 d-flex justify-content-center ">
+								<div class="form-check">
+								<input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+								<label class="form-check-label" for="invalidCheck">
+									Agree to terms and conditions
+								</label>
+								<div class="invalid-feedback">
+									You must agree before submitting.
+								</div>
+								</div>
+
+								</div>
+								<div class="d-flex justify-content-end">
 									<button type="submit" class="btn btn-primary ms-auto">
 										Register	
 									</button>
 								</div>
+
 							</form>
 						</div>
 						<div class="card-footer py-3 border-0">
 							<div class="text-center">
-								Already have an account? <a href="log.html">Login</a>
+								Already have an account? <a href="log.php">Login</a>
 							</div>
 						</div>
 					</div>
@@ -116,6 +115,6 @@
 			</div>
 		</div>
 	</section>
-	<script src="/js/register.js"></script>
+	<script src="../js/register.js"></script>
 </body>
 </html>
