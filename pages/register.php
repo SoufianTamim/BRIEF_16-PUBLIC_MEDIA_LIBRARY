@@ -4,7 +4,7 @@ require '../php/User.php';
 $conn = new Database('localhost', 'Library', 'root', '');
 $user = new User($conn);
 
-if (isset($_GET['submit'])) {
+if (isset($_GET['register'])) {
 	$nickname = $_GET['nickname'];
 	$name = $_GET['name'];
 	$email = $_GET['email'];
@@ -40,12 +40,12 @@ if (isset($_GET['submit'])) {
 					<div class="card shadow-lg mt-3">
 						<div class="card-body bg-light-50">
 							<h1 class="fs-4 card-title fw-bold mb-4 text-center">REGISTER </h1>
-							<form method="GET" action="" id="form">
+							<form method="GET"  id="form">
 								<div class="mb-2 d-flex flex-row justify-content-between flex-wrap">
 									<label class=" text-muted" >name :</label>
 									<div class="w-75 d-flex flex-row "> 
 										<div class="w-50 me-3 ">
-											<input id="nickname" type="text" class="form-control" name="nickname" placeholder="Enter your nickname ..."  autofocus>
+											<input  type="text" class="form-control" name="nickname" id="nickname" placeholder="Enter your nickname ..."  autofocus>
 											<div class="error text-danger"></div>
 										</div> 
 										<div class="w-50">
@@ -122,7 +122,7 @@ if (isset($_GET['submit'])) {
 
 								</div>
 								<div class="d-flex justify-content-end">
-									<input type="submit" name="submit"  class="btn btn-primary ms-auto" value="Register">
+									<input type="submit" name="register"  class="btn btn-primary ms-auto" value="Register">
 								</div>
 
 							</form>
@@ -139,6 +139,6 @@ if (isset($_GET['submit'])) {
 			</div>
 		</div>
 	</section>
-	<script src="../js/register.js"></script>
+	<!-- <script src="../js/register.js"></script> -->
 </body>
 </html>

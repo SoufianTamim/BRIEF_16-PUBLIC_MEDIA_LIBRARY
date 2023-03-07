@@ -1,5 +1,7 @@
-  <?php
-  // require("../php/database.php");
+<?php
+  session_start();
+
+
   require("../php/CRUD.php");
   require '../php/User.php';
 
@@ -46,6 +48,9 @@ if (isset($_GET['logout'])) {
 }
 
 
+if (!$isAuthenticated) : header('Location: ../index.php'); 
+
+else : 
 ?>
 
 
@@ -202,3 +207,4 @@ if (isset($_GET['logout'])) {
 
   </body>
 </html>
+<?php endif ?>

@@ -1,8 +1,10 @@
+
+
 const form = document.getElementById("form");
 const nickname = document.getElementById("nickname");
 const Fullname = document.getElementById("name");
 const Email = document.getElementById("email");
-const Phone = document.getElementById("phone");
+const Phone = document.getElementById("Phone");
 const Address = document.getElementById("address");
 const CIN = document.getElementById("CIN");
 const Occupation = document.getElementById("Occupation");
@@ -51,7 +53,6 @@ const validateInputs = () => {
   const OccupationValue = Occupation.value;
   const BirthDateValue = BirthDate.value;
 
-
   const arr = [];
 
   if (nicknameValue === "") {
@@ -66,7 +67,7 @@ const validateInputs = () => {
   } else {
     setSuccess(nickname);
   }
-
+  
   if (FullnameValue === "") {
     setError(Fullname, " name is required");
     arr.push(false);
@@ -79,7 +80,6 @@ const validateInputs = () => {
   } else {
     setSuccess(Fullname);
   }
-
 
   if (EmailValue === "") {
     setError(Email, " Email is required");
@@ -94,7 +94,6 @@ const validateInputs = () => {
     setSuccess(Email);
   }
 
-
   if (PhoneValue === "") {
     setError(Phone, " Phone is required");
     arr.push(false);
@@ -107,7 +106,6 @@ const validateInputs = () => {
   } else {
     setSuccess(Phone);
   }
-
 
   if (AddressValue === "") {
     setError(Address, " Address is required");
@@ -122,7 +120,6 @@ const validateInputs = () => {
     setSuccess(Address);
   }
 
-
   if (CINValue === "") {
     setError(CIN, " CIN is required");
     arr.push(false);
@@ -135,7 +132,6 @@ const validateInputs = () => {
   } else {
     setSuccess(CIN);
   }
-  
 
   if (OccupationValue === "") {
     setError(Occupation, " Occupation is required");
@@ -150,7 +146,6 @@ const validateInputs = () => {
     setSuccess(Occupation);
   }
 
-
   if (BirthDateValue === "") {
     setError(BirthDate, " BirthDate is required");
     arr.push(false);
@@ -160,8 +155,6 @@ const validateInputs = () => {
   } else {
     setSuccess(BirthDate);
   }
-  
-  
 
   if (password1Value === "") {
     setError(password1, "password is required, cannot be empty");
@@ -176,7 +169,7 @@ const validateInputs = () => {
     setSuccess(password1);
   }
 
-  if(password1Value === password2Value){
+  if (password1Value === password2Value) {
     if (password2Value === "") {
       setError(password2, "password is required, cannot be empty");
       arr.push(false);
@@ -189,13 +182,12 @@ const validateInputs = () => {
     } else {
       setSuccess(password2);
     }
-  }else if(password1Value !== password2Value) {
+  } else if (password1Value !== password2Value) {
     setError(password2, "passwords doesn't match");
     arr.push(false);
-  }else{
+  } else {
     setSuccess(password2);
   }
-
 
   if (arr.length === 0) {
     form.submit();

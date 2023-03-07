@@ -30,8 +30,8 @@ $userData = $isAuthenticated ? $user->getUser() : null;
 if ($isAuthenticated) : header('Location: ../pages/home.php'); 
 
 else : 
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
