@@ -3,7 +3,7 @@
   require("../php/CRUD.php");
 
   $crud = new Crud();
-  $crud->getConnection();
+  // $crud->getConnection();
 
 
   $table_name = "Category";

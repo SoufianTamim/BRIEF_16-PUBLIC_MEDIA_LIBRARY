@@ -9,7 +9,7 @@ class Crud {
     private $password = "";
     public $conn;
 
-    public function getConnection() {
+    public function __construct() {
 
         try {
             $this->conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->db_name, $this->username, $this->password);
@@ -19,7 +19,7 @@ class Crud {
         }
 
     }
-    
+
 
     public function read($table_name, $row ="*", $where="1 = 1") {
         $query = "SELECT $row FROM $table_name WHERE $where";

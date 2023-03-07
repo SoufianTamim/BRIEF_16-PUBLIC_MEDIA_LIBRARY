@@ -1,20 +1,11 @@
 <?php
 
 session_start();
+require("CRUD.php");
 
-class Connection{
-  public $host = "localhost";
-  public $user = "root";
-  public $password = "";
-  public $db_name = "Library";
-  public $conn;
 
-  public function __construct(){
-    $this->conn = mysqli_connect($this->host, $this->user, $this->password, $this->db_name);
-  }
-}
 
-class Register extends Connection{
+class Register extends Crud{
   public function registration($name, $username, $email, $password, $confirmpassword){
     
     $duplicate = mysqli_query($this->conn, "SELECT * FROM tb_user WHERE username = '$username' OR email = '$email'");
@@ -37,7 +28,7 @@ class Register extends Connection{
   }
 }
 
-class Login extends Connection{
+class Login extends Crud{
   public $id;
   public function login($usernameemail, $password){
     $result = mysqli_query($this->conn, "SELECT * FROM tb_user WHERE username = '$usernameemail' OR email = '$usernameemail'");
@@ -65,7 +56,7 @@ class Login extends Connection{
   }
 }
 
-class Select extends Connection{
+class Select extends Crud{
   public function selectUserById($id){
     $result = mysqli_query($this->conn, "SELECT * FROM tb_user WHERE id = $id");
     return mysqli_fetch_assoc($result);
