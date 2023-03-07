@@ -30,9 +30,7 @@ class User extends Database {
 
     public function signup($nickname, $name, $CIN, $Occupation, $email, $Phone, $Address, $BirthDate, $password)
     {
-        $stmt = $this->conn->prepare('SELECT * FROM Members WHERE nickname = ? OR email = ?');
-        $stmt->execute([$nickname, $email]);
-        $user = $stmt->fetch();
+        $user = $this->conn->query("SELECT * FROM Members WHERE nickname = '$nickname' OR email = '$email'")->fetch();
 
         if ($user) {
             return false;
@@ -40,15 +38,15 @@ class User extends Database {
 
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        $stmt = $this->conn->prepare('INSERT INTO Members (`Nickname`, `Full_Name`, `CIN`, `Occupation`, `Email`, `Phone`, `Address`, `Birth_Date`, `Password`) 
-                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'); 
-        $stmt->execute([$nickname, $name, $CIN, $Occupation, $email, $Phone, $Address, $BirthDate, $hashedPassword]);
+        $this->conn->query("INSERT INTO Members (`Nickname`, `Full_Name`, `CIN`, `Occupation`, `Email`, `Phone`, `Address`, `Birth_Date`, `Password`) 
+                            VALUES ('$nickname', '$name', '$CIN', '$Occupation', '$email', '$Phone', '$Address', '$BirthDate', '$hashedPassword')");
 
         session_start();
         $_SESSION['user_id'] = $nickname;
 
         return true;
     }
+
 
 
     

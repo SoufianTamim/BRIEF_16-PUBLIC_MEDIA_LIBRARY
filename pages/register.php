@@ -3,6 +3,7 @@
 require '../php/User.php';
 $conn = new Database('localhost', 'Library', 'root', '');
 $user = new User($conn);
+
 if (isset($_GET['submit'])) {
 	$nickname = $_GET['nickname'];
 	$name = $_GET['name'];
@@ -13,9 +14,10 @@ if (isset($_GET['submit'])) {
 	$Address  = $_GET['Address'];
 	$BirthDate  = $_GET['birthdate'];
 	$password = $_GET['password1'];
+
 	if ($user->signup($nickname, $name, $CIN ,$Occupation, $email ,$Phone ,$Address ,$BirthDate ,$password)) {
 		echo '<p>Registration successful!</p>';
-		// header("location: log.php");
+		header("location: log.php");
 	} else {
 		echo '<p>Registration failed: user already exists.</p>';
 	}
@@ -37,7 +39,7 @@ if (isset($_GET['submit'])) {
 				<div class="w-75">
 					<div class="card shadow-lg mt-3">
 						<div class="card-body bg-light-50">
-							<h1 class="fs-4 card-title fw-bold mb-4 text-center">REGISTER  </h1>
+							<h1 class="fs-4 card-title fw-bold mb-4 text-center">REGISTER </h1>
 							<form method="GET" action="" id="form">
 								<div class="mb-2 d-flex flex-row justify-content-between flex-wrap">
 									<label class=" text-muted" >name :</label>
@@ -120,9 +122,7 @@ if (isset($_GET['submit'])) {
 
 								</div>
 								<div class="d-flex justify-content-end">
-									<button type="submit" class="btn btn-primary ms-auto">
-										Register	
-									</button>
+									<input type="submit" name="submit"  class="btn btn-primary ms-auto" value="Register">
 								</div>
 
 							</form>
