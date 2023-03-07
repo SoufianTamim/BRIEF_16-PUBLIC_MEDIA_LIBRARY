@@ -25,10 +25,8 @@
               </a>
               <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
                 <li><a class="dropdown-item" href="/pages/profile.html">PROFILE</a></li>
-
                 <li><a class="dropdown-item" href="./pages/Reservation.html">RESERVATION</a></li>
                 <li><a class="dropdown-item" href="./pages/borrowing.html">BORROWING</a></li>
-                
                 <li><a class="dropdown-item text-danger" href="#">Log out</a></li>
               </ul>
             </div>

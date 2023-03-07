@@ -27,6 +27,8 @@
             </div>
           </nav>
       </header>
+
+
         <section style="background-color: #eee;">
           <div class="container py-5 text-black">
             <div class="row">
@@ -40,7 +42,7 @@
                     <p class="text-muted mb-1">birthdate dd/mm/yy </p>
                     <div class="d-flex justify-content-center mb-2">
                       <button type="button" class="btn btn-primary">Edit Profile</button>
-                      <button type="button" class="btn btn-danger ms-1">Delete Account</button>
+                      <!-- <button type="button" class="btn btn-danger ms-1">Delete Account</button> -->
                     </div>
                   </div>
                 </div>
@@ -108,9 +110,9 @@
                     </div>
                 </div>
         </section>
-    <footer class="mt-auto text-white-50 bg-dark ">
-      <p>  © All Rights Are reserved Soufian </p>
-    </footer>
+
+        
+    <?php require '../includes/footer.php';?>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://kit.fontawesome.com/c7a60e43cd.js" crossorigin="anonymous"></script>

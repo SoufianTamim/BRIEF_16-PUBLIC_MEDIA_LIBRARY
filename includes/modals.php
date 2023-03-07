@@ -106,5 +106,3 @@
           </form>
         </div>
       </div>
-
-      </section>
