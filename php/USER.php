@@ -46,14 +46,7 @@ class User extends Database {
 
         return true;
     }
-
-
-
     
-
-
-
-
     public function logout()
     {
         session_start();

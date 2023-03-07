@@ -1,10 +1,12 @@
   <?php
   // require("../php/database.php");
   require("../php/CRUD.php");
+  require '../php/User.php';
 
+
+  $conn = new Database('localhost', 'Library', 'root', '');
+  $user = new User($conn);
   $crud = new Crud();
-  // $crud->getConnection();
-
 
   $table_name = "Category";
   $where = "";
@@ -34,6 +36,16 @@ if (isset($_GET['find'])) {
 
 }
 
+$isAuthenticated = $user->isAuthenticated();
+$userData = $isAuthenticated ? $user->getUser() : null;
+
+if (isset($_GET['logout'])) {
+    $user->logout();
+    header('Location:../index.php'); 
+    exit;
+}
+
+
 ?>
 
 
@@ -62,8 +74,8 @@ if (isset($_GET['find'])) {
           <img src="../images/user.png" alt="profile logo" width="35">
         </a>
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
-          <li><a class="dropdown-item" href="./pages/profile.php">Profile</a></li>
-          <li><a class="dropdown-item text-danger" href="#">Log out</a></li>
+          <li><a class="dropdown-item" href="profile.php">Profile</a></li>
+          <li><a class="dropdown-item text-danger" href="?logout">Log out</a></li>
         </ul>
       </div>
     </nav>

@@ -139,6 +139,6 @@ if (isset($_GET['submit'])) {
 			</div>
 		</div>
 	</section>
-	<!-- <script src="../js/register.js"></script> -->
+	<script src="../js/register.js"></script>
 </body>
 </html>
