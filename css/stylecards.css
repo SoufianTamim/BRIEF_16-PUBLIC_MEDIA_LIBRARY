@@ -33,4 +33,6 @@
 .cont:hover .middle {
   opacity: 1;
 }
-
+#card{
+  width: 20%;
+}

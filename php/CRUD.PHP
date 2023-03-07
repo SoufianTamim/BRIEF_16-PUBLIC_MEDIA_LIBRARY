@@ -19,6 +19,7 @@ class Crud {
         }
 
     }
+    
 
     public function read($table_name, $row ="*", $where="1 = 1") {
         $query = "SELECT $row FROM $table_name WHERE $where";
@@ -84,22 +85,37 @@ class Crud {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function filterItems($table_name ,$Column_1 = null, $Column_2 = null, $Column_3 = null) {
+        $Column_1 = $this->conn->quote("%" . $Column_1 . "%");
+        $Column_2 = $this->conn->quote("%" . $Column_2 . "%");
+        $Column_3 = $this->conn->quote($Column_3);
+    
+        $sql = "SELECT * FROM item INNER JOIN category ON item.Category_Code = category.Category_Code where 1 = 1";
+
+        if($Column_1 != null) {
+            $sql .= " AND Title LIKE " . $Column_1;
+        }
+    
+        if($Column_2 != null) {
+            $sql .= " AND Author_Name LIKE " . $Column_2;
+        }
+    
+        if($Column_3 != null) {
+            $sql .= " AND Category_Name = " . $Column_3;
+        }
+    
+
+        $result = $this->conn->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+
+            echo "<pre class='bg-dark'>";
+            echo $sql;
+            print_r($result);
+            echo "</pre>";
+
+
+
+        return $result;
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ?>
