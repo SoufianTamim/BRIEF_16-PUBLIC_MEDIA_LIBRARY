@@ -66,7 +66,7 @@
                <div class="mb-2 d-flex flex-row justify-content-between flex-wrap">
 								<label class="mb-2 text-muted" >Image :</label>
 								<div class="w-75">
-									<input id="Image" type="text" class="form-control" name="Image" placeholder="Enter your Image Number ..."  autofocus>
+									<input id="Image" type="file" class="form-control" name="Image" placeholder="Enter your Image Number ..."  autofocus>
 									<div class="error text-danger"></div>
 								</div>
 								</div>
