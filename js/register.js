@@ -1,5 +1,5 @@
 const form = document.getElementById("form");
-const nickname = document.getElementById("NickName");
+const nickname = document.getElementById("nickname");
 const Fullname = document.getElementById("name");
 const Email = document.getElementById("email");
 const Phone = document.getElementById("phone");

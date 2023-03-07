@@ -4,7 +4,6 @@ require 'User.php';
 
 $conn = new Database('localhost', 'Library', 'root', '');
 $user = new User($conn);
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['Nickname']) && isset($_POST['password'])) {
     $Nickname = $_POST['Nickname'];
     $password = $_POST['password'];

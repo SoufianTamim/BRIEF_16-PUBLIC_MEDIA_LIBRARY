@@ -1,3 +1,27 @@
+<?php
+// include 'DB.php';
+require '../php/User.php';
+$conn = new Database('localhost', 'Library', 'root', '');
+$user = new User($conn);
+if (isset($_GET['submit'])) {
+	$nickname = $_GET['nickname'];
+	$name = $_GET['name'];
+	$email = $_GET['email'];
+	$CIN  = $_GET['CIN'];
+	$Occupation = $_GET['Occupation'];
+	$Phone = $_GET['Phone'];
+	$Address  = $_GET['Address'];
+	$BirthDate  = $_GET['birthdate'];
+	$password = $_GET['password1'];
+	if ($user->signup($nickname, $name, $CIN ,$Occupation, $email ,$Phone ,$Address ,$BirthDate ,$password)) {
+		echo '<p>Registration successful!</p>';
+		// header("location: log.php");
+	} else {
+		echo '<p>Registration failed: user already exists.</p>';
+	}
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,16 +38,16 @@
 					<div class="card shadow-lg mt-3">
 						<div class="card-body bg-light-50">
 							<h1 class="fs-4 card-title fw-bold mb-4 text-center">REGISTER  </h1>
-							<form method="" action="" id="form">
+							<form method="GET" action="" id="form">
 								<div class="mb-2 d-flex flex-row justify-content-between flex-wrap">
-									<label class=" text-muted" >Name :</label>
+									<label class=" text-muted" >name :</label>
 									<div class="w-75 d-flex flex-row "> 
 										<div class="w-50 me-3 ">
-											<input id="NickName" type="text" class="form-control" name="NickName" placeholder="Enter your NickName ..."  autofocus>
+											<input id="nickname" type="text" class="form-control" name="nickname" placeholder="Enter your nickname ..."  autofocus>
 											<div class="error text-danger"></div>
 										</div> 
 										<div class="w-50">
-											<input id="name" type="text" class="form-control" name="name" placeholder="Enter your Full Name ..."  autofocus>
+											<input id="name" type="text" class="form-control" name="name" placeholder="Enter your Full name ..."  autofocus>
 											<div class="error text-danger"></div>
 										</div>
 									</div>
@@ -42,7 +66,7 @@
 									</div>
 								</div>
 								<div class="mb-2 d-flex flex-row justify-content-between flex-wrap">
-									<label class="mb-2 text-muted" >Email :</label>
+									<label class="mb-2 text-muted" >email :</label>
 								<div  class="w-75">
 									<input id="email" type="email" class="form-control" name="email" placeholder="Enter your email ..."  autofocus>
 									<div class="error text-danger"></div>
@@ -51,7 +75,7 @@
 								<div class="mb-2 d-flex flex-row justify-content-between flex-wrap">
 									<label class="mb-2 text-muted" >Phone :</label>
 									<div class="w-75">
-										<input id="phone" type="phone" class="form-control" name="phone" placeholder="Enter your Phone Number ..."  autofocus>
+										<input id="Phone" type="Phone" class="form-control" name="Phone" placeholder="Enter your Phone Number ..."  autofocus>
 										<div class="error text-danger"></div>
 									</div>
 								</div>
@@ -115,6 +139,6 @@
 			</div>
 		</div>
 	</section>
-	<script src="../js/register.js"></script>
+	<!-- <script src="../js/register.js"></script> -->
 </body>
 </html>

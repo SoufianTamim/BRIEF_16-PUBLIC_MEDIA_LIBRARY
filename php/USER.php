@@ -16,7 +16,7 @@ class User extends Database {
 
     public function login($Nickname, $Password)
     {
-        $stmt = $this->conn->query('SELECT * FROM members WHERE Nickname = ?', [$Nickname]);
+        $stmt = $this->conn->query('SELECT * FROM Members WHERE Nickname = ?', [$Nickname]);
         $user = $stmt->fetch();
 
         if ($user && Password_verify($Password, $user['Password'])) {
@@ -28,24 +28,29 @@ class User extends Database {
         return false;
     }
 
-    public function signup($nickname, $password, $email)
+    public function signup($nickname, $name, $CIN, $Occupation, $email, $Phone, $Address, $BirthDate, $password)
     {
-        $stmt = $this->conn->query('SELECT * FROM members WHERE nickname = ? OR email = ?', [$nickname, $email]);
+        $stmt = $this->conn->prepare('SELECT * FROM Members WHERE nickname = ? OR email = ?');
+        $stmt->execute([$nickname, $email]);
         $user = $stmt->fetch();
-    
+
         if ($user) {
             return false;
         }
-    
+
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-    
-        $this->conn->query('INSERT INTO members (nickname, password, email) VALUES (?, ?, ?)', [$nickname, $hashedPassword, $email]);
-    
+
+        $stmt = $this->conn->prepare('INSERT INTO Members (`Nickname`, `Full_Name`, `CIN`, `Occupation`, `Email`, `Phone`, `Address`, `Birth_Date`, `Password`) 
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'); 
+        $stmt->execute([$nickname, $name, $CIN, $Occupation, $email, $Phone, $Address, $BirthDate, $hashedPassword]);
+
         session_start();
         $_SESSION['user_id'] = $nickname;
-    
+
         return true;
     }
+
+
     
 
 
@@ -62,7 +67,7 @@ class User extends Database {
         session_start();
 
         if (isset($_SESSION['user_id'])) {
-            $stmt = $this->conn->query('SELECT * FROM members WHERE Nickname = ?', [$_SESSION['user_id']]);
+            $stmt = $this->conn->query('SELECT * FROM Members WHERE Nickname = ?', [$_SESSION['user_id']]);
             $user = $stmt->fetch();
 
             if ($user) {
@@ -78,7 +83,7 @@ class User extends Database {
         session_start();
 
         if (isset($_SESSION['user_id'])) {
-            $stmt = $this->conn->query('SELECT * FROM members WHERE Nickname = ?', [$_SESSION['user_id']]);
+            $stmt = $this->conn->query('SELECT * FROM Members WHERE Nickname = ?', [$_SESSION['user_id']]);
             $user = $stmt->fetch();
 
             if ($user) {
