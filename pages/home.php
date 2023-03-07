@@ -2,8 +2,8 @@
   session_start();
 
 
-  require("../php/CRUD.php");
-  require '../php/User.php';
+  include '../php/CRUD.php';
+  include '../php/User.php';
 
 
   $conn = new Database('localhost', 'Library', 'root', '');
@@ -51,6 +51,12 @@ if (isset($_GET['logout'])) {
 if (!$isAuthenticated) : header('Location: ../index.php'); 
 
 else : 
+  
+  if ($user->isAdmin()) {
+    echo "<p class='bg-dark'>You are an admin!</p>";
+} else {
+    echo "<p class='bg-dark'>You are not an admin.</p>";
+}
 ?>
 
 
@@ -108,103 +114,16 @@ else :
           <div class="underline mx-auto mt-3"></div>
         </div>
       </div>
-
-      <form action="" method="GET">
-      <div class="form row">
-        <div class="col-lg-3">
-          <div class="input-icon-wrap">
-            <input type="text" class="form-control" name="Title" placeholder="Item Title ...">
-          </div>
-        </div>
-        <div class="col-lg-3">
-          <div class="input-icon-wrap">
-            <input type="text" class="form-control" name="Author_Name" placeholder="Author Name ...">
-          </div>
-        </div>
-        <div class="col-lg-3">
-          <div>
-            <select class="form-select" name="Category">
-              <option  disabled selected value=""><-- Choose a Category --> </option>
-              <?php foreach ($category as $key => $val) { ?>
-                  <option value="<?php echo $val['Category_Name']; ?>"><?php echo $val['Category_Name']; ?></option>
-              <?php } ?>
-            </select>
-          </div>
-        </div>
-        <div class="col-lg-3">
-              <button class="btn btn-primary btn-block w-100" name="find">Find </button>
-        </div>
+        <!-- //=========== display cards ===========// -->
+        <?php require '../includes/Category.php'; ?>
       </div>
-    </form>
-          <div class = "d-flex flex-row flex-wrap justify-content-center mt-5">
-          <?php 
-         if (!isset($_GET['find'])) {
-              foreach($All_Data as $key => $val) {  ?>
-            <div class="d-flex flex-wrap  bg-dark p-2 rounded-2 m-1" id="card">
-              <div class = "product-img cont image " >
-                  <img src = "../<?php echo $val['Cover_Image'] ?>" id="image" class = "image img-fluid d-block mx-auto" height="400px !important">
-                  <div class="overlay w-100">
-                     <div class="middle">
-                      <div class="text w-100">
-                        <p><?php echo $val['Author_Name'] ?></p>
-                        <p><?php echo $val['State'] ?></p>
-                        <p><?php echo $val['Edition_Date'] ?></p>
-                        <p><?php echo $val['Category_Name'] ?></p>
-                        <p><?php echo $val['Category_Type'] ?></p>
-                      </div>
-                    </div>
-                  </div>
-              </div>
-              <div class = "product-content text-center d-flex flex-column d-block m-auto mb-3">
-                  <span class = " m-1 text-uppercase"><?php echo $val['Title'] ?></span>
-                  <span class = " m-1 text-success"><?php echo $val['Status'] ?></span>
-                  <button type="button" <?php if(!isset($val['Status']) || $val['Status'] !== "Available") { echo "hidden"; } ?> class="btn btn-outline-primary text-white" data-bs-toggle="modal" data-bs-target="#exampleModal">reserve</button>
-              </div>
-            </div>
-           <?php 
-           }
-            
-          } else if (isset($_GET['find'])) { //check if the method is po  st
-              foreach($Filters as $key => $val) { //loops in the table of announce with filterd data and display the in cards 
-                      ?>
-            <div class="d-flex flex-wrap  bg-dark p-2 rounded-2 m-1" id="card">
-              <div class = "product-img cont image " >
-                  <img src = "../<?php echo $val['Cover_Image'] ?>" id="image" class = "image img-fluid d-block mx-auto" height="400px !important">
-                  <div class="overlay w-100">
-                     <div class="middle">
-                      <div class="text w-100">
-                        <p><?php echo $val['Author_Name'] ?></p>
-                        <p><?php echo $val['State'] ?></p>
-                        <p><?php echo $val['Edition_Date'] ?></p>
-                        <p><?php echo $val['Category_Name'] ?></p>
-                        <p><?php echo $val['Category_Type'] ?></p>
-                      </div>
-                    </div>
-                  </div>
-              </div>
-              <div class = "product-content text-center d-flex flex-column d-block m-auto mb-3">
-                  <span class = " m-1 text-uppercase"><?php echo $val['Title'] ?></span>
-                  <span class = " m-1 text-success"><?php echo $val['Status'] ?></span>
-                  <button type="button" <?php if(!isset($val['Status']) || $val['Status'] !== "Available") { echo "hidden"; } ?> class="btn btn-outline-primary text-white" data-bs-toggle="modal" data-bs-target="#exampleModal">reserve</button>
-
-              </div>
-            </div>
-           <?php  } } ?>
-
-
-
-        </div>
-
+    <!-- //=========== display cards ===========// -->
+    <?php require '../includes/Cards.php'; ?>
   </section>
-
-
-  <footer class="mt-auto text-center bg-dark">
-    <p class="mb-0">© 2023 by Soufian Tamim. </p>
-  </footer>
- </div>
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
-
-  </body>
+    <!-- //=========== display footer ===========// -->
+  <?php require '../includes/footer.php'; ?>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    </body>
 </html>
 <?php endif ?>

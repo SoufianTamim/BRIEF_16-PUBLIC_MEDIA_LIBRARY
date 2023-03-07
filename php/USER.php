@@ -69,6 +69,23 @@ class User extends Database {
         return false;
     }
 
+    public function isAdmin()
+{
+    session_start();
+
+    if (isset($_SESSION['user_id'])) {
+        $stmt = $this->conn->query('SELECT admin FROM Members WHERE Nickname = ?', [$_SESSION['user_id']]);
+        $result = $stmt->fetch();
+
+        if ($result && $result['Admin'] == 1) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+
     public function getUser()
     {
         session_start();
