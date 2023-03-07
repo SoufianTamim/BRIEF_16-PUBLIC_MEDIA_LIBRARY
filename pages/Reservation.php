@@ -12,12 +12,10 @@
       <header class="mb-auto bg-dark">
           <nav class="nav nav-masthead d-flex justify-content-around p-3" >
             <div>
-              <a class="float-md-start mb-0 "  href="/index.html" ><img src="/images/logo.png"  alt="logo" width="150"></a>
+              <a class="float-md-start mb-0 "  href="/index.php" ><img src="/images/logo.png"  alt="logo" width="150"></a>
             </div>
             <div class="d-flex flex-row" >
-              <a class="nav-link text-white" aria-current="page" href="/index.html">HOME</a>
-              <a class="nav-link text-white" aria-current="page" href="/pages/Reservation.html">RESERVATION</a>
-              <a class="nav-link text-white" aria-current="page" href="/pages/borrowing.html">BORROWING</a>
+              <a class="nav-link text-white" aria-current="page" href="/index.php">HOME</a>
               <a class="nav-link text-white" aria-current="page" data-bs-toggle="modal"   data-bs-target="#Add-item" href="#">ADD-ITEM</a>
               
             </div>
@@ -26,7 +24,9 @@
                 <img src="/images/user.png" alt="profile logo" width="35">  
               </a>
               <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
-                <li><a class="dropdown-item" href="/pages/profile.html">Profile</a></li>
+                <li><a class="dropdown-item" href="./pages/profile.php">PROFILE</a></li>
+                <li><a class="dropdown-item" href="./pages/Reservation.php">RESERVATION</a></li>
+                <li><a class="dropdown-item" href="./pages/borrowing.php">BORROWING</a></li>
                 <li><a class="dropdown-item text-danger" href="#">Log out</a></li>
               </ul>
             </div>
@@ -151,42 +151,10 @@
                     <button class="btn btn-outline-primary m-1  text-white" data-bs-toggle="modal" data-bs-target="#reservation">Confirm reservation </button>
                 </div>
             </div>
-
-
-            
       </section>
 
 
-
-      <section>
-        <!-- Modal -->
-        <div class="modal fade " id="reservation" tabindex="-1" aria-labelledby="Add-itemLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="Add-itemLabel">Modal title</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                ...
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-
-
-      </section>
-
-
-
-
-
+<?php require '../includes/modals.php';?>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
