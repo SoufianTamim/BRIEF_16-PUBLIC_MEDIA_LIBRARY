@@ -2,14 +2,17 @@
 
 require '../php/User.php';
 
-$conn = new Database('localhost', 'Library', 'root', '');
-$user = new User($conn);
+Database::connect('localhost', 'Library', 'root', '');
+$user = new User();
+$crud = new Crud();
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['Nickname']) && isset($_POST['password'])) {
-    $Nickname = $_POST['Nickname'];
+
+if (isset($_POST['login']) && isset($_POST['Nickname']) && isset($_POST['password'])) {
+	$Nickname = $_POST['Nickname'];
     $password = $_POST['password'];
-
+	
     if ($user->login($Nickname, $password)) {
+		// dd($user);
         header('Location: ../pages/home.php');
         exit;
     } else {
@@ -66,7 +69,7 @@ else :
 											<?php endif ?>
 										</div>
 										<div class="d-flex align-items-center">
-											<button type="submit" class="btn btn-primary ms-auto"> Login </button>
+											<button type="submit" class="btn btn-primary ms-auto" name="login"> Login </button>
 										</div>
 									</form>
 								

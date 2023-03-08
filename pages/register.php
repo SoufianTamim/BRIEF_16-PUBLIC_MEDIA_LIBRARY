@@ -1,10 +1,8 @@
 <?php
 // include 'DB.php';
 require '../php/User.php';
-$conn = new Database('localhost', 'Library', 'root', '');
-$user = new User($conn);
-
-// dd($_GET);
+Database::connect('localhost', 'Library', 'root', '');
+$user = new User();
 
 if (isset($_GET['nickname'])) {
 	$nickname = $_GET['nickname'];
@@ -16,9 +14,6 @@ if (isset($_GET['nickname'])) {
 	$Address  = $_GET['Address'];
 	$BirthDate  = $_GET['birthdate'];
 	$password = $_GET['Password'];
-
-
-
 
 	if ($user->signup($nickname, $name, $CIN ,$Occupation, $email ,$Phone ,$Address ,$BirthDate ,$password)) {
 		echo '<p>Registration successful!</p>';

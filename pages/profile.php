@@ -1,40 +1,57 @@
 <?php
-include '../includes/navbar.php';
 
+  include '../includes/navbar.php';
 
-$nickname = $_SESSION['user_id'];
-$table_name = "members";
-$where = "Nickname = '$nickname'";
-$member = $crud->read($table_name , $where);
+  $nickname = $_SESSION['user_id'];
+  $table_name = "members";
+  $where = "Nickname = '$nickname'";
+  $member = $crud->read($table_name , $where);
 
-
-echo '<p class="bg-dark">';
-
-
-if(isset($_GET['submit'])) {
-  $data = [ 
-    "Nickname" => $_GET['Nickname'],
-    "Email" => $_GET['Email'],
-    "Phone" => $_GET['Phone'],
-    "CIN" => $_GET['CIN'],
-    "Address" => $_GET['Address']
-  ];
-  $Nickname = 'Nickname';
-  $table_name = 'members';
-  // dd($_GET);
-
-  
-  if($profile = $crud->update($table_name, $Nickname, $data)) {
-
-      // header("Location: profile.php");
-      echo  'ahahahahah';
-     exit; 
+  if(isset($_GET['submit'])) {
+    $data = [ 
+      "Nickname" => $_GET['Nickname'],
+      "Email" => $_GET['Email'],
+      "Phone" => $_GET['Phone'],
+      "CIN" => $_GET['CIN'],
+      "Address" => $_GET['Address']
+    ];
+    $Nickname = 'Nickname';
+    $table_name = 'members';
+    
+    if($profile = $crud->update($table_name, $Nickname, $data)) {
+      
+      header("Location: profile.php");
+      exit; 
+    }
   }
-}
-
-echo '</p>';
+  include '../includes/modals.php';
 
 
+  if (isset($_GET['add'])) {
+      $data = [
+      "Title" => $_GET['Title'],
+      "Author" => $_GET['Author'],
+      "Duration" => $_GET['Duration'],
+      "Status" => $_GET['Status'],
+      "State" => $_GET['State'],
+      "Edition_Date" => $_GET['Edition_Date'],
+      "Puchase_Date" => $_GET['Puchase_Date'],
+      "Image" => $_GET['Image'],
+      "Category" => $_GET['Category']
+    ]; 
+    
+    
+    $table_name = "Item";
+
+    if ($Add = $crud->create($table_name, $data)) {
+
+      header("Location: profile.php");
+      echo "Item added successfully!";
+      
+    } else {
+      echo "Error adding item.";
+    }
+  }
 
 ?>
 
@@ -111,6 +128,7 @@ echo '</p>';
 
                       </div>
                     </div>
+                    <hr>
                     <button type="submit" name="submit" class="btn btn-primary my-2">Save</button>
                   </div>
                 </div>

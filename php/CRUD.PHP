@@ -10,7 +10,6 @@ class Crud extends Database {
     public function __construct()
     {
         $this->conn = self::$gogo;
-        // session_start();
     }
 
 
@@ -24,20 +23,19 @@ class Crud extends Database {
 
     public function create($table_name, $data) {
         $query = "INSERT INTO $table_name SET ";
+        $params = [];
         foreach($data as $key => $value) {
-            $query .= "$key=:$key, ";
+            $query .= "$key=?, ";
+            $params[] = $value;
         }
         $query = rtrim($query, ", ");
         $stmt = $this->conn->prepare($query);
-        foreach($data as $key => &$value) {
-            $value = htmlspecialchars(strip_tags($value));
-            $stmt->bindParam(":$key", $value);
-        }
-        if($stmt->execute()) {
+        if($stmt->execute($params)) {
             return true;
         }
         return false;
     }
+
 
     public function update($table_name, $Nickname, $data) {
         // dd($data);

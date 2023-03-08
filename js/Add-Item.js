@@ -1,7 +1,7 @@
 const form = document.getElementById("moda-Add-item");
 const Title = document.getElementById("Title");
 const Author = document.getElementById("Author");
-const Image = document.getElementById("Image");
+const Image = document.getElementById("formFileMultiple");
 const Edition_Date = document.getElementById("Edition_Date");
 const Puchase_Date = document.getElementById("Puchase_Date");
 const select = document.getElementById("select").selectedIndex;
@@ -38,7 +38,6 @@ let myRegex = /(^[^0-9])([\w a-z A-Z 0-9][^@#])/;
 const validateInputs = () => {
   const TitleValue = Title.value;
   const AuthorValue = Author.value;
-  const ImageValue = Image.value;
   const Edition_DateValue = Edition_Date.value;
   const Puchase_DateValue = Puchase_Date.value;
 
@@ -70,14 +69,8 @@ const validateInputs = () => {
     setSuccess(Author);
   }
 
-  if (ImageValue === "") {
+  if (Image === "") {
     setError(Image, " Image is required");
-    arr.push(false);
-  } else if (ImageValue.length > 50) {
-    setError(Image, " Image is too long");
-    arr.push(false);
-  } else if (ImageRe.test(ImageValue) === false) {
-    setError(Image, " Image is Invalid");
     arr.push(false);
   } else {
     setSuccess(Image);

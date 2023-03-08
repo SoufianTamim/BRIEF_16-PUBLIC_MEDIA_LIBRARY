@@ -19,17 +19,19 @@ class User  extends Database {
 
     public function login($Nickname, $Password)
     {
-        $stmt = $this->conn->query('SELECT * FROM members WHERE Nickname = ?', [$Nickname]);
+        $stmt = $this->conn->prepare('SELECT * FROM Members WHERE Nickname = ?');
+        $stmt->execute([$Nickname]);
         $user = $stmt->fetch();
 
-        if ($user && Password_verify($Password, $user['Password'])) {
-            // session_start();
+        if ($user && password_verify($Password, $user['Password'])) {
+            session_start();
             $_SESSION['user_id'] = $user['Nickname'];
             return true;
         }
 
         return false;
     }
+
 
     public function signup($nickname, $name, $CIN, $Occupation, $email, $Phone, $Address, $BirthDate, $password)
     {

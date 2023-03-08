@@ -3,13 +3,11 @@ require __DIR__.'/../vendor/autoload.php';
 
 include '../php/USER.php';
 
-// $conn = new Database('localhost', 'Library', 'root', '');
-// $user = new User();
-
-// $crud = new Crud();
 Database::connect('localhost', 'Library', 'root', '');
+
 $crud = new Crud();
 $user = new User();
+
 $table_name = "Category";
 $where = "";
 $category = $crud->read($table_name);

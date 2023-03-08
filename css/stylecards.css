@@ -2,6 +2,9 @@
   position: relative;
   width: 100%;
 }
+.modal-title{
+  color: black;
+}
 
 .image {
   opacity: 1;
