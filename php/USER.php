@@ -1,19 +1,16 @@
 
 <?php
 require __DIR__.'/../vendor/autoload.php';
-// dd("haa");
-
 
 include 'DB.php';
 include 'CRUD.php';
 
-
-class User extends Database {
+class User  extends Database {
     public $conn;
 
-    public function __construct(Database $conn)
+    public function __construct()
     {
-        $this->conn = $conn;
+        $this->conn = self::$gogo;
         session_start();
     }
 
@@ -60,31 +57,35 @@ class User extends Database {
         session_destroy();
     }
 
+
     public function isAuthenticated()
-    {
-        // session_start();
+{
+    // session_start();
 
-        if (isset($_SESSION['user_id'])) {
-            $stmt = $this->conn->query('SELECT * FROM members WHERE Nickname = ?', [$_SESSION['user_id']]);
-            $user = $stmt->fetch();
+    if (isset($_SESSION['user_id'])) {
+        $stmt = $this->conn->prepare('SELECT * FROM members WHERE Nickname = ?');
+        $stmt->execute([$_SESSION['user_id']]);
+        $user = $stmt->fetch();
 
-            if ($user) {
-                return true;
-            }
+        if ($user) {
+            return true;
         }
-
-        return false;
     }
+
+    return false;
+}
+
 
     public function isAdmin()
 {
     // session_start();
 
     if (isset($_SESSION['user_id'])) {
-        $stmt = $this->conn->query('SELECT admin FROM members WHERE Nickname = ?', [$_SESSION['user_id']]);
-        $result = $stmt->fetch();
+        $stmt = $this->conn->prepare('SELECT * FROM members WHERE Nickname = ?');
+        $stmt->execute([$_SESSION['user_id']]);
+        $user = $stmt->fetch();
 
-        if ($result && $result['admin'] == 1) {
+        if ($user && $user['Admin'] == 1) {
 
             // dd($result);
             return true;
@@ -100,7 +101,9 @@ class User extends Database {
         // session_start(); 
 
         if (isset($_SESSION['user_id'])) {
-            $stmt = $this->conn->query('SELECT * FROM members WHERE Nickname = ?', [$_SESSION['user_id']]);
+            
+            $stmt = $this->conn->prepare('SELECT * FROM members WHERE Nickname = ?');
+            $stmt->execute([$_SESSION['user_id']]);
             $user = $stmt->fetch();
 
             if ($user) {

@@ -3,10 +3,10 @@ require __DIR__.'/../vendor/autoload.php';
 
 include '../php/USER.php';
 
-$conn = new Database('localhost', 'Library', 'root', '');
-$user = new User($conn);
+Database::connect('localhost', 'Library', 'root', '');
+$crud = new Crud();
+$user = new User();
 
-$crud = new Crud($conn);
 
 $table_name = "Category";
 $where = "";

@@ -8,31 +8,31 @@ $where = "Nickname = '$nickname'";
 $member = $crud->read($table_name , $where);
 
 
+echo '<p class="bg-dark">';
 
 
-// $_SESSION['user_id'] = $nickname;
+if(isset($_GET['submit'])) {
+  $data = [ 
+    "Nickname" => $_GET['Nickname'],
+    "Email" => $_GET['Email'],
+    "Phone" => $_GET['Phone'],
+    "CIN" => $_GET['CIN'],
+    "Address" => $_GET['Address']
+  ];
+  $Nickname = 'Nickname';
+  $table_name = 'members';
+  // dd($_GET);
 
+  
+  if($profile = $crud->update($table_name, $Nickname, $data)) {
 
-
-
-// Get the form data
-$data = array(
-    'Nickname' => $_GET['Nickname'],
-    'Email' => $_GET['Email'],
-    'Phone' => $_GET['Phone'],
-    'CIN' => $_GET['CIN'],
-    'Address' => $_GET['Address']
-);
-$id = 'Nickname';
-
-// Call the update() function
-if($database->update('members', $id, $data)) {
-    // Redirect the user to the page where the updated data is displayed
-    header('Location: display_data.php');
-    exit();
-} else {
-    echo "Error updating data.";
+      // header("Location: profile.php");
+      echo  'ahahahahah';
+     exit; 
+  }
 }
+
+echo '</p>';
 
 
 
@@ -41,7 +41,7 @@ if($database->update('members', $id, $data)) {
 
 <?php foreach ($member as $key => $val) { ?>
         <section style="background-color: #eee;">
-        <form method="GET">
+        <form method="GET" >
           <div class="container py-5 text-black">
             <div class="row">
               <div class="col-lg-4">
@@ -111,7 +111,7 @@ if($database->update('members', $id, $data)) {
 
                       </div>
                     </div>
-                    <button type="submit" class="btn btn-primary my-2">Save</button>
+                    <button type="submit" name="submit" class="btn btn-primary my-2">Save</button>
                   </div>
                 </div>
                 

@@ -5,11 +5,12 @@ require __DIR__.'/../vendor/autoload.php';
 // include 'DB.php';
 
 class Crud extends Database {
-    public $conn;
+   public $conn;
 
-    public function __construct(Database $conn)
+    public function __construct()
     {
-        $this->conn = $conn;
+        $this->conn = self::$gogo;
+        // session_start();
     }
 
 
@@ -38,28 +39,32 @@ class Crud extends Database {
         return false;
     }
 
-    public function update($table_name, $id, $data) {
+    public function update($table_name, $Nickname, $data) {
+        // dd($data);
+        
         $query = "UPDATE $table_name SET ";
         foreach($data as $key => $value) {
-            $query .= "$key=:$key, ";
+            $query .= "$key = :$key, ";
         }
+        // dd($query);
+
         $query = rtrim($query, ", ");
         $query .= " WHERE Nickname=:Nickname";
         $stmt = $this->conn->prepare($query);
-        $id = htmlspecialchars(strip_tags($id));
-        $stmt->bindParam(":Nickname", $id);
+        $Nickname = htmlspecialchars(strip_tags($Nickname));
+        $stmt->bindParam(":Nickname", $Nickname);
         foreach($data as $key => &$value) {
             $value = htmlspecialchars(strip_tags($value));
             $stmt->bindParam(":$key", $value);
         }
+        // dd($stmt);
+
         if($stmt->execute()) {
             return true;
         }
         return false;
     }
-
-
-
+    
     public function delete($table_name, $id) {
         $query = "DELETE FROM $table_name WHERE id=:id";
         $stmt = $this->conn->prepare($query);

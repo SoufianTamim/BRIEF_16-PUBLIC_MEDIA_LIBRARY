@@ -1,27 +1,50 @@
 <?php
 
 class Database {
-    private $host;
-    private $db_name;
-    private $username;
-    private $password;
-    private $conn;
+    public  static $host;
+    public static $db_name;
+    public static $username;
+    public  static $password;
+    // public  static $conn;
+    public static $gogo;
 
-    public function __construct($host, $db_name, $username, $password) {
-        $this->host = $host;
-        $this->db_name = $db_name;
-        $this->username = $username;
-        $this->password = $password;
+     public  static function connect($host, $db_name, $username, $password) {
+        self::$host = $host;
+        self::$db_name = $db_name;
+        self::$username = $username;
+        self::$password = $password;
 
         try {
-            $this->conn = new PDO("mysql:host=$this->host;dbname=$this->db_name", $this->username, $this->password);
+            $lol = new PDO("mysql:host=".self::$host.";dbname=".self::$db_name, self::$username, self::$password);
+        // $stmt = $lol->exec("INSERT INTO members (CIN, Nickname, Email) VALUES ('pppp', 'ppp', 'ppppp')");
+// dd($stmt);
+self::$gogo = $lol ;
+
         } catch(PDOException $e) {
             echo "Connection failed: " . $e->getMessage();
         }
+
     }
 
-    public function getConnection() {
-        return $this->conn;
+    public static function getConnection() {
+        
+        dump(self::$gogo);
+        
+        $stmt = self::$gogo->exec("INSERT INTO members (CIN, Nickname, Email) VALUES ('mmmmmmmm', 'mmmmmmmm', 'mmmmmmmmmmm')");
+//   $stmt->bindParam(':CIN', $CIN);
+//   $stmt->bindParam(':Nickname', $Nickname);
+//   $stmt->bindParam(':Email', $Email);
+  
+  // insert a row
+//   $CIN = "John";
+//   $Nickname = "Doe";
+//   $Email = "john@example.com";
+//   $xd = $stmt->execute();
+  
+  dd( $stmt );
+//   return $xd ;
+//   return $this->conn;
+
     }
 
     public function query($sql, $params = []) {
