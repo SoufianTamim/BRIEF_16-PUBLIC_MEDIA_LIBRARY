@@ -45,11 +45,11 @@ if (!$isAuthenticated):
   header('Location: ../index.php');
 else:
 
-  if ($user->isAdmin()) {
-    echo "<p>You are an admin!</p>";
-  } else {
-    echo "<p>You are not an admin.</p>";
-  }
+  // if ($user->isAdmin()) {
+  //   echo "<p>You are an admin!</p>";
+  // } else {
+  //   echo "<p>You are not an admin.</p>";
+  // }
 
 
 

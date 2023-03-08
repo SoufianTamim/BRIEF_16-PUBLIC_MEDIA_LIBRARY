@@ -22,10 +22,10 @@
                   <span class = " m-1 text-success"><?php echo $val['Status'] ?></span>
                      <?php   if ($user->isAdmin()) {  ?>
                 
-                      <div class = "product-content text-center d-flex flex-row d-block ">
+                      <div class = "product-content text-center d-flex justify-content-center d-block ">
                         <form method="GET" >
-                          <input type="submit" class="btn btn-primary text-white w-50 m-1" name="delete" value="Edit">
-                        <input type="submit" class="btn btn-danger text-white w-50 m-1" name="delete"  value="Delete">
+                        <input type="submit"  class="btn btn-primary text-white w-100 m-1" name="delete" value="Edit">
+                        <input type="submit" <?php if(!isset($val['Status']) || $val['Status'] !== "Available" && $val['Status'] !== "Unavailable") { echo "hidden"; } ?> class="btn btn-danger text-white w-100 m-1" name="delete"  value="delete">
                         <input type="hidden" name="Item_Code" value="<?php echo $val['Item_Code'] ?>">   
                         </form>
                       </div>

@@ -109,26 +109,16 @@ public function create($table_name, $data) {
         return false;
     }
     
-    // public function delete($table_name, $id) {
-    //     $query = "DELETE FROM $table_name WHERE Item_Code=:id";
-    //     $stmt = $this->conn->prepare($query);
-    //     $id = htmlspecialchars(strip_tags($id));
-    //     $stmt->bindParam(":id", $id);
-    //     if($stmt->execute()) {
-    //         return true;
-    //     }
-    //     return false;
-    // }
-
-    public function delete($table_name, $id) {
-    $query = "DELETE FROM $table_name WHERE Item_Code = $id";
-    $result = $this->conn->query($query);
-    if($result) {
-        return true;
+    public function delete($table_name, $column, $id) {
+        $query = "DELETE FROM $table_name WHERE $column=:id";
+        $stmt = $this->conn->prepare($query);
+        $id = htmlspecialchars(strip_tags($id));
+        $stmt->bindParam(":id", $id);
+        if($stmt->execute()) {
+            return true;
+        }
+        return false;
     }
-    return false;
-}
-
 
     public function join($table1_name, $table2_name, $table1_id, $table2_id) {
         $query = "SELECT * FROM $table1_name INNER JOIN $table2_name ON $table1_name.$table1_id = $table2_name.$table2_id;";

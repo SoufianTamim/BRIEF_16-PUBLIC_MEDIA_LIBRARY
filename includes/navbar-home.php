@@ -1,10 +1,9 @@
 <?php
-require __DIR__.'/../vendor/autoload.php';
+include __DIR__.'/../vendor/autoload.php';
 
 include '../php/USER.php';
 
 Database::connect('localhost', 'Library', 'root', '');
-
 $crud = new Crud();
 $user = new User();
 
@@ -21,7 +20,6 @@ if (isset($_GET['find'])) {
   if ($Column_1 || $Column_2 || $Column_3) {
     $Filters = $crud->filterItems($table_name, $Column_1, $Column_2, $Column_3);
 
-    // print_r($Filters);
   }
 } else {
 
@@ -46,11 +44,14 @@ if (!$isAuthenticated):
 else:
 
   if ($user->isAdmin()) {
-    dd($_GET);
+    // dd($_GET);
     if(isset($_GET['delete'])) {
       $id = $_GET['Item_Code'];
-      if($crud->delete('Item', $id)) {
+      
+      // dd($success);
+      if($success = $crud->delete('Item','Item_Code', $id)) {
           echo "Record deleted successfully.";
+          header('Location: home.php');
       } else {
           echo "Error deleting record.";
       }
