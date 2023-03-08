@@ -21,8 +21,8 @@ if (isset($_GET['find'])) {
   if ($Column_1 || $Column_2 || $Column_3) {
     $Filters = $crud->filterItems($table_name, $Column_1, $Column_2, $Column_3);
 
-    // print_r($Filters);
   }
+  
 } else {
 
   $table1_name = "Item";
@@ -50,6 +50,8 @@ else:
   } else {
     echo "<p>You are not an admin.</p>";
   }
+
+
 
 
 ?>
@@ -81,7 +83,7 @@ else:
             <div class="d-flex flex-row" >
             <?php   if ($user->isAdmin()) {  ?>
               <a class="nav-link text-white" aria-current="page" href="home.php">HOME</a>
-              <a class="nav-link text-white" aria-current="page" data-bs-toggle="modal" data-bs-target="#Add-item" href="#">ADD-ITEM</a>
+              <a class="nav-link text-white" aria-current="page" href="Add_Item.php">ADD-ITEM</a>
               <?php } else {  ?>
               <a class="nav-link text-white" aria-current="page" href="home.php">HOME</a>
                 <?php } ?>

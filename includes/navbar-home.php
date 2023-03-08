@@ -46,10 +46,17 @@ if (!$isAuthenticated):
 else:
 
   if ($user->isAdmin()) {
-    echo "<p>You are an admin!</p>";
-  } else {
-    echo "<p>You are not an admin.</p>";
-  }
+    dd($_GET);
+    if(isset($_GET['delete'])) {
+      $id = $_GET['Item_Code'];
+      if($crud->delete('Item', $id)) {
+          echo "Record deleted successfully.";
+      } else {
+          echo "Error deleting record.";
+      }
+  } 
+
+}
 ?>
 <!DOCTYPE html>
 <html lang="en" class="h-100">
@@ -71,7 +78,7 @@ else:
       </a>
       <?php if ($user->isAdmin()) {  ?>
               <a class="nav-link text-white" aria-current="page" href="home.php">HOME</a>
-              <a class="nav-link text-white" aria-current="page" data-bs-toggle="modal" data-bs-target="#Add-item" href="#">ADD-ITEM</a>
+              <a class="nav-link text-white" aria-current="page"  href="Add_Item.php">ADD-ITEM</a>
               <?php } else {  ?>
               <a class="nav-link text-white" aria-current="page" href="home.php">HOME</a>
               <?php } ?>

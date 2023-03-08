@@ -20,8 +20,18 @@
               <div class = "product-content text-center d-flex flex-column d-block m-auto mb-3">
                   <span class = " m-1 text-uppercase"><?php echo $val['Title'] ?></span>
                   <span class = " m-1 text-success"><?php echo $val['Status'] ?></span>
-                  <button type="button" <?php if(!isset($val['Status']) || $val['Status'] !== "Available") { echo "hidden"; } ?> class="btn btn-outline-primary text-white" data-bs-toggle="modal" data-bs-target="#exampleModal">reserve</button>
-              </div>
+                     <?php   if ($user->isAdmin()) {  ?>
+                
+                      <div class = "product-content text-center d-flex flex-row d-block ">
+                        <form method="GET" >
+                          <input type="submit" class="btn btn-primary text-white w-50 m-1" name="delete" value="Edit">
+                        <input type="submit" class="btn btn-danger text-white w-50 m-1" name="delete"  value="Delete">
+                        <input type="hidden" name="Item_Code" value="<?php echo $val['Item_Code'] ?>">   
+                        </form>
+                      </div>
+                    <?php } else {  ?>
+                    <button type="button" <?php if(!isset($val['Status']) || $val['Status'] !== "Available") { echo "hidden"; } ?> class="btn btn-outline-primary text-white" data-bs-toggle="modal" data-bs-target="#exampleModal">reserve</button>
+                    <?php } ?></div>
             </div>
            <?php 
            }
@@ -47,7 +57,12 @@
               <div class = "product-content text-center d-flex flex-column d-block m-auto mb-3">
                   <span class = " m-1 text-uppercase"><?php echo $val['Title'] ?></span>
                   <span class = " m-1 text-success"><?php echo $val['Status'] ?></span>
-                  <button type="button" <?php if(!isset($val['Status']) || $val['Status'] !== "Available") { echo "hidden"; } ?> class="btn btn-outline-primary text-white" data-bs-toggle="modal" data-bs-target="#exampleModal">reserve</button>
+                  <?php   if ($user->isAdmin()) {  ?>
+                <button type="button" class="btn btn-primary text-white" >Edit</button>
+                <button type="button" class="btn btn-danger text-white">Delete</button>                    
+                    <?php } else {  ?>
+                <button type="button" <?php if(!isset($val['Status']) || $val['Status'] !== "Available") { echo "hidden"; } ?> class="btn btn-outline-primary text-white" data-bs-toggle="modal" data-bs-target="#exampleModal">reserve</button>
+                <?php } ?>
 
               </div>
             </div>
