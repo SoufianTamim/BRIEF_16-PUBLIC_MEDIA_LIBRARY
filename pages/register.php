@@ -4,7 +4,9 @@ require '../php/User.php';
 $conn = new Database('localhost', 'Library', 'root', '');
 $user = new User($conn);
 
-if (isset($_GET['register'])) {
+// dd($_GET);
+
+if (isset($_GET['nickname'])) {
 	$nickname = $_GET['nickname'];
 	$name = $_GET['name'];
 	$email = $_GET['email'];
@@ -13,7 +15,10 @@ if (isset($_GET['register'])) {
 	$Phone = $_GET['Phone'];
 	$Address  = $_GET['Address'];
 	$BirthDate  = $_GET['birthdate'];
-	$password = $_GET['password1'];
+	$password = $_GET['Password'];
+
+
+
 
 	if ($user->signup($nickname, $name, $CIN ,$Occupation, $email ,$Phone ,$Address ,$BirthDate ,$password)) {
 		echo '<p>Registration successful!</p>';
@@ -40,7 +45,7 @@ if (isset($_GET['register'])) {
 					<div class="card shadow-lg mt-3">
 						<div class="card-body bg-light-50">
 							<h1 class="fs-4 card-title fw-bold mb-4 text-center">REGISTER </h1>
-							<form method="GET"  id="form">
+							<form method="GET" id="form">
 								<div class="mb-2 d-flex flex-row justify-content-between flex-wrap">
 									<label class=" text-muted" >name :</label>
 									<div class="w-75 d-flex flex-row "> 
@@ -84,26 +89,26 @@ if (isset($_GET['register'])) {
 								<div class="mb-2 d-flex flex-row justify-content-between flex-wrap">
 									<label class="mb-2 text-muted">Address :</label>
 									<div class="w-75">
-										<input id="address" type="text" class="form-control" name="address" placeholder="Enter your Address ..." >
+										<input id="address" type="text" class="form-control" name="Address" placeholder="Enter your Address ..." >
 										<div class="error text-danger"></div>
 									</div>
 								</div>
 								<div class="mb-2 d-flex flex-row justify-content-between flex-wrap">
-									<label class="mb-2 text-muted" for="password">BirthDate :</label>
+									<label class="mb-2 text-muted">BirthDate :</label>
 								<div class="w-75">
 									<input id="date" type="date" class="form-control" name="birthdate" >
 									<div class="error text-danger"></div>
 								</div>
 								</div>
 								<div class="mb-2 d-flex flex-row justify-content-between flex-wrap">
-									<label class="mb-2 text-muted" for="password">Password :</label>
+									<label class="mb-2 text-muted">Password :</label>
 									<div class="w-75">
-										<input id="password1" type="password" class="form-control" name="password1"placeholder="Enter a password ..."  >
+										<input id="password1" type="password" class="form-control" name="Password"placeholder="Enter a password ..."  >
 										<div class="error text-danger"></div>
 									</div>
 								</div>
 								<div class="mb-2 d-flex flex-row justify-content-between flex-wrap">
-									<label class="mb-2 text-muted" for="password">Password :</label>
+									<label class="mb-2 text-muted">Password :</label>
 									<div class="w-75">
 										<input id="password2" type="password" class="form-control" name="password2" placeholder="confirm Password ..."  >
 										<div class="error text-danger"></div>
@@ -119,12 +124,10 @@ if (isset($_GET['register'])) {
 									You must agree before submitting.
 								</div>
 								</div>
-
 								</div>
 								<div class="d-flex justify-content-end">
-									<input type="submit" name="register"  class="btn btn-primary ms-auto" value="Register">
+									<input type="submit" name="xxxx"  class="btn btn-primary ms-auto" value="Register">
 								</div>
-
 							</form>
 						</div>
 						<div class="card-footer py-3 border-0">
@@ -139,6 +142,6 @@ if (isset($_GET['register'])) {
 			</div>
 		</div>
 	</section>
-	<!-- <script src="../js/register.js"></script> -->
+	<script src="../js/register.js"></script>
 </body>
 </html>

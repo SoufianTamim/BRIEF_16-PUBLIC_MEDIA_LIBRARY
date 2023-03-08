@@ -1,24 +1,17 @@
 <?php
 
-class Crud {
+require __DIR__.'/../vendor/autoload.php';
 
-    
-    private $host = "localhost";
-    private $db_name = "Library";
-    private $username = "root";
-    private $password = "";
+// include 'DB.php';
+
+class Crud extends Database {
     public $conn;
 
-    public function __construct() {
-
-        try {
-            $this->conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->db_name, $this->username, $this->password);
-            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch(PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
-        }
-
+    public function __construct(Database $conn)
+    {
+        $this->conn = $conn;
     }
+
 
 
     public function read($table_name, $row ="*", $where="1 = 1") {
@@ -80,8 +73,7 @@ class Crud {
 
     public function join($table1_name, $table2_name, $table1_id, $table2_id) {
         $query = "SELECT * FROM $table1_name INNER JOIN $table2_name ON $table1_name.$table1_id = $table2_name.$table2_id;";
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute();
+        $stmt = $this->conn->query($query);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
