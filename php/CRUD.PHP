@@ -14,7 +14,7 @@ class Crud extends Database {
 
 
 
-    public function read($table_name, $row ="*", $where="1 = 1") {
+    public function read($table_name, $where="1 = 1" , $row ="*") {
         $query = "SELECT $row FROM $table_name WHERE $where";
         $stmt = $this->conn->query($query);
         $xx = $stmt->fetchAll();
@@ -44,10 +44,10 @@ class Crud extends Database {
             $query .= "$key=:$key, ";
         }
         $query = rtrim($query, ", ");
-        $query .= " WHERE id=:id";
+        $query .= " WHERE Nickname=:Nickname";
         $stmt = $this->conn->prepare($query);
         $id = htmlspecialchars(strip_tags($id));
-        $stmt->bindParam(":id", $id);
+        $stmt->bindParam(":Nickname", $id);
         foreach($data as $key => &$value) {
             $value = htmlspecialchars(strip_tags($value));
             $stmt->bindParam(":$key", $value);
