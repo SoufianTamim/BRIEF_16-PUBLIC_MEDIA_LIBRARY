@@ -21,29 +21,75 @@ class Crud extends Database {
         return $xx;
     }
 
-//     public function create($table_name, $data) {
+    // public function create($table_name, $data) {
+    // $keys = array_keys($data);
+    // $values = array_values($data);
+    // $placeholders = implode(',', array_fill(0, count($keys), '?'));
+
+    // $query = "INSERT INTO $table_name (".implode(',', $keys).") VALUES ($placeholders)";
+    // // $query ="INSERT INTO `Item` (`Item_Code`, `Title`, `Author_Name`, `Cover_Image`, `State`, `Edition_Date`, `Purchase_Date`, `Status`, `Duration`, `Category_Code`) VALUES (NULL, 'CHER BLOPBLOP : LETTRE A MON EMBRYON', 'Lea Castor', 'Item_Images/Comic/4fbec7c24ebf7b699e1f8d80eb993a6aac12bb81c66fe8c939c04883bd884c84.jpg', 'Broken', '2016-02-08', '2017-01-31', 'Unavailable', '0', '5'); ";
+
+
+    // $stmt = $this->conn->prepare($query);
+    // $success = $stmt->execute($values);
+    
+    // if($success) {
+    //     return true;
+    // }
+
+    public function create($table, $data)
+{
+    $keys = implode(',', array_keys($data));
+    $placeholders = implode(',', array_fill(0, count($data), '?'));
+
+    $query = "INSERT INTO $table ($keys) VALUES ($placeholders)";
+    $stmt = $this->conn->prepare($query);
+
+    $values = array_values($data);
+
+    $success = $stmt->execute($values);
+
+    if($success) {
+        return $this->conn->lastInsertId();
+    } else {
+        return false;
+    }
+}
+
+    
+    
+    
+    // $stmt = $this->conn->prepare($query);
+    // $success = $stmt->execute($values);
+    // dd($success);
+    
+    // if($success) {
+    //     return true;
+    // } else {
+    //     $error = $stmt->errorInfo();
+    //     dd($error);
+    //     return false;
+    // }
+
+
+//     return false;
+// }
+
+// public function create($table_name, $data) {
 //     $keys = array_keys($data);
 //     $values = array_values($data);
 //     $placeholders = implode(',', array_fill(0, count($keys), '?'));
 
 //     $query = "INSERT INTO $table_name (".implode(',', $keys).") VALUES ($placeholders)";
-//     // $query ="INSERT INTO `Item` (`Item_Code`, `Title`, `Author_Name`, `Cover_Image`, `State`, `Edition_Date`, `Purchase_Date`, `Status`, `Duration`, `Category_Code`) VALUES (NULL, 'CHER BLOPBLOP : LETTRE A MON EMBRYON', 'Lea Castor', 'Item_Images/Comic/4fbec7c24ebf7b699e1f8d80eb993a6aac12bb81c66fe8c939c04883bd884c84.jpg', 'Broken', '2016-02-08', '2017-01-31', 'Unavailable', '0', '5'); ";
 
+//     $query .= " VALUES (" . implode(',', array_fill(0, count($values), '?')) . ")";
 
-//     // $stmt = $this->conn->prepare($query);
-//     // $success = $stmt->execute($values);
-    
-//     // if($success) {
-//     //     return true;
-//     // }
-    
-    
-    
-    
-//     $stmt = $this->conn->prepare($query);
+//     $stmt = $this->conn->query($query);
+//     dd($stmt);
+
 //     $success = $stmt->execute($values);
-//     dd($success);
-    
+
+
 //     if($success) {
 //         return true;
 //     } else {
@@ -51,34 +97,7 @@ class Crud extends Database {
 //         dd($error);
 //         return false;
 //     }
-
-
-//     return false;
 // }
-
-public function create($table_name, $data) {
-    $keys = array_keys($data);
-    $values = array_values($data);
-    $placeholders = implode(',', array_fill(0, count($keys), '?'));
-
-    $query = "INSERT INTO $table_name (".implode(',', $keys).") VALUES ($placeholders)";
-
-    $query .= " VALUES (" . implode(',', array_fill(0, count($values), '?')) . ")";
-
-    $stmt = $this->conn->query($query);
-
-    $success = $stmt->execute($values);
-        dd($success);
-
-
-    if($success) {
-        return true;
-    } else {
-        $error = $stmt->errorInfo();
-        dd($error);
-        return false;
-    }
-}
 
 
 
