@@ -37,11 +37,8 @@
                       </form>
                     <?php }  ?></div>
             </div>
-           <?php 
-           }
-          } else if (isset($_GET['find'])) { //check if the method is po  st
-              foreach($Filters as $key => $val) { //loops in the table of announce with filterd data and display the in cards 
-                      ?>
+           <?php } } else if (isset($_GET['find'])) {
+                      foreach($Filters as $key => $val) { ?>
             <div class="d-flex flex-wrap  bg-dark p-2 rounded-2 m-1" id="card">
               <div class = "product-img cont image " >
                   <img src = "../<?php echo $val['Cover_Image'] ?>" id="image" class = "image img-fluid d-block mx-auto" height="400px !important">
@@ -66,7 +63,6 @@
                     <?php } else {  ?>
                 <button type="button" <?php if(!isset($val['Status']) || $val['Status'] !== "Available") { echo "hidden"; } ?> class="btn btn-outline-primary text-white" data-bs-toggle="modal" data-bs-target="#exampleModal">reserve</button>
                 <?php } ?>
-
               </div>
             </div>
            <?php  } } ?>
