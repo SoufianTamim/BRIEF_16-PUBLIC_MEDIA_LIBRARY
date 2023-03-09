@@ -46,8 +46,11 @@ else:
   if ($user->isAdmin()) {
     if (isset($_GET['delete'])) {
       $id = $_GET['Item_Code'];
+      $column = 'Item_Code';
+      $table_name = 'Item';
 
-      if ($success = $crud->delete('Item', 'Item_Code', $id)) {
+      // dd($crud->delete($table_name, $column, $id));
+      if ($success = $crud->delete($table_name, $column, $id)) {
         echo "Record deleted successfully.";
         header('Location: home.php');
       } else {

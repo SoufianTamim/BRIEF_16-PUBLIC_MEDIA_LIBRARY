@@ -95,6 +95,7 @@ class Crud extends Database
         $stmt = $this->conn->prepare($query);
         $id = htmlspecialchars(strip_tags($id));
         $stmt->bindParam(":id", $id);
+        // dd($stmt);
         if ($stmt->execute()) {
             return true;
         }
@@ -131,10 +132,6 @@ class Crud extends Database
 
         $result = $this->conn->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
-        echo "<pre class='bg-dark'>";
-        echo $sql;
-        print_r($result);
-        echo "</pre>";
 
 
 
