@@ -1,7 +1,9 @@
  <div class = "d-flex flex-row flex-wrap justify-content-center mt-5">
           <?php 
          if (!isset($_GET['find'])) {
-              foreach($All_Data as $key => $val) {  ?>
+              foreach($All_Data as $key => $val) {  
+                  ?>
+
             <div class="d-flex flex-wrap  bg-dark p-2 rounded-2 m-1" id="card">
               <div class = "product-img cont image " >
                   <img src = "../<?php echo $val['Cover_Image'] ?>" id="image" class = "image img-fluid d-block mx-auto" height="400px !important">
@@ -30,8 +32,12 @@
                         </form>
                       </div>
                     <?php } else {  ?>
-                    <button type="button" <?php if(!isset($val['Status']) || $val['Status'] !== "Available") { echo "hidden"; } ?> class="btn btn-outline-primary text-white" data-bs-toggle="modal" data-bs-target="#exampleModal">reserve</button>
-                    <?php } ?></div>
+                      <form action="">
+                        <input type="submit" name="Reserve" <?php if(!isset($val['Status']) || $val['Status'] !== "Available") { echo "hidden"; } ?> class="btn btn-outline-primary text-white" Value="Reserve">
+                        <input type="hidden" name="Item_Code" value="<?php echo $val['Item_Code'] ?>" >
+                        <input type="hidden" name="Nickname" value="<?php echo $_SESSION['user_id'] ?>">
+                      </form>
+                    <?php }  ?></div>
             </div>
            <?php 
            }

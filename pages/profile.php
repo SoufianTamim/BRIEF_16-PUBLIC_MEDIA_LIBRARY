@@ -2,11 +2,6 @@
 
   include '../includes/navbar.php';
 
-  $nickname = $_SESSION['user_id'];
-  $table_name = "members";
-  $where = "Nickname = '$nickname'";
-  $member = $crud->read($table_name , $where);
-
   if(isset($_GET['submit'])) {
     $data = [ 
       "Nickname" => $_GET['Nickname'],
@@ -16,9 +11,10 @@
       "Address" => $_GET['Address']
     ];
     $Nickname = 'Nickname';
+    $id_Name = 'Nickname';
     $table_name = 'members';
     
-    if($profile = $crud->update($table_name, $Nickname, $data)) {
+    if($profile = $crud->update($table_name, $Nickname, $id_Name, $data) ){
       
       header("Location: profile.php");
       exit; 

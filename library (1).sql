@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Mar 06, 2023 at 10:13 PM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.2.0
+-- Hôte : 127.0.0.1
+-- Généré le : jeu. 09 mars 2023 à 10:35
+-- Version du serveur : 10.4.27-MariaDB
+-- Version de PHP : 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,16 +18,16 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `Library`
+-- Base de données : `library`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Borrowings`
+-- Structure de la table `borrowings`
 --
 
-CREATE TABLE `Borrowings` (
+CREATE TABLE `borrowings` (
   `Borrowing_Code` int(11) NOT NULL,
   `Borrowing_Date` datetime DEFAULT NULL,
   `Borrowing_Return_Date` datetime DEFAULT NULL,
@@ -37,10 +37,10 @@ CREATE TABLE `Borrowings` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `Borrowings`
+-- Déchargement des données de la table `borrowings`
 --
 
-INSERT INTO `Borrowings` (`Borrowing_Code`, `Borrowing_Date`, `Borrowing_Return_Date`, `Item_Code`, `Nickname`, `Reservation_Code`) VALUES
+INSERT INTO `borrowings` (`Borrowing_Code`, `Borrowing_Date`, `Borrowing_Return_Date`, `Item_Code`, `Nickname`, `Reservation_Code`) VALUES
 (1, '2023-03-01 18:33:38', '2023-03-16 18:33:38', 2, 'bkhitamine2000', 8),
 (2, '2023-03-02 18:33:38', '2023-03-17 18:33:38', 6, 'daifaneyasmine2002', 11),
 (3, '2023-03-05 14:01:38', '2023-03-20 14:01:38', 9, 'daifaneyasmine2002', 29),
@@ -61,20 +61,20 @@ INSERT INTO `Borrowings` (`Borrowing_Code`, `Borrowing_Date`, `Borrowing_Return_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Category`
+-- Structure de la table `category`
 --
 
-CREATE TABLE `Category` (
+CREATE TABLE `category` (
   `Category_Code` int(11) NOT NULL,
   `Category_Name` varchar(50) DEFAULT NULL,
   `Category_Type` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `Category`
+-- Déchargement des données de la table `category`
 --
 
-INSERT INTO `Category` (`Category_Code`, `Category_Name`, `Category_Type`) VALUES
+INSERT INTO `category` (`Category_Code`, `Category_Name`, `Category_Type`) VALUES
 (1, 'Book', 'Number of pages'),
 (2, 'Music', 'Duration'),
 (3, 'Audio book', 'Duration'),
@@ -84,10 +84,10 @@ INSERT INTO `Category` (`Category_Code`, `Category_Name`, `Category_Type`) VALUE
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Item`
+-- Structure de la table `item`
 --
 
-CREATE TABLE `Item` (
+CREATE TABLE `item` (
   `Item_Code` int(11) NOT NULL,
   `Title` varchar(50) DEFAULT NULL,
   `Author_Name` varchar(100) DEFAULT NULL,
@@ -96,15 +96,15 @@ CREATE TABLE `Item` (
   `Edition_Date` date DEFAULT NULL,
   `Purchase_Date` date DEFAULT NULL,
   `Status` varchar(150) DEFAULT NULL,
-  `Duration` int(50) NOT NULL,
+  `Duration` int(11) NOT NULL,
   `Category_Code` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `Item`
+-- Déchargement des données de la table `item`
 --
 
-INSERT INTO `Item` (`Item_Code`, `Title`, `Author_Name`, `Cover_Image`, `State`, `Edition_Date`, `Purchase_Date`, `Status`, `Duration`, `Category_Code`) VALUES
+INSERT INTO `item` (`Item_Code`, `Title`, `Author_Name`, `Cover_Image`, `State`, `Edition_Date`, `Purchase_Date`, `Status`, `Duration`, `Category_Code`) VALUES
 (1, 'LA FEMME MOUSTIQUE : TEXTE INTEGRAL', 'Ghislaine Herbera', 'Item_Images/Audio_Book/wsgetimg (3).jpeg', 'Used - like new', '2022-01-10', '2022-01-10', 'Available', 0, 3),
 (2, 'PANIQUE DANS LA FORET', 'Clotilde Perrin', 'Item_Images/Audio_Book/1297509.jpg', 'Used', '2013-03-27', '2019-07-10', 'Borrowed', 0, 3),
 (3, 'PAX ET LE PETIT SOLDAT', 'Sara Pennypacker', 'Item_Images/Audio_Book/1297513.jpg', 'Used - like new', '2020-10-14', '2021-08-19', 'Reserved', 0, 3),
@@ -154,15 +154,16 @@ INSERT INTO `Item` (`Item_Code`, `Title`, `Author_Name`, `Cover_Image`, `State`,
 (47, 'UNE SURPRISE POUR AMOS MCGEE', 'Philip Christian', 'Item_Images/Book/079bd8ff61271504db3d7dbfbe7fc46f2f4c08a87ab4fb7da7a36f02c4135780.jpg', 'New', '2022-01-11', '2022-02-09', 'Reserved', 0, 1),
 (48, 'LEUR SANG COULE DANS TES VEINES', 'Rachel Burge', 'Item_Images/Book/64ab4232595d9e4d20a4bb76d2508100290b8006af7cdd138e91d7a38f2a330a.jpg', 'Used - like new', '2019-06-10', '2020-02-04', 'Available', 0, 1),
 (49, 'AU PARADIS JE DEMEURE', 'Attica Locke', 'Item_Images/Book/c80f59eefb7f0872ce8cda3577d5db807ff84aaf0e496198c46f943eb83c4619.jpg', 'Used', '2016-09-21', '2017-01-22', 'Available', 0, 1),
-(50, 'L\'ECOLE N\'EST PAS FAITE POUR LES PAUVRES ', 'Jean-Paul Delahaye', 'Item_Images/Book/21711074dc6316af8f3428a1e0e5348da54f8f86c708e0f3af8279a20ed0f121.jpg', 'Used - like old', '2019-03-01', '2019-04-01', 'Borrowed', 0, 1);
+(50, 'L\'ECOLE N\'EST PAS FAITE POUR LES PAUVRES ', 'Jean-Paul Delahaye', 'Item_Images/Book/21711074dc6316af8f3428a1e0e5348da54f8f86c708e0f3af8279a20ed0f121.jpg', 'Used - like old', '2019-03-01', '2019-04-01', 'Borrowed', 0, 1),
+(86, 'Quas animi in est q', 'Ut earum in cum non ', '/Item_Images/1297509.jpg', 'Used - like old', '2014-02-22', '2017-03-25', 'Borrowed', 14, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Members`
+-- Structure de la table `members`
 --
 
-CREATE TABLE `Members` (
+CREATE TABLE `members` (
   `Nickname` varchar(150) NOT NULL,
   `Full_Name` varchar(150) DEFAULT NULL,
   `Password` varchar(150) DEFAULT NULL,
@@ -174,44 +175,51 @@ CREATE TABLE `Members` (
   `Occupation` varchar(50) DEFAULT NULL,
   `Penalty_Count` int(11) DEFAULT 0,
   `Birth_Date` date DEFAULT NULL,
-  `Creation_Date` date DEFAULT NULL
+  `Creation_Date` date DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `Members`
+-- Déchargement des données de la table `members`
 --
 
-INSERT INTO `Members` (`Nickname`, `Full_Name`, `Password`, `Admin`, `Address`, `Email`, `Phone`, `CIN`, `Occupation`, `Penalty_Count`, `Birth_Date`, `Creation_Date`) VALUES
-('alilousaad1975', 'Alilou Saad', '8755418a587841fe5ea7b3cd305eb1fc', 1, '27, av. Hassan II', 'alilou.saad@gmail.com', '+212695621537', 'K143659', 'Responsable', 0, '1975-04-22', '2015-06-09'),
-('bkhitamine2000', 'Bkhit Amine', '018bf5b92964a965c186d3169dc48d12', 0, '20, rue Bani Marine', 'bkhit.amine@gmail.com', '+212684021838', 'CE456918', 'Etudiant', 1, '2000-01-04', '2022-07-09'),
-('daifaneyasmine2002', 'Daifane Yasmine', 'fff78b1cc652372b6695b06311049f8c', 0, '63, Place Rahba Lakdima', 'dafaine.yasmine@gmail.com', '+212696395569', 'BR54712', 'Salariee', 0, '2002-05-15', '2021-08-23'),
-('elghaliikram2001', 'Elghali Ikram', '25da82168123e978a1ae0dff02f65028', 0, '6, rue Moulay Slimane', 'elghali.ikram@gmail.com', '+212676225556', 'BL87123', 'Etudiante', 0, '2001-08-25', '2021-09-09'),
-('ettamriilyasse1997', 'Ettamri Ilyasse', '5133661b7a0be48e2510f945ead87cf4', 0, '1, av Hassan II, hay ElFarah Karia', 'ettamri.ilyasse@gmail.com', '+212672322387', 'BE345019', 'Salarié', 0, '1997-01-31', '2022-01-20'),
-('lamchattabamine2003', 'Lamchattab Amine', 'd20703fa5e07b347d3df89cdd57a4858', 0, 'bd. Mohamed V, Imm. Al Ouafa', 'lamchattab.amine@gmail.com', '+212698129013', 'FG341203', 'Entrepreneur', 2, '2003-07-07', '2022-06-02'),
-('salikbassam2001', 'Bassam Salik', 'ff6c13a527533e7fe4d06d308d2e392c', 0, '365, bd Mohammed V', 'bassam.salik@gmail.com', '+212675975761', 'KB345712', 'Etudiant', 0, '2001-06-27', '2022-03-08'),
-('sarsriimran2004', 'Sarsri Imran', '8b1bf0833ad39f8e683b31cf97b33263', 0, '13, av. de la liberté, v.n.', 'sarsri.imran@gmail.com', '+212674586990', 'KB33456', 'Etudiant', 0, '2004-04-01', '2022-02-26'),
-('tamimsoufian2003', 'Tamim Soufian', '830027a3167662727e072ed060a0a49e', 0, '24, rue Ali Abderrazak ', 'tamim.Soufian@gmail.com', '+212683842321', 'KB89645', 'Etudiant', 0, '2003-10-27', '2022-08-24'),
-('tebbasaad2003', 'Tebba Saad', '36554aee94dcd773f70fda74d36e0bdb', 0, 'Av. Mohamed V, 83350', 'tebba.saad@gmail.com', '+212674065353', 'KB345716', 'Stagiaire', 0, '2003-02-06', '2022-06-07');
+INSERT INTO `members` (`Nickname`, `Full_Name`, `Password`, `Admin`, `Address`, `Email`, `Phone`, `CIN`, `Occupation`, `Penalty_Count`, `Birth_Date`, `Creation_Date`) VALUES
+('alilousaad1975', 'Alilou Saad', '$2y$10$JLZPL6qxKGsYcKY9g6nXpeArQ1owcSWcbmK02Hh5kyLaEmZkxhsYO', 1, '27, av. Hassan II444', 'alilou.saad@gmail.com', '+212695621537', 'K143659', 'Responsable', 0, '1975-04-22', '2015-06-09'),
+('bkhitamine2000', 'Bkhit Amine', '$2y$10$JLZPL6qxKGsYcKY9g6nXpeArQ1owcSWcbmK02Hh5kyLaEmZkxhsYO', 0, '20, rue Bani Marine', 'bkhit.amine@gmail.com', '+212684021838', 'CE456918', 'Etudiant', 1, '2000-01-04', '2022-07-09'),
+('blabla', NULL, NULL, 0, NULL, 'blabla@blabla.blabla', NULL, 'blabla', NULL, 0, NULL, '2023-03-08'),
+('daifaneyasmine2002', 'Daifane Yasmine', '$2y$10$JLZPL6qxKGsYcKY9g6nXpeArQ1owcSWcbmK02Hh5kyLaEmZkxhsYO', 0, '63, Place Rahba Lakdima', 'dafaine.yasmine@gmail.com', '+212696395569', 'BR54712', 'Salariee', 0, '2002-05-15', '2021-08-23'),
+('elghaliikram2001', 'Elghali Ikram', '$2y$10$JLZPL6qxKGsYcKY9g6nXpeArQ1owcSWcbmK02Hh5kyLaEmZkxhsYO', 0, '6, rue Moulay Slimane', 'elghali.ikram@gmail.com', '+212676225556', 'BL87123', 'Etudiante', 0, '2001-08-25', '2021-09-09'),
+('ettamriilyasse1997', 'Ettamri Ilyasse', '$2y$10$JLZPL6qxKGsYcKY9g6nXpeArQ1owcSWcbmK02Hh5kyLaEmZkxhsYO', 0, '1, av Hassan II, hay ElFarah Karia', 'ettamri.ilyasse@gmail.com', '+212672322387', 'BE345019', 'Salarié', 0, '1997-01-31', '2022-01-20'),
+('fffff', NULL, NULL, 0, NULL, 'sdfsdf', NULL, 'sdfdsf', NULL, 0, NULL, '2023-03-08'),
+('httjhy', NULL, NULL, 0, NULL, 'blabla@blabla.blabla', NULL, 'blabla', NULL, 0, NULL, '2023-03-08'),
+('Joel Blackburn', 'Rowan Hurley', '$2y$10$KhqWv5yqHkw2XKMEe1JNfOpU5HPle8nLEr4T7CoM4HY2nUZCoeQ6a', 0, 'Incididunt labore ni', 'sidigeg@mailinator.com', '+1 (531) 849-1638', 'ddd', 'Tempora enim dolore ', 0, '2016-05-06', '2023-03-08'),
+('lamchattabamine2003', 'Lamchattab Amine', '$2y$10$JLZPL6qxKGsYcKY9g6nXpeArQ1owcSWcbmK02Hh5kyLaEmZkxhsYO', 0, 'bd. Mohamed V, Imm. Al Ouafa', 'lamchattab.amine@gmail.com', '+212698129013', 'FG341203', 'Entrepreneur', 2, '2003-07-07', '2022-06-02'),
+('mmmmmmmm', NULL, NULL, 0, NULL, 'mmmmmmmmmmm', NULL, 'mmmmmmmm', NULL, 0, NULL, '2023-03-08'),
+('ppp', NULL, NULL, 0, NULL, 'ppppp', NULL, 'pppp', NULL, 0, NULL, '2023-03-08'),
+('salikbassam2001', 'Bassam Salik', '$2y$10$JLZPL6qxKGsYcKY9g6nXpeArQ1owcSWcbmK02Hh5kyLaEmZkxhsYO', 0, '365, bd Mohammed V', 'bassam.salik@gmail.com', '+212675975761', 'KB345712', 'Etudiant', 0, '2001-06-27', '2022-03-08'),
+('sarsriimran2004', 'Sarsri Imran', '$2y$10$JLZPL6qxKGsYcKY9g6nXpeArQ1owcSWcbmK02Hh5kyLaEmZkxhsYO', 0, '13, av. de la liberté, v.n.', 'sarsri.imran@gmail.com', '+212674586990', 'KB33456', 'Etudiant', 0, '2004-04-01', '2022-02-26'),
+('Shoshana Lindsay', 'Rama Becker', '$2y$10$yJZO5LV2Pms/m6AoWwFmNestCAEvmcH25KP4kcyExiDkW.9Vb3EGm', 0, 'Nostrum delectus qu', 'vykyverox@mailinator.com', '+1 (679) 907-8576', 'dhfgjhklmnbsvadxcvjbk', 'Irure ea exercitatio', 0, '1982-03-29', '2023-03-08'),
+('tamimsoufian2003', 'Tamim Soufian', '$2y$10$JLZPL6qxKGsYcKY9g6nXpeArQ1owcSWcbmK02Hh5kyLaEmZkxhsYO', 0, '24, rue Ali Abderrazak ', 'tamim.Soufian@gmail.com', '+212683842321', 'KB89645', 'Etudiant', 0, '2003-10-27', '2022-08-24'),
+('tebbasaad2003', 'Tebba Saad', '$2y$10$JLZPL6qxKGsYcKY9g6nXpeArQ1owcSWcbmK02Hh5kyLaEmZkxhsYO', 0, 'Av. Mohamed V, 83350', 'tebba.saad@gmail.com', '+212674065353', 'KB345716', 'Stagiaire', 0, '2003-02-06', '2022-06-07');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Reservation`
+-- Structure de la table `reservation`
 --
 
-CREATE TABLE `Reservation` (
+CREATE TABLE `reservation` (
   `Reservation_Code` int(11) NOT NULL,
-  `Reservation_Date` datetime DEFAULT NULL,
+  `Reservation_Date` datetime DEFAULT current_timestamp(),
   `Reservation_Expiration_Date` datetime DEFAULT NULL,
   `Item_Code` int(11) NOT NULL,
   `Nickname` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `Reservation`
+-- Déchargement des données de la table `reservation`
 --
 
-INSERT INTO `Reservation` (`Reservation_Code`, `Reservation_Date`, `Reservation_Expiration_Date`, `Item_Code`, `Nickname`) VALUES
+INSERT INTO `reservation` (`Reservation_Code`, `Reservation_Date`, `Reservation_Expiration_Date`, `Item_Code`, `Nickname`) VALUES
 (1, '2023-01-02 20:33:45', '2023-01-03 20:33:45', 11, 'lamchattabamine2003'),
 (2, '2023-01-02 20:35:21', '2023-01-03 20:35:21', 16, 'lamchattabamine2003'),
 (3, '2023-02-07 17:22:32', '2023-02-08 17:22:32', 19, 'bkhitamine2000'),
@@ -240,100 +248,101 @@ INSERT INTO `Reservation` (`Reservation_Code`, `Reservation_Date`, `Reservation_
 (26, '2023-03-04 13:55:42', '2023-03-05 13:55:42', 42, 'sarsriimran2004'),
 (27, '2023-03-04 14:01:02', '2023-03-05 14:01:02', 44, 'sarsriimran2004'),
 (28, '2023-03-04 19:23:37', '2023-03-05 19:23:37', 47, 'tamimsoufian2003'),
-(29, '2023-03-04 21:55:21', '2023-03-05 21:55:21', 9, 'daifaneyasmine2002');
+(29, '2023-03-04 21:55:21', '2023-03-05 21:55:21', 9, 'daifaneyasmine2002'),
+(2919, '2023-03-09 10:30:23', '2023-03-10 10:30:23', 4, 'lamchattabamine2003');
 
 --
--- Indexes for dumped tables
+-- Index pour les tables déchargées
 --
 
 --
--- Indexes for table `Borrowings`
+-- Index pour la table `borrowings`
 --
-ALTER TABLE `Borrowings`
+ALTER TABLE `borrowings`
   ADD PRIMARY KEY (`Borrowing_Code`),
   ADD UNIQUE KEY `Reservation_Code` (`Reservation_Code`),
   ADD KEY `Item_Code` (`Item_Code`),
   ADD KEY `Nickname` (`Nickname`);
 
 --
--- Indexes for table `Category`
+-- Index pour la table `category`
 --
-ALTER TABLE `Category`
+ALTER TABLE `category`
   ADD PRIMARY KEY (`Category_Code`);
 
 --
--- Indexes for table `Item`
+-- Index pour la table `item`
 --
-ALTER TABLE `Item`
+ALTER TABLE `item`
   ADD PRIMARY KEY (`Item_Code`),
   ADD KEY `Category_Code` (`Category_Code`);
 
 --
--- Indexes for table `Members`
+-- Index pour la table `members`
 --
-ALTER TABLE `Members`
+ALTER TABLE `members`
   ADD PRIMARY KEY (`Nickname`);
 
 --
--- Indexes for table `Reservation`
+-- Index pour la table `reservation`
 --
-ALTER TABLE `Reservation`
+ALTER TABLE `reservation`
   ADD PRIMARY KEY (`Reservation_Code`),
   ADD KEY `Item_Code` (`Item_Code`),
   ADD KEY `Nickname` (`Nickname`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT for table `Borrowings`
+-- AUTO_INCREMENT pour la table `borrowings`
 --
-ALTER TABLE `Borrowings`
+ALTER TABLE `borrowings`
   MODIFY `Borrowing_Code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT for table `Category`
+-- AUTO_INCREMENT pour la table `category`
 --
-ALTER TABLE `Category`
+ALTER TABLE `category`
   MODIFY `Category_Code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `Item`
+-- AUTO_INCREMENT pour la table `item`
 --
-ALTER TABLE `Item`
-  MODIFY `Item_Code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+ALTER TABLE `item`
+  MODIFY `Item_Code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 
 --
--- AUTO_INCREMENT for table `Reservation`
+-- AUTO_INCREMENT pour la table `reservation`
 --
-ALTER TABLE `Reservation`
-  MODIFY `Reservation_Code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2901;
+ALTER TABLE `reservation`
+  MODIFY `Reservation_Code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2920;
 
 --
--- Constraints for dumped tables
+-- Contraintes pour les tables déchargées
 --
 
 --
--- Constraints for table `Borrowings`
+-- Contraintes pour la table `borrowings`
 --
-ALTER TABLE `Borrowings`
-  ADD CONSTRAINT `borrowings_ibfk_1` FOREIGN KEY (`Item_Code`) REFERENCES `Item` (`Item_Code`),
-  ADD CONSTRAINT `borrowings_ibfk_2` FOREIGN KEY (`Nickname`) REFERENCES `Members` (`Nickname`),
-  ADD CONSTRAINT `borrowings_ibfk_3` FOREIGN KEY (`Reservation_Code`) REFERENCES `Reservation` (`Reservation_Code`);
+ALTER TABLE `borrowings`
+  ADD CONSTRAINT `borrowings_ibfk_1` FOREIGN KEY (`Item_Code`) REFERENCES `item` (`Item_Code`),
+  ADD CONSTRAINT `borrowings_ibfk_2` FOREIGN KEY (`Nickname`) REFERENCES `members` (`Nickname`),
+  ADD CONSTRAINT `borrowings_ibfk_3` FOREIGN KEY (`Reservation_Code`) REFERENCES `reservation` (`Reservation_Code`);
 
 --
--- Constraints for table `Item`
+-- Contraintes pour la table `item`
 --
-ALTER TABLE `Item`
-  ADD CONSTRAINT `item_ibfk_1` FOREIGN KEY (`Category_Code`) REFERENCES `Category` (`Category_Code`);
+ALTER TABLE `item`
+  ADD CONSTRAINT `item_ibfk_1` FOREIGN KEY (`Category_Code`) REFERENCES `category` (`Category_Code`);
 
 --
--- Constraints for table `Reservation`
+-- Contraintes pour la table `reservation`
 --
-ALTER TABLE `Reservation`
-  ADD CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`Item_Code`) REFERENCES `Item` (`Item_Code`),
-  ADD CONSTRAINT `reservation_ibfk_2` FOREIGN KEY (`Nickname`) REFERENCES `Members` (`Nickname`);
+ALTER TABLE `reservation`
+  ADD CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`Item_Code`) REFERENCES `item` (`Item_Code`),
+  ADD CONSTRAINT `reservation_ibfk_2` FOREIGN KEY (`Nickname`) REFERENCES `members` (`Nickname`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

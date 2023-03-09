@@ -35,6 +35,10 @@ if (isset($_GET['find'])) {
 $isAuthenticated = $user->isAuthenticated();
 $userData = $isAuthenticated ? $user->getUser() : null;
 
+
+
+
+
 if (isset($_GET['logout'])) {
   $user->logout();
   header('Location: ../index.php');
@@ -44,6 +48,14 @@ if (isset($_GET['logout'])) {
 if (!$isAuthenticated):
   header('Location: ../index.php');
 else:
+
+
+  $nickname = $_SESSION['user_id'];
+  $table_name = "members";
+  $where = "Nickname = '$nickname'";
+  $member = $crud->read($table_name , $where);
+
+
 
   // if ($user->isAdmin()) {
   //   echo "<p>You are an admin!</p>";

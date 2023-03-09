@@ -37,83 +37,33 @@ class Crud extends Database {
     //     return true;
     // }
 
-    public function create($table, $data)
-{
-    $keys = implode(',', array_keys($data));
-    $placeholders = implode(',', array_fill(0, count($data), '?'));
+    public function create($table_name, $data)  {
+        $keys = implode(',', array_keys($data));
+        $placeholders = implode(',', array_fill(0, count($data), '?'));
 
-    $query = "INSERT INTO $table ($keys) VALUES ($placeholders)";
-    $stmt = $this->conn->prepare($query);
+        $query = "INSERT INTO $table_name ($keys) VALUES ($placeholders)";
+        $stmt = $this->conn->prepare($query);
+        
+        $values = array_values($data);
+        
+        $success = $stmt->execute($values);
 
-    $values = array_values($data);
-
-    $success = $stmt->execute($values);
-
-    if($success) {
-        return $this->conn->lastInsertId();
-    } else {
-        return false;
+        if($success) {
+            return $this->conn->lastInsertId();
+        } else {
+            return false;
+        }
     }
-}
-
-    
-    
-    
-    // $stmt = $this->conn->prepare($query);
-    // $success = $stmt->execute($values);
-    // dd($success);
-    
-    // if($success) {
-    //     return true;
-    // } else {
-    //     $error = $stmt->errorInfo();
-    //     dd($error);
-    //     return false;
-    // }
 
 
-//     return false;
-// }
-
-// public function create($table_name, $data) {
-//     $keys = array_keys($data);
-//     $values = array_values($data);
-//     $placeholders = implode(',', array_fill(0, count($keys), '?'));
-
-//     $query = "INSERT INTO $table_name (".implode(',', $keys).") VALUES ($placeholders)";
-
-//     $query .= " VALUES (" . implode(',', array_fill(0, count($values), '?')) . ")";
-
-//     $stmt = $this->conn->query($query);
-//     dd($stmt);
-
-//     $success = $stmt->execute($values);
-
-
-//     if($success) {
-//         return true;
-//     } else {
-//         $error = $stmt->errorInfo();
-//         dd($error);
-//         return false;
-//     }
-// }
-
-
-
-
-
-
-
-    public function update($table_name, $Nickname, $data) {
+    public function update($table_name, $Nickname, $id_Name, $data) {
         
         $query = "UPDATE $table_name SET ";
         foreach($data as $key => $value) {
             $query .= "$key = :$key, ";
         }
-
         $query = rtrim($query, ", ");
-        $query .= " WHERE Nickname=:Nickname";
+        $query .= " WHERE $id_Name=:Nickname";
         $stmt = $this->conn->prepare($query);
         $Nickname = htmlspecialchars(strip_tags($Nickname));
         $stmt->bindParam(":Nickname", $Nickname);
@@ -127,6 +77,7 @@ class Crud extends Database {
         }
         return false;
     }
+
     
     public function delete($table_name, $column, $id) {
         $query = "DELETE FROM $table_name WHERE $column=:id";

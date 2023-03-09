@@ -1,8 +1,37 @@
 <?php
+include '../includes/navbar-home.php';
+
+
+if (isset($_GET['Reserve'])) {
+  $table_name = 'reservation';
+  $data = [
+      "Item_Code" => $_GET['Item_Code'],
+      "Nickname" => $_GET['Nickname'],
+  ];
+
+  if ($crud->create($table_name, $data)) {
+        $Nickname = $_GET['Item_Code'];
+        $id_Name = 'Item_Code';
+        $table_name='item';
+        $data = [
+          "Item_Code" => $_GET['Item_Code'],
+          "Status" => 'Reserved',
+      ];
+      // dd($data);
+
+    if ($crud->update($table_name, $Nickname, $id_Name, $data)) {
+      header("Location: home.php");
+    } else {
+        echo "Error adding item.";
+    }
+      exit;
+  } else {
+      echo "Error adding item.";
+  }
+}
+
 
 ?>
-
-<?php include '../includes/navbar-home.php'; ?>
   <section id="sec-2">
     <div class="container">
       <div class="row">

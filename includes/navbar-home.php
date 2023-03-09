@@ -44,11 +44,9 @@ if (!$isAuthenticated):
 else:
 
   if ($user->isAdmin()) {
-    // dd($_GET);
     if(isset($_GET['delete'])) {
       $id = $_GET['Item_Code'];
       
-      // dd($success);
       if($success = $crud->delete('Item','Item_Code', $id)) {
           echo "Record deleted successfully.";
           header('Location: home.php');
