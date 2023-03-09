@@ -1,8 +1,8 @@
 <?php
 
 include '../includes/navbar.php';
-$table_name = "Reservation";
 
+$table_name = "Reservation";
 $Reservations = $crud->read($table_name);
 
 if (isset($_GET['Active_Reservation'])) {
@@ -19,11 +19,8 @@ if (isset($_GET['Active_Reservation'])) {
     $id_Name = 'Item_Code';
     $table_name = 'item';
     $data = [
-      // "Item_Code" => $_GET['Item_Code'],
       "Status" => 'Borrowed',
     ];
-    // dd($data);
-
     if ($crud->update($table_name, $Nickname, $id_Name, $data)) {
       header("Location: reservation.php");
       echo "addded";

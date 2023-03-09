@@ -28,9 +28,9 @@
       "Status" => 'Available',
   ];
     if($profile = $crud->update($table_name, $Nickname, $id_Name, $data) ){
-      $id = $_GET['Item_Code'];
-      $column = 'Item_Code';
-      $table_name = 'Item';
+      $id = $_GET['Reservation_Code'];
+      $column = 'Reservation_Code';
+      $table_name = 'reservation';
       if ($success = $crud->delete($table_name, $column, $id)) {
         header("Location: profile.php");
       } else {
@@ -43,12 +43,10 @@
   $user_id = $_SESSION['user_id'];
 
   $query_1 = "SELECT * FROM item INNER JOIN reservation ON item.Item_Code = reservation.Item_Code WHERE reservation.Nickname = '$user_id' AND reservation.`Reservation_Expiration_Date` > NOW() AND item.`Status` = 'Reserved' ";
-  $query_2 = "SELECT * FROM item INNER JOIN Borrowings ON item.Item_Code = borrowings.Item_Code WHERE borrowings.Nickname = '$user_id' AND borrowings.`Borrowing_Return_Date` > NOW() OR borrowings.`Borrowing_Return_Date` IS NULL AND item.`Status` = 'Reserved' ";
-
+  $query_2 = "SELECT * FROM item INNER JOIN borrowings ON item.Item_Code = borrowings.Item_Code WHERE borrowings.Nickname = '$user_id' AND borrowings.`Borrowing_Return_Date` > NOW() OR borrowings.`Borrowing_Return_Date` IS NULL AND item.`Status` = 'Borrowed' ";
 
 $profile_R = $crud->readQuery($query_1);
 $profile_B = $crud->readQuery($query_2);
-
 
   if (isset($_GET['add'])) {
       $data = [
@@ -163,7 +161,7 @@ $profile_B = $crud->readQuery($query_2);
                               <p class="card-text"><?php echo $val['Edition_Date']?></p>
                               <form method="GET">
                                 <input type="submit" value="Cancel" name="cancel" class="btn btn-warning text-white ">
-                                <input type="hidden" value="<?php echo $val['Item_Code']?>" name="Item_Code" class="btn btn-warning text-white ">
+                                <input type="hidden" value="<?php echo $val['Reservation_Code']?>" name="Reservation_Code" class="btn btn-warning text-white ">
                               </form>
                             </div>
                           </div>
@@ -185,7 +183,7 @@ $profile_B = $crud->readQuery($query_2);
                               <p class="card-text"><?php echo $val['Edition_Date']?></p>
                               <form method="GET">
                                 <input type="submit" value="Cancel" name="cancel" class="btn btn-warning text-white ">
-                                <input type="hidden" value="<?php echo $val['Item_Code']?>" name="Item_Code" class="btn btn-warning text-white ">
+                                <input type="hidden" value="<?php echo $val['Borrowing_Code']?>" name="Item_Code" class="btn btn-warning text-white ">
                               </form>
                             </div>
                           </div>
