@@ -2,14 +2,58 @@
 
 
 $table_name = "Borrowings";
+
+
+
+
+
+
+
+
+
+
 $Borrowings = $crud->read($table_name);
 
+// dd($_GET);
+
+if (isset($_GET['Confirm_Return'])) {
+  $Nickname = $_GET['Borrowing_Code'];
+  $id_Name = 'Borrowing_Code';
+  $table_name='borrowings';
+  $data = [
+    "Borrowing_Return_Date" => 'current_timestamp()',
+    // "Status" => 'Borrowed',
+];
+
+  if ($crud->update($table_name, $Nickname, $id_Name, $data)) {
+    $Nickname = $_GET['Item_Code'];
+    $id_Name = 'Item_Code';
+    $table_name='item';
+    $data = [
+      // "Item_Code" => $_GET['Item_Code'],
+      "Status" => 'Available',
+  ];
+  // dd($data);
+
+if ($crud->update($table_name, $Nickname, $id_Name, $data)) {
+  header("Location: home.php");
+  // echo "addded";
+} else {
+    echo "Error adding item.";
+}
+  } else {
+      echo "Error adding item.";
+  }
+}
 
 
 ?>
 
 <section>
-  <?php require '../includes/filter.php'; ?>
+  <?php require '../includes/filter.php';
+  
+  ?>
+  
 </section>
 <!-- items reserved  -->
 <section class = "d-flex flex-wrap container">
@@ -37,10 +81,14 @@ $Borrowings = $crud->read($table_name);
                   <span class = " m-1 text-success"><?php echo $vale['Reservation_Code'] ?></span>
                   <span class = " m-1 text-uppercase"><?php echo $val['Title'] ?></span>
                   <span class = " m-1 text-success"><?php echo $val['Status'] ?></span>
-                  <button type="button" <?php if(!isset($val['Status']) || $val['Status'] !== "Borrowed") { echo "hidden"; } ?> class="btn btn-outline-primary text-white">Confirm Return</button>
+                  <form method="GET">
+                  <input type="submit" <?php if(!isset($val['Status']) || $val['Status'] !== "Borrowed") { echo "hidden"; } ?> class="btn btn-outline-primary text-white" value="Confirm Return" name="Confirm_Return">
+                  <input type="hidden" name="Borrowing_Code" value="<?php echo $vale['Borrowing_Code'];?>" >
+                  <input type="hidden" name="Item_Code" value="<?php echo $vale['Item_Code'];?>" >
+                  </form>
               </div>
             </div>
-       <?php }  }  }?>
+       <?php }  }  }  ?>
 </section>
 <?php require '../includes/modals.php'; ?>
 <?php require '../includes/footer.php'; ?>
