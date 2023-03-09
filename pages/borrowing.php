@@ -1,17 +1,10 @@
-<?php include '../includes/navbar.php';
+<?php 
+
+include '../includes/navbar.php';
+include '../php/functions.php';
 
 
 $table_name = "Borrowings";
-
-
-
-
-
-
-
-
-
-
 $Borrowings = $crud->read($table_name);
 
 // dd($_GET);
@@ -21,8 +14,7 @@ if (isset($_GET['Confirm_Return'])) {
   $id_Name = 'Borrowing_Code';
   $table_name='borrowings';
   $data = [
-    "Borrowing_Return_Date" => 'current_timestamp()',
-    // "Status" => 'Borrowed',
+    "Borrowing_Return_Date" => now(),
 ];
 
   if ($crud->update($table_name, $Nickname, $id_Name, $data)) {
