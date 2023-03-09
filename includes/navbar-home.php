@@ -38,7 +38,6 @@ if (isset($_GET['logout'])) {
   header('Location: ../index.php');
   exit;
 }
-
 if (!$isAuthenticated):
   header('Location: ../index.php');
 else:
@@ -49,7 +48,6 @@ else:
       $column = 'Item_Code';
       $table_name = 'Item';
 
-      // dd($crud->delete($table_name, $column, $id));
       if ($success = $crud->delete($table_name, $column, $id)) {
         echo "Record deleted successfully.";
         header('Location: home.php');
@@ -103,8 +101,13 @@ else:
             </ul>
           </div>
         </nav>
-        <div class="container search">
-          <div class="input-group rounded mx-auto w-50">
+        <div class="container mt-5 bg-dark p-5  rounded-4">
+          <div class="">
+            <h1 class="text-center text-uppercase mb-3">welcome <span><?php echo $_SESSION['user_id'] ?></span></h1>
+            <div class="text-center line mx-auto">
+              <h3 class="text-center ">Thank you for choosing <kbd class="">READAMP</kbd> for your library rentalneeds.<br>  Happy reading and watching!</h3>
+              
+            </div>
 
           </div>
         </div>

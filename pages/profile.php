@@ -20,7 +20,34 @@
       exit; 
     }
   }
+  if(isset($_GET['cancel'])) {
+    $Nickname = $_GET['Item_Code'];
+    $id_Name = 'Item_Code';
+    $table_name='item';
+    $data = [
+      "Status" => 'Available',
+  ];
+    if($profile = $crud->update($table_name, $Nickname, $id_Name, $data) ){
+      $id = $_GET['Item_Code'];
+      $column = 'Item_Code';
+      $table_name = 'Item';
+      if ($success = $crud->delete($table_name, $column, $id)) {
+        header("Location: profile.php");
+      } else {
+        echo "Error deleting record.";
+      }
+      exit; 
+    }
+}
   include '../includes/modals.php';
+  $user_id = $_SESSION['user_id'];
+
+  $query_1 = "SELECT * FROM item INNER JOIN reservation ON item.Item_Code = reservation.Item_Code WHERE reservation.Nickname = '$user_id' AND reservation.`Reservation_Expiration_Date` > NOW() AND item.`Status` = 'Reserved' ";
+  $query_2 = "SELECT * FROM item INNER JOIN Borrowings ON item.Item_Code = borrowings.Item_Code WHERE borrowings.Nickname = '$user_id' AND borrowings.`Borrowing_Return_Date` > NOW() OR borrowings.`Borrowing_Return_Date` IS NULL AND item.`Status` = 'Reserved' ";
+
+
+$profile_R = $crud->readQuery($query_1);
+$profile_B = $crud->readQuery($query_2);
 
 
   if (isset($_GET['add'])) {
@@ -50,10 +77,8 @@
   }
 
 ?>
-
-
-<?php foreach ($member as $key => $val) { ?>
-        <section style="background-color: #eee;">
+<section style="background-color: #eee;">
+  <?php foreach ($member as $key => $val) { ?>
         <form method="GET" >
           <div class="container py-5 text-black">
             <div class="row">
@@ -65,7 +90,6 @@
                       <h5 type="text"class=" text-black text-center  my-2"><?php echo $val['Full_Name']; ?></h5>
                       <p type="text"class=" text-black text-center  my-2"><?php echo $val['Occupation']; ?></p>
                       <p type="text"class=" text-black text-center  my-2"><?php echo $val['Birth_Date']; ?></p>
-
                     <div class="d-flex justify-content-center mb-2">
                       </div>
                     </div>
@@ -77,11 +101,9 @@
                     <div class="row">
                       <div class="col-sm-3">
                         <p class="mb-0">Nick Name</p>
-                      
                       </div>
                       <div class="col-sm-9">
                     <input type="text" class=" text-black text-center form-control w-75" name="Nickname"  value="<?php echo $val['Nickname']; ?>">
-
                       </div>
                     </div>
                     <hr>
@@ -91,7 +113,6 @@
                       </div>
                       <div class="col-sm-9">
                     <input type="text" class=" text-black text-center form-control w-75" name="Email" value="<?php echo $val['Email']; ?>">
-
                       </div>
                     </div>
                     <hr>
@@ -101,7 +122,6 @@
                       </div>
                       <div class="col-sm-9">
                     <input type="text" class=" text-black text-center form-control w-75" name="Phone" value="<?php echo $val['Phone']; ?>">
-
                       </div>
                     </div>
                     <hr>
@@ -111,7 +131,6 @@
                       </div>
                       <div class="col-sm-9">
                     <input type="text " class=" text-black text-center form-control w-75" name="CIN" value="<?php echo $val['CIN']; ?>">
-
                       </div>
                     </div>
                     <hr>
@@ -121,32 +140,62 @@
                       </div>
                       <div class="col-sm-9">
                     <input type="text" class=" text-black text-center form-control w-75" name="Address" value="<?php echo $val['Address']; ?>">
-
                       </div>
                     </div>
                     <hr>
                     <button type="submit" name="submit" class="btn btn-primary my-2">Save</button>
                   </div>
                 </div>
-                
                 </form>
-
+        <?php } ?>
                 <div class="d-flex flex-row">
                   <div class="card w-50 me-2">
-                    <div class="card-body">
-                      <p class="mb-4"><span class="text-primary font-italic me-1">Reaservations</p>
+                    <p class="mb-4"><span class="text-primary font-italic me-1">Reaservations</p>
+                    <div class="card-body d-flex flex-row">
+                      <?php foreach ($profile_R as $key => $val) { ?>
+                        <div class="m-2 w-50"> 
+                          <div class="card bg-dark text-white">
+                            <img class="card-img opacity-25" src="../<?php echo $val['Cover_Image']?>" alt="Card image" height="250px">
+                            <div class="card-img-overlay">
+                              <h5 class="card-title"><?php echo $val['Title']?></h5>
+                              <p class="card-text"><?php echo $val['Author_Name']?></p>
+                              <p class="card-text"><?php echo $val['State']?></p>
+                              <p class="card-text"><?php echo $val['Edition_Date']?></p>
+                              <form method="GET">
+                                <input type="submit" value="Cancel" name="cancel" class="btn btn-warning text-white ">
+                                <input type="hidden" value="<?php echo $val['Item_Code']?>" name="Item_Code" class="btn btn-warning text-white ">
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                    <?php } ?>
                     </div>
                   </div>
                       <div class="card w-50 ml-2">
+                        <p class="mb-4"><span class="text-primary font-italic me-1">Borrowings</p>
                         <div class="card-body">
-                          <p class="mb-4"><span class="text-primary font-italic me-1">Borrowings</p>
+                         <?php foreach ($profile_B as $key => $val) { ?>
+                        <div class="m-2 w-50"> 
+                          <div class="card bg-dark text-white">
+                            <img class="card-img opacity-25" src="../<?php echo $val['Cover_Image']?>" alt="Card image" height="250px">
+                            <div class="card-img-overlay">
+                              <h5 class="card-title"><?php echo $val['Title']?></h5>
+                              <p class="card-text"><?php echo $val['Author_Name']?></p>
+                              <p class="card-text"><?php echo $val['State']?></p>
+                              <p class="card-text"><?php echo $val['Edition_Date']?></p>
+                              <form method="GET">
+                                <input type="submit" value="Cancel" name="cancel" class="btn btn-warning text-white ">
+                                <input type="hidden" value="<?php echo $val['Item_Code']?>" name="Item_Code" class="btn btn-warning text-white ">
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                    <?php } ?>
                         </div>
                       </div>
                     </div>
                 </div>
         </section>
-        <?php } ?>
     <?php require '../includes/footer.php';?>
     </div>
-
 </html>

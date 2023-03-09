@@ -3,12 +3,22 @@ include '../includes/navbar-home.php';
 include '../php/functions.php';
 
 $nickname = $_SESSION['user_id'];
-echo $nickname;
+// $query = "SELECT COUNT(*) FROM ( SELECT nickname FROM reservation UNION ALL SELECT nickname FROM borrowings ) as combined_tables WHERE nickname = '$nickname' ";
+// $query = "SELECT COUNT(*) FROM ( SELECT Nickname FROM reservation  UNION ALL  SELECT nickname FROM borrowings WHERE Borrowing_Return_Date IS NULL ) as combined_tables WHERE nickname = '$nickname'";
+$query = "SELECT COUNT(*) FROM (
+  SELECT Nickname, Item_Code FROM reservation
+  UNION ALL
+  SELECT nickname, Item_Code FROM borrowings WHERE Borrowing_Return_Date IS NULL
+) as combined_tables
+INNER JOIN item ON combined_tables.Item_Code = item.Item_Code
+WHERE combined_tables.Nickname = '$nickname' AND item.Status <> 'Available' LIMIT 0, 25;
+ ";
 
-$query = "SELECT COUNT(*) FROM ( SELECT nickname FROM reservation UNION ALL SELECT nickname FROM borrowings ) as combined_tables WHERE nickname = '$nickname'";
+
 $result = $crud->readQuery($query);
 
 $count = $result[0]['COUNT(*)'];
+// echo $count;
 
 if ($count <= 3) {
 if (isset($_GET['Reserve'])) {
@@ -18,12 +28,9 @@ if (isset($_GET['Reserve'])) {
     "Nickname" => $_GET['Nickname'],
     "Reservation_Date"=> now(),
     "Reservation_Expiration_Date"=> nowPlus24h(),
-
-
   ];
 
   if ($crud->create($table_name, $data)) {
-
     $Nickname = $_GET['Item_Code'];
     $id_Name = 'Item_Code';
     $table_name = 'item';
@@ -31,7 +38,6 @@ if (isset($_GET['Reserve'])) {
       "Item_Code" => $_GET['Item_Code'],
       "Status" => 'Reserved',
     ];
-
     if ($crud->update($table_name, $Nickname, $id_Name, $data)) {
       header("Location: home.php");
     } else {
@@ -42,7 +48,6 @@ if (isset($_GET['Reserve'])) {
     echo "Error adding item.";
   }
 }
-
 } else {
   echo "you have reserved tooo much";
 }

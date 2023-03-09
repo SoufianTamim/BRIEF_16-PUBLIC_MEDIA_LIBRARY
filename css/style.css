@@ -37,15 +37,6 @@ section {
   border-radius: 20px;
   cursor: pointer;
 }
-.search{
-  height: 80px;
-  width: 50px;
-  position: absolute;
-  left: 2%;
-  top: 300px;
-  border-radius: 20px;
-  cursor: pointer;
-}
 .scroll-down::before,
 .scroll-down::after {
   content: "";

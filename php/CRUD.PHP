@@ -1,8 +1,5 @@
 <?php
-
 require __DIR__ . '/../vendor/autoload.php';
-
-// include 'DB.php';
 
 class Crud extends Database
 {
@@ -12,8 +9,6 @@ class Crud extends Database
     {
         $this->conn = self::$gogo;
     }
-
-
 
     public function readQuery($query) {
         $stmt = $this->conn->query($query);
@@ -28,22 +23,6 @@ class Crud extends Database
         $xx = $stmt->fetchAll();
         return $xx;
     }
-
-    // public function create($table_name, $data) {
-    // $keys = array_keys($data);
-    // $values = array_values($data);
-    // $placeholders = implode(',', array_fill(0, count($keys), '?'));
-
-    // $query = "INSERT INTO $table_name (".implode(',', $keys).") VALUES ($placeholders)";
-    // // $query ="INSERT INTO `Item` (`Item_Code`, `Title`, `Author_Name`, `Cover_Image`, `State`, `Edition_Date`, `Purchase_Date`, `Status`, `Duration`, `Category_Code`) VALUES (NULL, 'CHER BLOPBLOP : LETTRE A MON EMBRYON', 'Lea Castor', 'Item_Images/Comic/4fbec7c24ebf7b699e1f8d80eb993a6aac12bb81c66fe8c939c04883bd884c84.jpg', 'Broken', '2016-02-08', '2017-01-31', 'Unavailable', '0', '5'); ";
-
-
-    // $stmt = $this->conn->prepare($query);
-    // $success = $stmt->execute($values);
-
-    // if($success) {
-    //     return true;
-    // }
 
     public function create($table_name, $data)
     {
@@ -64,7 +43,6 @@ class Crud extends Database
         }
     }
 
-
     public function update($table_name, $Nickname, $id_Name, $data)
     {
 
@@ -81,13 +59,11 @@ class Crud extends Database
             $value = htmlspecialchars(strip_tags($value));
             $stmt->bindParam(":$key", $value);
         }
-
         if ($stmt->execute()) {
             return true;
         }
         return false;
     }
-
 
     public function delete($table_name, $column, $id)
     {
@@ -95,7 +71,6 @@ class Crud extends Database
         $stmt = $this->conn->prepare($query);
         $id = htmlspecialchars(strip_tags($id));
         $stmt->bindParam(":id", $id);
-        // dd($stmt);
         if ($stmt->execute()) {
             return true;
         }
@@ -104,7 +79,7 @@ class Crud extends Database
 
     public function join($table1_name, $table2_name, $table1_id, $table2_id)
     {
-        $query = "SELECT * FROM $table1_name INNER JOIN $table2_name ON $table1_name.$table1_id = $table2_name.$table2_id;";
+        $query = "SELECT * FROM $table1_name INNER JOIN $table2_name ON $table1_name.$table1_id = $table2_name.$table1_id;";
         $stmt = $this->conn->query($query);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -114,26 +89,18 @@ class Crud extends Database
         $Column_1 = $this->conn->quote("%" . $Column_1 . "%");
         $Column_2 = $this->conn->quote("%" . $Column_2 . "%");
         $Column_3 = $this->conn->quote($Column_3);
-
         $sql = "SELECT * FROM item INNER JOIN category ON item.Category_Code = category.Category_Code where 1 = 1";
 
         if ($Column_1 != null) {
             $sql .= " AND Title LIKE " . $Column_1;
         }
-
         if ($Column_2 != null) {
             $sql .= " AND Author_Name LIKE " . $Column_2;
         }
-
         if ($Column_3 != null) {
             $sql .= " AND Category_Name = " . $Column_3;
         }
-
-
         $result = $this->conn->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-
-
-
 
         return $result;
     }
