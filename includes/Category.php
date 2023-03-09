@@ -10,8 +10,6 @@
             <input type="text" class="form-control" name="Author_Name" placeholder="Author Name ...">
           </div>
         </div>
-
-
 <div class="col-lg-3">
      <div>
        <select class="form-select" name="Category">
@@ -22,7 +20,6 @@
        </select>
      </div>
 </div>
-
 <div class="col-lg-3">
     <button class="btn btn-primary btn-block w-100" name="find">Find </button>
 </div>

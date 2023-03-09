@@ -3,7 +3,6 @@
          if (!isset($_GET['find'])) {
               foreach($All_Data as $key => $val) {  
                   ?>
-
             <div class="d-flex flex-wrap  bg-dark p-2 rounded-2 m-1" id="card">
               <div class = "product-img cont image " >
                   <img src = "../<?php echo $val['Cover_Image'] ?>" id="image" class = "image img-fluid d-block mx-auto" height="400px !important">
@@ -23,7 +22,6 @@
                   <span class = " m-1 text-uppercase"><?php echo $val['Title'] ?></span>
                   <span class = " m-1 text-success"><?php echo $val['Status'] ?></span>
                      <?php   if ($user->isAdmin()) {  ?>
-                
                       <div class = "product-content text-center d-flex justify-content-center d-block ">
                         <form method="GET" >
                         <input type="submit"  class="btn btn-primary text-white w-100 m-1" name="delete" value="Edit">
@@ -41,7 +39,6 @@
             </div>
            <?php 
            }
-            
           } else if (isset($_GET['find'])) { //check if the method is po  st
               foreach($Filters as $key => $val) { //loops in the table of announce with filterd data and display the in cards 
                       ?>
@@ -73,7 +70,4 @@
               </div>
             </div>
            <?php  } } ?>
-
-
-
         </div>

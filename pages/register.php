@@ -3,7 +3,6 @@
 require '../php/User.php';
 Database::connect('localhost', 'Library', 'root', '');
 $user = new User();
-
 if (isset($_GET['nickname'])) {
 	$nickname = $_GET['nickname'];
 	$name = $_GET['name'];
@@ -14,7 +13,6 @@ if (isset($_GET['nickname'])) {
 	$Address = $_GET['Address'];
 	$BirthDate = $_GET['birthdate'];
 	$password = $_GET['Password'];
-
 	if ($user->signup($nickname, $name, $CIN, $Occupation, $email, $Phone, $Address, $BirthDate, $password)) {
 		echo '<p>Registration successful!</p>';
 		header("location: log.php");
@@ -23,7 +21,6 @@ if (isset($_GET['nickname'])) {
 	}
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -141,5 +138,4 @@ if (isset($_GET['nickname'])) {
 	</section>
 	<script src="../js/register.js"></script>
 </body>
-
 </html>

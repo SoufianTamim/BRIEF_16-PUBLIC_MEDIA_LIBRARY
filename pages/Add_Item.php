@@ -1,7 +1,5 @@
 <?php
-
 include '../includes/navbar.php';
-
 if (isset($_GET['add'])) {
   $table_name = 'Item';
   $data = [
@@ -24,9 +22,7 @@ if (isset($_GET['add'])) {
     echo "Error adding item.";
   }
 }
-
 ?>
-
 <section class="container mx-auto mt-5">
   <form method="GET" enctype="multipart/form-data" id="moda-Add-item">
     <div class="modal-body">

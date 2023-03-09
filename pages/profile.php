@@ -1,7 +1,5 @@
 <?php
-
   include '../includes/navbar.php';
-
   if(isset($_GET['submit'])) {
     $data = [ 
       "Nickname" => $_GET['Nickname'],
@@ -13,7 +11,6 @@
     $Nickname = 'Nickname';
     $id_Name = 'Nickname';
     $table_name = 'members';
-    
     if($profile = $crud->update($table_name, $Nickname, $id_Name, $data) ){
       
       header("Location: profile.php");
@@ -41,13 +38,10 @@
 }
   include '../includes/modals.php';
   $user_id = $_SESSION['user_id'];
-
   $query_1 = "SELECT * FROM item INNER JOIN reservation ON item.Item_Code = reservation.Item_Code WHERE reservation.Nickname = '$user_id' AND reservation.`Reservation_Expiration_Date` > NOW() AND item.`Status` = 'Reserved' ";
   $query_2 = "SELECT * FROM item INNER JOIN borrowings ON item.Item_Code = borrowings.Item_Code WHERE borrowings.Nickname = '$user_id' AND borrowings.`Borrowing_Return_Date` > NOW() OR borrowings.`Borrowing_Return_Date` IS NULL AND item.`Status` = 'Borrowed' ";
-
 $profile_R = $crud->readQuery($query_1);
 $profile_B = $crud->readQuery($query_2);
-
   if (isset($_GET['add'])) {
       $data = [
       "Title" => $_GET['Title'],
@@ -63,9 +57,7 @@ $profile_B = $crud->readQuery($query_2);
     
     
     $table_name = "Item";
-
     if ($Add = $crud->create($table_name, $data)) {
-
       header("Location: profile.php");
       echo "Item added successfully!";
       
@@ -73,7 +65,6 @@ $profile_B = $crud->readQuery($query_2);
       echo "Error adding item.";
     }
   }
-
 ?>
 <section style="background-color: #eee;">
   <?php foreach ($member as $key => $val) { ?>

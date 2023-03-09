@@ -17,8 +17,6 @@
       </div>
     </div>
   </div>
-
-
   <!-- Modal -->
   <div class="modal fade " id="reservation" tabindex="-1" aria-labelledby="Add-itemLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">

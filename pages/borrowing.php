@@ -1,13 +1,9 @@
 <?php 
-
 include '../includes/navbar.php';
 include '../php/functions.php';
 
-
 $table_name = "Borrowings";
 $Borrowings = $crud->read($table_name);
-
-// dd($_GET);
 
 if (isset($_GET['Confirm_Return'])) {
   $Nickname = $_GET['Borrowing_Code'];
@@ -22,14 +18,11 @@ if (isset($_GET['Confirm_Return'])) {
     $id_Name = 'Item_Code';
     $table_name='item';
     $data = [
-      // "Item_Code" => $_GET['Item_Code'],
       "Status" => 'Available',
   ];
-  // dd($data);
 
 if ($crud->update($table_name, $Nickname, $id_Name, $data)) {
   header("Location: home.php");
-  // echo "addded";
 } else {
     echo "Error adding item.";
 }
@@ -37,15 +30,9 @@ if ($crud->update($table_name, $Nickname, $id_Name, $data)) {
       echo "Error adding item.";
   }
 }
-
-
 ?>
-
 <section>
-  <?php require '../includes/filter.php';
-  
-  ?>
-  
+  <?php require '../includes/filter.php'; ?>
 </section>
 <!-- items reserved  -->
 <section class = "d-flex flex-wrap container">

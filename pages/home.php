@@ -21,33 +21,33 @@ $count = $result[0]['COUNT(*)'];
 // echo $count;
 
 if ($count <= 3) {
-if (isset($_GET['Reserve'])) {
-  $table_name = 'reservation';
-  $data = [
-    "Item_Code" => $_GET['Item_Code'],
-    "Nickname" => $_GET['Nickname'],
-    "Reservation_Date"=> now(),
-    "Reservation_Expiration_Date"=> nowPlus24h(),
-  ];
-
-  if ($crud->create($table_name, $data)) {
-    $Nickname = $_GET['Item_Code'];
-    $id_Name = 'Item_Code';
-    $table_name = 'item';
+  if (isset($_GET['Reserve'])) {
+    $table_name = 'reservation';
     $data = [
       "Item_Code" => $_GET['Item_Code'],
-      "Status" => 'Reserved',
+      "Nickname" => $_GET['Nickname'],
+      "Reservation_Date" => now(),
+      "Reservation_Expiration_Date" => nowPlus24h(),
     ];
-    if ($crud->update($table_name, $Nickname, $id_Name, $data)) {
-      header("Location: home.php");
+
+    if ($crud->create($table_name, $data)) {
+      $Nickname = $_GET['Item_Code'];
+      $id_Name = 'Item_Code';
+      $table_name = 'item';
+      $data = [
+        "Item_Code" => $_GET['Item_Code'],
+        "Status" => 'Reserved',
+      ];
+      if ($crud->update($table_name, $Nickname, $id_Name, $data)) {
+        header("Location: home.php");
+      } else {
+        echo "Error adding item.";
+      }
+      exit;
     } else {
       echo "Error adding item.";
     }
-    exit;
-  } else {
-    echo "Error adding item.";
   }
-}
 } else {
   echo "you have reserved tooo much";
 }
@@ -71,4 +71,5 @@ if (isset($_GET['Reserve'])) {
 <?php require '../includes/footer.php'; ?>
 </div>
 </body>
+
 </html>

@@ -1,10 +1,7 @@
 <?php
-
 include '../includes/navbar.php';
-
 $table_name = "Reservation";
 $Reservations = $crud->read($table_name);
-
 if (isset($_GET['Active_Reservation'])) {
   $table_name = 'borrowings';
   $data = [
@@ -12,8 +9,6 @@ if (isset($_GET['Active_Reservation'])) {
     "Nickname" => $_GET['Nickname'],
     "Reservation_Code" => $_GET['Reservation_Code'],
   ];
-
-
   if ($crud->create($table_name, $data)) {
     $Nickname = $_GET['Item_Code'];
     $id_Name = 'Item_Code';
@@ -32,18 +27,13 @@ if (isset($_GET['Active_Reservation'])) {
   }
 }
 ?>
-
 <section>
   <?php require '../includes/filter.php'; ?>
-
 </section>
 <section class="container d-flex flex-wrap ">
-
   <!-- items reserved  -->
   <?php foreach ($All_Data as $key => $val) { ?>
     <?php if ($val['Item_Code'] === $val['Item_Code'] && $val['Status'] == "Reserved") { ?>
-
-
       <div class="d-flex flex-wrap  bg-dark p-2 rounded-2 m-1" id="card">
         <div class="product-img cont image ">
           <img src="../<?php echo $val['Cover_Image'] ?>" id="image" class="image img-fluid d-block mx-auto" height="400px !important">
@@ -91,12 +81,10 @@ if (isset($_GET['Active_Reservation'])) {
                 <input type="hidden" name="Item_Code" value="<?php echo $val['Item_Code'] ?>">
                 <input type="hidden" name="Nickname" value="<?php echo $vale['Nickname'] ?>">
                 <input type="hidden" name="Reservation_Code" value="<?php echo $vale['Reservation_Code'] ?>">
-
                 <?php break;
           }
         } ?>
           </form>
-
         </div>
       </div>
     <?php }
@@ -106,5 +94,4 @@ if (isset($_GET['Active_Reservation'])) {
 <?php require '../includes/footer.php'; ?>
 <script src="/js/Add-Item.js"></script>
 </body>
-
 </html>
