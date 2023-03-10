@@ -24,8 +24,8 @@ class User  extends Database {
         $user = $stmt->fetch();
 
         if ($user && password_verify($Password, $user['Password'])) {
-            session_start();
             $_SESSION['user_id'] = $user['Nickname'];
+            $_SESSION['Penalties'] = $user['Penalty_Count'];
             return true;
         }
 
@@ -47,7 +47,7 @@ class User  extends Database {
                             VALUES ('$nickname', '$name', '$CIN', '$Occupation', '$email', '$Phone', '$Address', '$BirthDate', '$hashedPassword')");
         
 
-        session_start();
+        // session_start();
         $_SESSION['user_id'] = $nickname;
 
         return true;
@@ -58,7 +58,6 @@ class User  extends Database {
         // session_start();
         session_destroy();
     }
-
 
     public function isAuthenticated()
 {
@@ -76,8 +75,6 @@ class User  extends Database {
 
     return false;
 }
-
-
     public function isAdmin()
 {
     // session_start();
@@ -88,8 +85,6 @@ class User  extends Database {
         $user = $stmt->fetch();
 
         if ($user && $user['Admin'] == 1) {
-
-            // dd($result);
             return true;
         }
     }
@@ -100,7 +95,6 @@ class User  extends Database {
 
     public function getUser()
     {
-        // session_start(); 
 
         if (isset($_SESSION['user_id'])) {
             
@@ -114,6 +108,19 @@ class User  extends Database {
         }
 
         return null;
+    }
+
+    public function getPenalties($nickname) {
+
+        $stmt = $this->conn->prepare("SELECT Penalty_Count FROM members WHERE Nickname = :nickname");
+
+        $stmt->bindParam(':nickname', $nickname);
+
+        $stmt->execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $result['Penalty_Count'];
     }
 }
 

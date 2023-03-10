@@ -24,11 +24,11 @@
     $data = [
       "Status" => 'Available',
   ];
-    if($profile = $crud->update($table_name, $Nickname, $id_Name, $data) ){
+    if($crud->update($table_name, $Nickname, $id_Name, $data) ){
       $id = $_GET['Reservation_Code'];
       $column = 'Reservation_Code';
       $table_name = 'reservation';
-      if ($success = $crud->delete($table_name, $column, $id)) {
+      if ($crud->delete($table_name, $column, $id)) {
         header("Location: profile.php");
       } else {
         echo "Error deleting record.";
@@ -38,10 +38,13 @@
 }
   include '../includes/modals.php';
   $user_id = $_SESSION['user_id'];
-  $query_1 = "SELECT * FROM item INNER JOIN reservation ON item.Item_Code = reservation.Item_Code WHERE reservation.Nickname = '$user_id' AND reservation.`Reservation_Expiration_Date` > NOW() AND item.`Status` = 'Reserved' ";
-  $query_2 = "SELECT * FROM item INNER JOIN borrowings ON item.Item_Code = borrowings.Item_Code WHERE borrowings.Nickname = '$user_id' AND borrowings.`Borrowing_Return_Date` > NOW() OR borrowings.`Borrowing_Return_Date` IS NULL AND item.`Status` = 'Borrowed' ";
-$profile_R = $crud->readQuery($query_1);
-$profile_B = $crud->readQuery($query_2);
+
+
+  $query_1 = "SELECT * FROM item INNER JOIN reservation ON item.Item_Code = reservation.Item_Code WHERE reservation.Nickname = '$user_id' AND item.Status = 'Reserved' AND ( reservation.Reservation_Expiration_Date > NOW() ) ";
+  $query_2 = "SELECT * FROM item INNER JOIN borrowings ON item.Item_Code = borrowings.Item_Code  WHERE borrowings.Nickname = '$user_id'  AND item.Status = 'Borrowed' AND (borrowings.Borrowing_Return_Date > NOW() OR borrowings.Borrowing_Return_Date IS NULL);";
+
+  $profile_R = $crud->readQuery($query_1);
+  $profile_B = $crud->readQuery($query_2);
   if (isset($_GET['add'])) {
       $data = [
       "Title" => $_GET['Title'],
@@ -54,8 +57,6 @@ $profile_B = $crud->readQuery($query_2);
       "Image" => $_GET['Image'],
       "Category" => $_GET['Category']
     ]; 
-    
-    
     $table_name = "Item";
     if ($Add = $crud->create($table_name, $data)) {
       header("Location: profile.php");
@@ -74,8 +75,8 @@ $profile_B = $crud->readQuery($query_2);
               <div class="col-lg-4">
                 <div class="card mb-4">
                   <div class="card-body text-center">
-                    <img src="../images/product_img_8.jpg" alt="avatar"
-                      class="rounded-circle img-fluid" style="width: 150px;">
+                    <img src="../images/profile.jpg" alt="avatar"
+                      class="rounded-4 img-fluid" style="width: 150px;">
                       <h5 type="text"class=" text-black text-center  my-2"><?php echo $val['Full_Name']; ?></h5>
                       <p type="text"class=" text-black text-center  my-2"><?php echo $val['Occupation']; ?></p>
                       <p type="text"class=" text-black text-center  my-2"><?php echo $val['Birth_Date']; ?></p>
@@ -92,6 +93,7 @@ $profile_B = $crud->readQuery($query_2);
                         <p class="mb-0">Nick Name</p>
                       </div>
                       <div class="col-sm-9">
+                    
                     <input type="text" class=" text-black text-center form-control w-75" name="Nickname"  value="<?php echo $val['Nickname']; ?>">
                       </div>
                     </div>
@@ -136,11 +138,13 @@ $profile_B = $crud->readQuery($query_2);
                   </div>
                 </div>
                 </form>
-        <?php } ?>
+        <?php } 
+        if(!$user->isAdmin()){
+        ?>
                 <div class="d-flex flex-row">
                   <div class="card w-50 me-2">
                     <p class="mb-4"><span class="text-primary font-italic me-1">Reaservations</p>
-                    <div class="card-body d-flex flex-row">
+                    <div class="card-body d-flex flex-row flex-wrap justify-content-center">
                       <?php foreach ($profile_R as $key => $val) { ?>
                         <div class="m-2 w-50"> 
                           <div class="card bg-dark text-white">
@@ -152,6 +156,7 @@ $profile_B = $crud->readQuery($query_2);
                               <p class="card-text"><?php echo $val['Edition_Date']?></p>
                               <form method="GET">
                                 <input type="submit" value="Cancel" name="cancel" class="btn btn-warning text-white ">
+                                <input type="hidden" value="<?php echo $val['Item_Code']?>" name="Item_Code" class="btn btn-warning text-white ">
                                 <input type="hidden" value="<?php echo $val['Reservation_Code']?>" name="Reservation_Code" class="btn btn-warning text-white ">
                               </form>
                             </div>
@@ -162,7 +167,7 @@ $profile_B = $crud->readQuery($query_2);
                   </div>
                       <div class="card w-50 ml-2">
                         <p class="mb-4"><span class="text-primary font-italic me-1">Borrowings</p>
-                        <div class="card-body">
+                        <div class="card-body d-flex flex-row flex-wrap justify-content-center">
                          <?php foreach ($profile_B as $key => $val) { ?>
                         <div class="m-2 w-50"> 
                           <div class="card bg-dark text-white">
@@ -173,13 +178,15 @@ $profile_B = $crud->readQuery($query_2);
                               <p class="card-text"><?php echo $val['State']?></p>
                               <p class="card-text"><?php echo $val['Edition_Date']?></p>
                               <form method="GET">
-                                <input type="submit" value="Cancel" name="cancel" class="btn btn-warning text-white ">
-                                <input type="hidden" value="<?php echo $val['Borrowing_Code']?>" name="Item_Code" class="btn btn-warning text-white ">
+
+                                <input type="hidden" class="card-text" name="user_id" value="<?php echo $_SESSION['user_id']?>">
                               </form>
+
                             </div>
+
                           </div>
                         </div>
-                    <?php } ?>
+                    <?php }  } ?>
                         </div>
                       </div>
                     </div>

@@ -7,14 +7,22 @@ $user = new User();
 $crud = new Crud();
 
 
-if (isset($_POST['login']) && isset($_POST['Nickname']) && isset($_POST['password'])) {
-	$Nickname = $_POST['Nickname'];
-	$password = $_POST['password'];
 
+
+if (isset($_GET['login']) && isset($_GET['Nickname']) && isset($_GET['password'])) {
+	
+	$Nickname = $_GET['Nickname'];
+	$password = $_GET['password'];
+	
 	if ($user->login($Nickname, $password)) {
-		// dd($user);
-		header('Location: ../pages/home.php');
-		exit;
+		$nickname = $_SESSION['user_id'];
+	
+		if ($user->getPenalties($nickname) === 3){
+			$user->logout();
+			// $error = 'Your Account is Banned for security reasons';
+		}else{
+			header('Location: ../pages/home.php');
+		}
 	} else {
 		$error = 'Invalid Nickname or password';
 	}
@@ -55,7 +63,13 @@ else:
 						<div class="card shadow-lg mt-3">
 							<div class="card-body p-5">
 								<h1 class="fs-4 card-title fw-bold mb-4">Login</h1>
-								<form method="POST" id="form">
+								<?php if(isset($error)){  ?>
+									<div class="alert alert-danger alert-dismissible fade show" role="alert">
+										<?php echo $error; ?>
+										<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+									</div>
+									<?php  } ?>
+								<form method="GET" id="form">
 									<div class="mb-3">
 										<label class="mb-2 text-muted">Nickname</label>
 										<input id="Nickname" type="text" class="form-control " name="Nickname" placeholder="Enter Your Nick Name ..." autofocus>
@@ -68,7 +82,6 @@ else:
 										<input id="password" type="password" class="form-control" name="password" placeholder="Enter Your password ... ">
 										<?php if (isset($error)): ?>
 											<div class="error text-danger">
-												<?= $error ?>
 											</div>
 										<?php endif ?>
 									</div>

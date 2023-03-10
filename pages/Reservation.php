@@ -1,5 +1,7 @@
 <?php
 include '../includes/navbar.php';
+if ($user->isAdmin()) { 
+
 $table_name = "Reservation";
 $Reservations = $crud->read($table_name);
 if (isset($_GET['Active_Reservation'])) {
@@ -90,8 +92,15 @@ if (isset($_GET['Active_Reservation'])) {
     <?php }
   } ?>
 </section>
-<?php require '../includes/modals.php'; ?>
-<?php require '../includes/footer.php'; ?>
+<?php
+ require '../includes/modals.php'; 
+ require '../includes/footer.php'; 
+}else {
+  header("Location: home.php");
+}
+
+
+?>
 <script src="/js/Add-Item.js"></script>
 </body>
 </html>

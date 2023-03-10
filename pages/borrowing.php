@@ -1,9 +1,16 @@
 <?php 
 include '../includes/navbar.php';
+
+if ($user->isAdmin()) { 
+
+
+
 include '../php/functions.php';
 
-$table_name = "Borrowings";
-$Borrowings = $crud->read($table_name);
+$table_name_1 = "Borrowings";
+$Borrowings = $crud->read($table_name_1);
+$table_name_2 = "members";
+$members = $crud->read($table_name_2);
 
 if (isset($_GET['Confirm_Return'])) {
   $Nickname = $_GET['Borrowing_Code'];
@@ -21,15 +28,29 @@ if (isset($_GET['Confirm_Return'])) {
       "Status" => 'Available',
   ];
 
-if ($crud->update($table_name, $Nickname, $id_Name, $data)) {
-  header("Location: home.php");
-} else {
-    echo "Error adding item.";
-}
+
+
+  if ($crud->update($table_name, $Nickname, $id_Name, $data)) {
+
+
+  $borrowing_date = new DateTime($borrowing['Borrowing_Date']);
+  $return_date = new DateTime($borrowing['Borrowing_Return_Date']);
+  $diff = $return_date->diff($borrowing_date);
+
+  if ($diff->days > 15) {
+    $penalty_count = $borrowing['Penalty_Count'] + 1;
+    $data = [
+      "Penalty_Count" => $penalty_count,
+    ];
+    if ($crud->update($table_name, $Nickname, $id_Name, $data)) {
+      header("Location: home.php");
+    }
   } else {
-      echo "Error adding item.";
+    header("Location: home.php");
   }
-}
+
+
+ } } }
 ?>
 <section>
   <?php require '../includes/filter.php'; ?>
@@ -69,8 +90,15 @@ if ($crud->update($table_name, $Nickname, $id_Name, $data)) {
             </div>
        <?php }  }  }  ?>
 </section>
-<?php require '../includes/modals.php'; ?>
-<?php require '../includes/footer.php'; ?>
+<?php
+ require '../includes/modals.php'; 
+  require '../includes/footer.php'; 
+ } else {
+  header("Location: home.php");
+}
+
+  
+  ?>
 <script src="/js/Add-Item.js"></script>
 </body>
 </html>

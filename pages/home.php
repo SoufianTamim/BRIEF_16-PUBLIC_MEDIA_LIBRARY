@@ -3,8 +3,6 @@ include '../includes/navbar-home.php';
 include '../php/functions.php';
 
 $nickname = $_SESSION['user_id'];
-// $query = "SELECT COUNT(*) FROM ( SELECT nickname FROM reservation UNION ALL SELECT nickname FROM borrowings ) as combined_tables WHERE nickname = '$nickname' ";
-// $query = "SELECT COUNT(*) FROM ( SELECT Nickname FROM reservation  UNION ALL  SELECT nickname FROM borrowings WHERE Borrowing_Return_Date IS NULL ) as combined_tables WHERE nickname = '$nickname'";
 $query = "SELECT COUNT(*) FROM (
   SELECT Nickname, Item_Code FROM reservation
   UNION ALL
@@ -18,9 +16,8 @@ WHERE combined_tables.Nickname = '$nickname' AND item.Status <> 'Available' LIMI
 $result = $crud->readQuery($query);
 
 $count = $result[0]['COUNT(*)'];
-// echo $count;
 
-if ($count <= 3) {
+if ($count < 3) {
   if (isset($_GET['Reserve'])) {
     $table_name = 'reservation';
     $data = [
@@ -49,7 +46,7 @@ if ($count <= 3) {
     }
   }
 } else {
-  echo "you have reserved tooo much";
+  $error = "you have reserved tooo much";
 }
 
 ?>
@@ -58,6 +55,12 @@ if ($count <= 3) {
     <div class="row">
       <div class="col text-center">
         <h1 class="fs-2 text-danger mt-3">Trending Item</h1>
+        <?php if(isset($error)){  ?>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <?php echo $error; ?>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <?php  } ?>
         <div class="underline mx-auto mt-3"></div>
       </div>
     </div>

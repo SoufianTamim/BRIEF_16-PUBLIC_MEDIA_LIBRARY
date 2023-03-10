@@ -43,9 +43,7 @@ class Crud extends Database
         }
     }
 
-    public function update($table_name, $Nickname, $id_Name, $data)
-    {
-
+    public function update($table_name, $Nickname, $id_Name, $data) {
         $query = "UPDATE $table_name SET ";
         foreach ($data as $key => $value) {
             $query .= "$key = :$key, ";
@@ -105,5 +103,4 @@ class Crud extends Database
         return $result;
     }
 }
-
 ?>
