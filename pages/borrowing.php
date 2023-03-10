@@ -10,9 +10,18 @@ include '../php/functions.php';
 
 $table_name_1 = "Borrowings";
 $Borrowings = $crud->read($table_name_1);
-$table_name_2 = "members";
-$members = $crud->read($table_name_2);
 
+$Nickname = $_GET['Nickname'];
+$table_name_2 = "members";
+$where ="Nickname = '$Nickname'";
+$row = 'Penalty_Count';
+
+$members = $crud->read($table_name_2 , $where, $row);
+
+
+// dd($members);
+
+// print_r($members);
 
 
 // echo $members[0]['Penalty_Count']; 
@@ -80,6 +89,7 @@ if (isset($_GET['Confirm_Return'])) {
                         <p><?php echo $val['Edition_Date'] ?></p>
                         <p><?php echo $val['Category_Name'] ?></p>
                         <p><?php echo $val['Category_Type'] ?></p>
+
                       </div>
                     </div>
                   </div>
@@ -92,7 +102,8 @@ if (isset($_GET['Confirm_Return'])) {
                   <span class = " m-1 text-success"><?php echo $val['Status'] ?></span>
                   <form method="GET">
                   <input type="submit" <?php if(!isset($val['Status']) || $val['Status'] !== "Borrowed") { echo "hidden"; } ?> class="btn btn-outline-primary text-white" value="Confirm Return" name="Confirm_Return">
-                  <input type="hidden" name="Borrowing_Code" value="<?php echo $vale['Borrowing_Code'];?>" >
+                  <input type="hidden" name="Nickname" value="<?php echo $vale['Borrowing_Code'];?>" >
+                  <input type="hidden" name="Borrowing_Code" value="<?php echo $vale['Nickname'];?>" >
                   <input type="hidden" name="Item_Code" value="<?php echo $vale['Item_Code'];?>" >
                   </form>
               </div>
@@ -100,11 +111,11 @@ if (isset($_GET['Confirm_Return'])) {
        <?php }  }  }  ?>
 </section>
 <?php
- require '../includes/modals.php'; 
-  require '../includes/footer.php'; 
- } else {
-  header("Location: home.php");
-}
+    require '../includes/modals.php'; 
+    require '../includes/footer.php'; 
+    } else {
+     header("Location: home.php");
+    }
 
   
   ?>

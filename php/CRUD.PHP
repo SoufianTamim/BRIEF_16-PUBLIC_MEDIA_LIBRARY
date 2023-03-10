@@ -19,6 +19,7 @@ class Crud extends Database
     public function read($table_name, $where = "1 = 1", $row = "*")
     {
         $query = "SELECT $row FROM $table_name WHERE $where";
+        // dd($query);
         $stmt = $this->conn->query($query);
         $xx = $stmt->fetchAll();
         return $xx;
@@ -82,25 +83,44 @@ class Crud extends Database
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function filterItems($table_name, $Column_1 = null, $Column_2 = null, $Column_3 = null)
+    public function filterItems($title = '', $authorName = '', $categoryName = '')
     {
-        $Column_1 = $this->conn->quote("%" . $Column_1 . "%");
-        $Column_2 = $this->conn->quote("%" . $Column_2 . "%");
-        $Column_3 = $this->conn->quote($Column_3);
-        $sql = "SELECT * FROM item INNER JOIN category ON item.Category_Code = category.Category_Code where 1 = 1";
+        $conditions = array();
+        $parameters = array();
 
-        if ($Column_1 != null) {
-            $sql .= " AND Title LIKE " . $Column_1;
+        if (!empty($title)) {
+            $conditions[] = 'i.Title LIKE ?';
+            $parameters[] = "%$title%";
         }
-        if ($Column_2 != null) {
-            $sql .= " AND Author_Name LIKE " . $Column_2;
-        }
-        if ($Column_3 != null) {
-            $sql .= " AND Category_Name = " . $Column_3;
-        }
-        $result = $this->conn->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
-        return $result;
+        if (!empty($authorName)) {
+            $conditions[] = 'a.Author_Name LIKE ?';
+            $parameters[] = "%$authorName%";
+        }
+
+        if (!empty($categoryName)) {
+            $conditions[] = 'c.Category_Name LIKE ?';
+            $parameters[] = "%$categoryName%";
+        }
+
+        $whereClause = '';
+        if (!empty($conditions)) {
+            $whereClause = 'WHERE ' . implode(' AND ', $conditions);
+        }
+
+        $stmt = $this->conn->prepare("SELECT *, i.Item_Code, i.Title, i.Author_Name, c.Category_Name
+                            FROM item i
+                            JOIN category c ON i.Category_Code = c.Category_Code
+                            WHERE i.Title LIKE ?
+                              AND i.Author_Name LIKE ?
+                              AND c.Category_Name LIKE ?");
+        $stmt->execute(["%$title%", "%$authorName%", "%$categoryName%"]);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+       
     }
+
 }
+
 ?>

@@ -12,7 +12,7 @@
         </div>
 <div class="col-lg-3">
      <div>
-       <select class="form-select" name="Category">
+       <select class="form-select" name="Category_Name">
          <option  disabled selected value=""><-- Choose a Category --> </option>
          <?php foreach ($category as $key => $val) { ?>
              <option value="<?php echo $val['Category_Name']; ?>"><?php echo $val['Category_Name']; ?></option>

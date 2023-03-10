@@ -11,32 +11,31 @@ $table_name = "Category";
 $where = "";
 $category = $crud->read($table_name);
 
+
+// dd($_GET);
 if (isset($_GET['find'])) {
   $table_name = "item";
-  $Column_1 = $_GET['Title'];
-  $Column_2 = $_GET['Author_Name'];
-  $Column_3 = isset($_GET['Category']) ? $_GET['Category'] : null;
-
-  if ($Column_1 || $Column_2 || $Column_3) {
-    $Filters = $crud->filterItems($table_name, $Column_1, $Column_2, $Column_3);
-
-  }
+  $title = $_GET['Title'];
+  $authorName = $_GET['Author_Name'];
+  $categoryName = isset($_GET['Category_Name']) ? $_GET['Category_Name'] : null;
+  $Filters = $crud->filterItems($title, $authorName , $categoryName );
 } else {
   $table1_name = "Item";
   $table2_name = "Category";
   $table1_id = "Category_Code";
   $table2_id = "Category_Code";
-
   $All_Data = $crud->join($table1_name, $table2_name, $table1_id, $table2_id);
 }
 $isAuthenticated = $user->isAuthenticated();
 $userData = $isAuthenticated ? $user->getUser() : null;
+
 
 if (isset($_GET['logout'])) {
   $user->logout();
   header('Location: ../index.php');
   exit;
 }
+
 if (!$isAuthenticated):
   header('Location: ../index.php');
 else:
