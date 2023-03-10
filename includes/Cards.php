@@ -24,7 +24,8 @@
                      <?php   if ($user->isAdmin()) {  ?>
                       <div class = "product-content text-center d-flex justify-content-center d-block ">
                         <form method="GET" >
-                        <input type="submit"  class="btn btn-primary text-white w-100 m-1" name="delete" value="Edit">
+                        <!-- <input type="submit"  class="btn btn-primary text-white w-100 m-1" name="delete" value="Edit"> -->
+                        <a href="Add_Item.php?id=<?php echo $val['Item_Code'] . '&action=update'; ?>" class="btn btn-primary text-white w-100 m-1">Edit</a>
                         <input type="submit" <?php if(!isset($val['Status']) || $val['Status'] !== "Available" && $val['Status'] !== "Unavailable") { echo "hidden"; } ?> class="btn btn-danger text-white w-100 m-1" name="delete"  value="delete">
                         <input type="hidden" name="Item_Code" value="<?php echo $val['Item_Code'] ?>">   
                         </form>
@@ -58,8 +59,8 @@
                   <span class = " m-1 text-uppercase"><?php echo $val['Title'] ?></span>
                   <span class = " m-1 text-success"><?php echo $val['Status'] ?></span>
                   <?php   if ($user->isAdmin()) {  ?>
-                <button type="button" class="btn btn-primary text-white" >Edit</button>
-                <button type="button" class="btn btn-danger text-white">Delete</button>                    
+                        <a href="Add_Item.php?id=<?php echo $val['Item_Code'] . '&action=update'; ?>" class="btn btn-primary text-white">Edit</a>
+                        <button type="button" class="btn btn-danger text-white">Delete</button>                    
                     <?php } else {  ?>
                 <button type="button" <?php if(!isset($val['Status']) || $val['Status'] !== "Available") { echo "hidden"; } ?> class="btn btn-outline-primary text-white" data-bs-toggle="modal" data-bs-target="#exampleModal">reserve</button>
                 <?php } ?>

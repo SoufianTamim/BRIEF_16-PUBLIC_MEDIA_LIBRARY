@@ -12,7 +12,6 @@ $where = "";
 $category = $crud->read($table_name);
 
 
-// dd($_GET);
 if (isset($_GET['find'])) {
   $table_name = "item";
   $title = $_GET['Title'];

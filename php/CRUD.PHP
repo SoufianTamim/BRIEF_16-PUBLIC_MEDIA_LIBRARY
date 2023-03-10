@@ -19,9 +19,8 @@ class Crud extends Database
     public function read($table_name, $where = "1 = 1", $row = "*")
     {
         $query = "SELECT $row FROM $table_name WHERE $where";
-        // dd($query);
         $stmt = $this->conn->query($query);
-        $xx = $stmt->fetchAll();
+        $xx = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $xx;
     }
 
