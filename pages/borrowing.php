@@ -4,13 +4,19 @@ include '../includes/navbar.php';
 if ($user->isAdmin()) { 
 
 
-
+ 
+  
 include '../php/functions.php';
 
 $table_name_1 = "Borrowings";
 $Borrowings = $crud->read($table_name_1);
 $table_name_2 = "members";
 $members = $crud->read($table_name_2);
+
+
+
+// echo $members[0]['Penalty_Count']; 
+
 
 if (isset($_GET['Confirm_Return'])) {
   $Nickname = $_GET['Borrowing_Code'];
@@ -28,17 +34,20 @@ if (isset($_GET['Confirm_Return'])) {
       "Status" => 'Available',
   ];
 
-
-
   if ($crud->update($table_name, $Nickname, $id_Name, $data)) {
 
+  $borrowing_date = $Borrowings[0]['Borrowing_Date'];
+  $return_date = $Borrowings['Borrowing_Return_Date'];
 
-  $borrowing_date = new DateTime($borrowing['Borrowing_Date']);
-  $return_date = new DateTime($borrowing['Borrowing_Return_Date']);
-  $diff = $return_date->diff($borrowing_date);
-
-  if ($diff->days > 15) {
-    $penalty_count = $borrowing['Penalty_Count'] + 1;
+  $diff = $return_date + $borrowing_date;
+  // dd($diff);
+  
+  if ($diff  > 15) {
+    $penalty_count = $members[0]['Penalty_Count'] + 1;
+    dd($penalty_count);
+    $Nickname = $_SESSION['Nickname'];
+    $id_Name = 'Nickname';
+    $table_name='members';
     $data = [
       "Penalty_Count" => $penalty_count,
     ];
