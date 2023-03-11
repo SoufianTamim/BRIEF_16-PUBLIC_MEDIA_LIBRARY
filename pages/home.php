@@ -3,18 +3,19 @@ include '../includes/navbar-home.php';
 include '../php/functions.php';
 
 $nickname = $_SESSION['user_id'];
+
+if(isset($_GET['Item_Code'])){ 
+$item_code= $_GET['Item_Code'];
+
 $query = "SELECT COUNT(*) FROM (
   SELECT Nickname, Item_Code FROM reservation
   UNION ALL
   SELECT nickname, Item_Code FROM borrowings WHERE Borrowing_Return_Date IS NULL
 ) as combined_tables
 INNER JOIN item ON combined_tables.Item_Code = item.Item_Code
-WHERE combined_tables.Nickname = '$nickname' AND item.Status <> 'Available' LIMIT 0, 25;
- ";
-
-
+WHERE combined_tables.Nickname = '$nickname' AND item.Status <> 'Available'  AND item.Item_Code <> '$item_code';
+";
 $result = $crud->readQuery($query);
-
 $count = $result[0]['COUNT(*)'];
 
 if ($count < 3) {
@@ -48,7 +49,7 @@ if ($count < 3) {
 } else {
   $error = "you have reserved tooo much";
 }
-
+}
 ?>
 <section id="sec-2">
   <div class="container">
