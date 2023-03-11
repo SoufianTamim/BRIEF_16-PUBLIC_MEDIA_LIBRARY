@@ -28,13 +28,43 @@ if (isset($_GET['Active_Reservation'])) {
     echo "Error adding item.";
   }
 }
+if(isset($_GET['Search']) ){
+
+  $Reservation = $crud->filter('Nickname', 'Reservation_Code', 'Title', 'reservation', 'item', $_GET['Nickname'], $_GET['Reservation_Code'], $_GET['Title']);
+}
+
+
 ?>
-<section>
-  <?php require '../includes/filter.php'; ?>
+<section class="container mx-auto mt-4 mb-4 ">
+ <form action="" method="GET">
+      <div class="form row">
+        <div class="col-lg-3">
+          <div class="input-icon-wrap">
+            <input type="text" class="form-control" name="Nickname" placeholder="Nickname ...">
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="input-icon-wrap">
+            <input type="text" class="form-control" name="Reservation_Code" placeholder="Reservation Code ...">
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="input-icon-wrap">
+            <input type="text" class="form-control" name="Title" placeholder=" Item Title  ...">
+          </div>
+        </div>
+<div class="col-lg-3">
+    <button class="btn btn-primary btn-block w-100" name="Search">Search </button>
+</div>
+</form>
 </section>
+
+
+
 <section class="container d-flex flex-wrap ">
   <!-- items reserved  -->
-  <?php foreach ($All_Data as $key => $val) { ?>
+       <?php  if (!isset($_GET['Search'])) { 
+        foreach ($All_Data as $key => $val) { ?>
     <?php if ($val['Item_Code'] === $val['Item_Code'] && $val['Status'] == "Reserved") { ?>
       <div class="d-flex flex-wrap  bg-dark p-2 rounded-2 m-1" id="card">
         <div class="product-img cont image ">
@@ -83,16 +113,77 @@ if (isset($_GET['Active_Reservation'])) {
                 <input type="hidden" name="Item_Code" value="<?php echo $val['Item_Code'] ?>">
                 <input type="hidden" name="Nickname" value="<?php echo $vale['Nickname'] ?>">
                 <input type="hidden" name="Reservation_Code" value="<?php echo $vale['Reservation_Code'] ?>">
-                <?php break;
-          }
-        } ?>
+                <?php break;  } } } ?>
           </form>
         </div>
       </div>
-    <?php }
-  } ?>
+    <?php }  }
+        if (isset($_GET['Search'])) {
+         foreach($Reservation as $key => $val) {  ?>
+             <?php if ($val['Item_Code'] === $val['Item_Code'] && $val['Status'] == "Reserved") { ?>
+      <div class="d-flex flex-wrap  bg-dark p-2 rounded-2 m-1" id="card">
+        <div class="product-img cont image ">
+          <img src="../<?php echo $val['Cover_Image'] ?>" id="image" class="image img-fluid d-block mx-auto" height="400px !important">
+          <div class="overlay w-100">
+            <div class="middle">
+              <div class="text w-100">
+                <p>
+                  <?php echo $val['Author_Name'] ?>
+                </p>
+                <p>
+                  <?php echo $val['State'] ?>
+                </p>
+                <p>
+                  <?php echo $val['Edition_Date'] ?>
+                </p>
+                <p>
+                  <?php echo $val['Reservation_Code'] ?>
+                </p>
+                <p>
+                  <?php echo $val['Nickname'] ?>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <?php foreach ($Reservations as $keye => $vale) { ?>
+          <?php if ($vale['Item_Code'] == $val['Item_Code']) { ?>
+            <div class="product-content text-center d-flex flex-column d-block m-auto mb-3">
+              <span class=" m-1 text-uppercase">
+                <?php echo $vale['Reservation_Date'] ?>
+              </span>
+              <span class=" m-1 text-success">
+                <?php echo $vale['Reservation_Expiration_Date'] ?>
+              </span>
+              <span class=" m-1 text-uppercase">
+                <?php echo $val['Title'] ?>
+              </span>
+              <span class=" m-1 text-success">
+                <?php echo $val['Status'] ?>
+              </span>
+              <form action="" method="GET">
+                <input type="submit" <?php if (!isset($val['Status']) || $val['Status'] !== "Reserved") {
+                  echo "hidden";
+                } ?> class="btn btn-outline-primary text-white" value="Active Reservation" name="Active_Reservation">
+                <input type="hidden" name="Item_Code" value="<?php echo $val['Item_Code'] ?>">
+                <input type="hidden" name="Nickname" value="<?php echo $vale['Nickname'] ?>">
+                <input type="hidden" name="Reservation_Code" value="<?php echo $vale['Reservation_Code'] ?>">
+                <?php break;  } } } ?>
+          </form>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+    <?php } }  ?>
 </section>
 <?php
+         
  require '../includes/modals.php'; 
  require '../includes/footer.php'; 
 }else {
