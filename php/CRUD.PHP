@@ -13,7 +13,7 @@ class Crud extends Database
     public function readQuery($query)
     {
         $stmt = $this->conn->query($query);
-        $result = $stmt->fetchAll();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 
@@ -21,7 +21,7 @@ class Crud extends Database
     {
         $query = "SELECT $row FROM $table_name WHERE $where";
         $stmt = $this->conn->query($query);
-        $xx = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $xx = $stmt->fetchAll();
         // dd($xx);
         return $xx;
     }

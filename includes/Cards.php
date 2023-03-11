@@ -42,7 +42,7 @@
                       foreach($Filters as $key => $val) { ?>
             <div class="d-flex flex-wrap  bg-dark p-2 rounded-2 m-1" id="card">
               <div class = "product-img cont image " >
-                  <img src = "../<?php echo $val['Cover_Image'] ?>" id="image" class = "image img-fluid d-block mx-auto" height="400px !important">
+                  <img src = "../Item_Images/<?php echo $val['Cover_Image'] ?>" id="image" class = "image img-fluid d-block mx-auto" height="400px !important">
                   <div class="overlay w-100">
                      <div class="middle">
                       <div class="text w-100">
