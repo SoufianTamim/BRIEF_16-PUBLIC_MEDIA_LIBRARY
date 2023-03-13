@@ -4,7 +4,12 @@ if ($user->isAdmin()) {
 
 $table_name = "Reservation";
 $Reservations = $crud->read($table_name);
+ 
+
+
+
 if (isset($_GET['Active_Reservation'])) {
+
   $table_name = 'borrowings';
   $data = [
     "Item_Code" => $_GET['Item_Code'],

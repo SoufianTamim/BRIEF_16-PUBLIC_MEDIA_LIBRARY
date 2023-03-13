@@ -78,7 +78,12 @@ else:
             <a class="nav-link text-white" aria-current="page" href="home.php">HOME</a>
             <a class="nav-link text-white" aria-current="page" href="Add_Item.php">ADD-ITEM</a>
           <?php } else {  ?>
-            <a class="nav-link text-white" aria-current="page" href="home.php">HOME <?PHP echo $_SESSION['Penalties']; ?></a>
+            <a class="nav-link text-white" aria-current="page" href="home.php">HOME 
+              <?php
+              echo $_SESSION['Penalties'];
+             
+              ?>
+            </a>
           <?php } ?>
           <div class="btn-group">
             <a class="me-5 my-1" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" type="button">

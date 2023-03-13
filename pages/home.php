@@ -4,6 +4,12 @@ include '../php/functions.php';
 
 $nickname = $_SESSION['user_id'];
 
+
+$Nickname = $_SESSION['user_id'];
+$penalties = $crud->readQuery("SELECT Penalty_Count FROM members WHERE Nickname = '$nickname'");
+$Penalty_Count = $penalties[0]['Penalty_Count'];
+
+
 if(isset($_GET['Item_Code'])){ 
 $item_code= $_GET['Item_Code'];
 
@@ -18,8 +24,10 @@ WHERE combined_tables.Nickname = '$nickname' AND item.Status <> 'Available'  AND
 $result = $crud->readQuery($query);
 $count = $result[0]['COUNT(*)'];
 
-if ($count < 3) {
-  if (isset($_GET['Reserve'])) {
+
+
+if ($count < 3 && $Penalty_Count <= 3) {
+  if (isset($_GET['Reserve']) ) {
     $table_name = 'reservation';
     $data = [
       "Item_Code" => $_GET['Item_Code'],
@@ -45,9 +53,11 @@ if ($count < 3) {
     } else {
       echo "Error adding item.";
     }
+  }else{
   }
 } else {
   $error = "you have reserved tooo much";
+  $user->logout();
 }
 }
 ?>
@@ -64,6 +74,9 @@ if ($count < 3) {
         <?php  } ?>
         <div class="underline mx-auto mt-3"></div>
       </div>
+    </div>
+    <div>
+       <?php echo $Penalty_Count; ?>
     </div>
     <!-- //=========== display cards ===========// -->
     <?php require '../includes/Category.php'; ?>
