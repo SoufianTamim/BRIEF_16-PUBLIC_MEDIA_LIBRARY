@@ -102,17 +102,10 @@ else:
             </ul>
           </div>
         </nav>
-        <div class="container mt-5 bg-dark p-5  rounded-4">
-          <div class="">
-            <h1 class="text-center text-uppercase mb-3">welcome <span>
-                <?php echo $_SESSION['user_id'] ?>
-              </span></h1>
-            <div class="text-center line mx-auto">
-              <h3 class="text-center ">Thank you for choosing <kbd class="">READAMP</kbd> for your library rentalneeds.<br> Happy reading and watching!</h3>
-
-            </div>
-
-          </div>
+        <div class="container mt-5">
+            <h1 class="text-center text-uppercase display-1">welcome <br>
+             <?php echo $_SESSION['user_id'] ?>  
+            </h1>
         </div>
         <a href="#sec-2">
           <div class="scroll-down">

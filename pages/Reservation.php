@@ -66,13 +66,15 @@ if(isset($_GET['Search']) ){
 
 
 
-<section class="container d-flex flex-wrap ">
+<section class="container-fluid">
+  <div class="row row-cols-4 g-3">
   <!-- items reserved  -->
        <?php  if (!isset($_GET['Search'])) { 
         foreach ($All_Data as $key => $val) { ?>
     <?php if ($val['Item_Code'] === $val['Item_Code'] && $val['Status'] == "Reserved") { ?>
-      <div class="d-flex flex-wrap  bg-dark p-2 rounded-2 m-1" id="card">
-        <div class="product-img cont image ">
+
+      <div class="bg-dark p-2 rounded-2 m-1 col" id="card">
+        <div class="product-img cont image">
           <img src="../<?php echo $val['Cover_Image'] ?>" id="image" class="image img-fluid d-block mx-auto" height="400px !important">
           <div class="overlay w-100">
             <div class="middle">
@@ -99,16 +101,17 @@ if(isset($_GET['Search']) ){
         <?php foreach ($Reservations as $keye => $vale) { ?>
           <?php if ($vale['Item_Code'] == $val['Item_Code']) { ?>
             <div class="product-content text-center d-flex flex-column d-block m-auto mb-3">
-              <span class=" m-1 text-uppercase">
+              
+              <span class="m-1 text-uppercase">
                 <?php echo $vale['Reservation_Date'] ?>
               </span>
-              <span class=" m-1 text-success">
+              <span class="m-1 text-success">
                 <?php echo $vale['Reservation_Expiration_Date'] ?>
               </span>
-              <span class=" m-1 text-uppercase">
+              <span class="m-1 text-uppercase">
                 <?php echo $val['Title'] ?>
               </span>
-              <span class=" m-1 text-success">
+              <span class="m-1 text-success">
                 <?php echo $val['Status'] ?>
               </span>
               <form action="" method="GET">
@@ -118,7 +121,7 @@ if(isset($_GET['Search']) ){
                 <input type="hidden" name="Item_Code" value="<?php echo $val['Item_Code'] ?>">
                 <input type="hidden" name="Nickname" value="<?php echo $vale['Nickname'] ?>">
                 <input type="hidden" name="Reservation_Code" value="<?php echo $vale['Reservation_Code'] ?>">
-                <?php break;  } } } ?>
+                <?php break;  } } ?>
           </form>
         </div>
       </div>
@@ -185,7 +188,8 @@ if(isset($_GET['Search']) ){
 
 
 
-    <?php } }  ?>
+    <?php } }  }?>
+      </div>
 </section>
 <?php
          

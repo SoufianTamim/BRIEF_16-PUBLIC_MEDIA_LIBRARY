@@ -150,10 +150,9 @@
                           <div class="card bg-dark text-white">
                             <img class="card-img opacity-25" src="../<?php echo $val['Cover_Image']?>" alt="Card image" height="250px">
                             <div class="card-img-overlay">
-                              <h5 class="card-title"><?php echo $val['Title']?></h5>
+                              <h6 class="card-title"><?php echo $val['Title']?></h6>
                               <p class="card-text"><?php echo $val['Author_Name']?></p>
                               <p class="card-text"><?php echo $val['State']?></p>
-                              <p class="card-text"><?php echo $val['Edition_Date']?></p>
                               <form method="GET">
                                 <input type="submit" value="Cancel" name="cancel" class="btn btn-warning text-white ">
                                 <input type="hidden" value="<?php echo $val['Item_Code']?>" name="Item_Code" class="btn btn-warning text-white ">
@@ -173,10 +172,9 @@
                           <div class="card bg-dark text-white">
                             <img class="card-img opacity-25" src="../<?php echo $val['Cover_Image']?>" alt="Card image" height="250px">
                             <div class="card-img-overlay">
-                              <h5 class="card-title"><?php echo $val['Title']?></h5>
+                              <h6 class="card-title"><?php echo $val['Title']?></h6>
                               <p class="card-text"><?php echo $val['Author_Name']?></p>
                               <p class="card-text"><?php echo $val['State']?></p>
-                              <p class="card-text"><?php echo $val['Edition_Date']?></p>
                               <form method="GET">
 
                                 <input type="hidden" class="card-text" name="user_id" value="<?php echo $_SESSION['user_id']?>">

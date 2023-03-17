@@ -83,7 +83,12 @@ if ($user->isAdmin()) {
 </div>
 </form>
 </section>
-<section class = "d-flex flex-wrap container">
+
+
+
+
+<section class="container-fluid">
+  <div class="row row-cols-4 g-3">
   <?php
     if (!isset($_GET['Search_B'])) {
    foreach ($Borrowings as $keye => $vale) { ?>
@@ -148,6 +153,8 @@ if ($user->isAdmin()) {
               </div>
             </div>
        <?php }  }  }   ?>
+      </div>
+
 </section>
 <?php
     require '../includes/footer.php'; 
