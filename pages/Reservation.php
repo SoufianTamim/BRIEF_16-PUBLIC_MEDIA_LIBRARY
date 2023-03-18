@@ -66,7 +66,7 @@ if(isset($_GET['Search']) ){
 
 
 
-<section class="container-fluid">
+<section class="container mx-auto">
   <div class="row row-cols-4 g-3">
   <!-- items reserved  -->
        <?php  if (!isset($_GET['Search'])) { 

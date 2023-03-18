@@ -87,7 +87,7 @@ if ($user->isAdmin()) {
 
 
 
-<section class="container-fluid">
+<section class="container">
   <div class="row row-cols-4 g-3">
   <?php
     if (!isset($_GET['Search_B'])) {
