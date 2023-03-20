@@ -6,7 +6,7 @@ class Database {
     public static $username;
     public  static $password;
     // public  static $conn;
-    public static $gogo;
+    public static $db_sub;
 
      public  static function connect($host, $db_name, $username, $password) {
         self::$host = $host;
@@ -16,24 +16,17 @@ class Database {
 
         try {
             $lol = new PDO("mysql:host=".self::$host.";dbname=".self::$db_name, self::$username, self::$password);
-            self::$gogo = $lol ;
+            self::$db_sub = $lol ;
 
         } catch(PDOException $e) {
             echo "Connection failed: " . $e->getMessage();
         }
-
     }
 
-    public static function getConnection() {
-        
-        dump(self::$gogo);
-        
-        $stmt = self::$gogo->exec("INSERT INTO members (CIN, Nickname, Email) VALUES ('mmmmmmmm', 'mmmmmmmm', 'mmmmmmmmmmm')");
-
-  
-        dd( $stmt );  
-
-    }
+    // public static function getConnection() { 
+    //     dump(self::$db_sub);
+    //     $stmt = self::$db_sub->exec("INSERT INTO members (CIN, Nickname, Email) VALUES ('mmmmmmmm', 'mmmmmmmm', 'mmmmmmmmmmm')");
+    // }
 
     public function query($sql, $params = []) {
         $stmt = $this->conn->prepare($sql);

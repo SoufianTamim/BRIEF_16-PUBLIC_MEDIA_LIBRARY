@@ -7,18 +7,16 @@ class Crud extends Database
 
     public function __construct()
     {
-        $this->conn = self::$gogo;
+        $this->conn = self::$db_sub;
     }
 
-    public function readQuery($query)
-    {
+    public function readQuery($query){
         $stmt = $this->conn->query($query);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 
-    public function read($table_name, $where = "1 = 1", $row = "*")
-    {
+    public function read($table_name, $where = "1 = 1", $row = "*") {
         $query = "SELECT $row FROM $table_name WHERE $where";
         $stmt = $this->conn->query($query);
         $xx = $stmt->fetchAll();
@@ -26,8 +24,7 @@ class Crud extends Database
         return $xx;
     }
 
-    public function create($table_name, $data)
-    {
+    public function create($table_name, $data)  {
         $keys = implode(',', array_keys($data));
         $placeholders = implode(',', array_fill(0, count($data), '?'));
 
@@ -45,8 +42,7 @@ class Crud extends Database
         }
     }
 
-    public function update($table_name, $Nickname, $id_Name, $data)
-    {
+    public function update($table_name, $Nickname, $id_Name, $data) {
         $query = "UPDATE $table_name SET ";
         foreach ($data as $key => $value) {
             $query .= "$key = :$key, ";
@@ -66,8 +62,7 @@ class Crud extends Database
         return false;
     }
 
-    public function delete($table_name, $column, $id)
-    {
+    public function delete($table_name, $column, $id) {
         $query = "DELETE FROM $table_name WHERE $column=:id";
         $stmt = $this->conn->prepare($query);
         $id = htmlspecialchars(strip_tags($id));
@@ -78,8 +73,7 @@ class Crud extends Database
         return false;
     }
 
-    public function join($table1_name, $table2_name, $table1_id, $table2_id)
-    {
+    public function join($table1_name, $table2_name, $table1_id, $table2_id)  {
         $query = "SELECT * FROM $table1_name INNER JOIN $table2_name ON $table1_name.$table1_id = $table2_name.$table1_id;";
         $stmt = $this->conn->query($query);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -112,8 +106,7 @@ class Crud extends Database
         $stmt->execute(["%$title%", "%$authorName%", "%$categoryName%"]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function filter($col_1 = '', $col_2 = '', $col_3 = '', $table_1, $table_2, $val_1 = '', $val_2 = '', $val_3 = '')
-    {
+    public function filter($col_1 = '', $col_2 = '', $col_3 = '', $table_1, $table_2, $val_1 = '', $val_2 = '', $val_3 = '') {
         $conditions = array();
         $parameters = array();
         if (!empty($val_1)) {

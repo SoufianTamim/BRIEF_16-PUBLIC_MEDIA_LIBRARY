@@ -10,7 +10,7 @@ class User  extends Database {
 
     public function __construct()
     {
-        $this->conn = self::$gogo;
+        $this->conn = self::$db_sub;
         session_start();
     }
 
